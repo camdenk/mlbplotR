@@ -13,7 +13,7 @@
 #'
 #' @export
 load_mlb_teams <- function(){
-  out <- readRDS("./raw-data/MLB_Colors_Logos.rds")
+  out <- readRDS("./R/MLB_Colors_Logos.rds")
   #class(out) <- c("tbl_df","tbl","data.table","data.frame")
   out
 }
