@@ -18,4 +18,10 @@ logo_urls <- teams_colors_logos$team_logo_espn
 names(logo_urls) <- teams_colors_logos$team_espn_abbr
 
 
-usethis::use_data(logo_list, primary_colors, secondary_colors, logo_urls, internal = TRUE, overwrite = TRUE)
+teams_colors_logos <- readRDS("./data-raw/MLB_Colors_Logos.rds")
+
+
+
+usethis::use_data(teams_logos_colors, logo_list, primary_colors,
+                  secondary_colors,
+                  logo_urls, internal = TRUE, overwrite = TRUE)
