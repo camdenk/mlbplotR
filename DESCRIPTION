@@ -6,8 +6,8 @@ Authors@R:
     c(
     person(given = "Sebastian",
            family = "Carl",
-           role = c("aut")
-           email = "mrcaseb@gmail.com),
+           role = c("aut"),
+           email = "mrcaseb@gmail.com"),
     person(given = "Camden",
            family = "Kay",
            role = c("aut", "cre"),
@@ -19,3 +19,4 @@ URL: https://github.com/camdenk/mlbplotR
 BugReports: https://github.com/camdenk/mlbplotR/issues
 Encoding: UTF-8
 LazyData: true
+License: MIT + file LICENSE
