@@ -1,19 +1,12 @@
 # INTERNAL HELPER THAT BUILDS THE GROBS FOR
-# GEOM LOGOS AND HEADSHOTS
-build_grobs <- function(i, alpha, colour, data, type = c("teams", "headshots", "path")) {
+# GEOM LOGOS
+build_grobs <- function(i, alpha, colour, data, type = c("teams")) {
   make_null <- FALSE
   type <- rlang::arg_match(type)
   if(type == "teams") {
     team_abbr <- data$team_abbr[i]
     image_to_read <- logo_list[[team_abbr]]
     if (is.na(team_abbr)) make_null <- TRUE
-  } else if (type == "path"){
-    image_to_read <- data$path[i]
-  } else {
-    gsis <- data$player_gsis[i]
-    headshot_map <- load_headshots()
-    image_to_read <- headshot_map$headshot_nfl[headshot_map$gsis_id == gsis]
-    if(length(image_to_read) == 0) image_to_read <- na_headshot()
   }
   if (is.na(make_null)){
     grid <- grid::nullGrob()
