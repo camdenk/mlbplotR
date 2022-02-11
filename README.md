@@ -9,6 +9,10 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg?style=flat-square)](https://lifecycle.r-lib.org/articles/stages.html)
 <!-- badges: end -->
 
+The code for this package was copied heavily from
+[nflplotR](https://nflverse.github.io/nflplotR/index.html) with minor
+changes to support Major League Baseball logos.
+
 The goal of mlbplotR is to provide functions and geoms that help with
 visualizations of MLB related analysis. It provides ggplot2 geoms that
 do the heavy lifting of plotting MLB logos in high quality, with correct
