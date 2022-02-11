@@ -39,5 +39,5 @@ Many hands make light work! Here are some ways you can contribute to
 this project:
 
 -   You can [open an
-    issue](https://github.com/nflverse/nflplotR/issues/new/choose) if
+    issue](https://github.com/camdenk/mlbplotR/issues/new/choose) if
     you’d like to request specific data or report a bug/error.
