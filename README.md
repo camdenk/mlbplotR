@@ -6,18 +6,15 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of mlbplotR is to …
+The goal of mlbplotR is to provide functions and geoms that help with
+visualizations of MLB related analysis. It provides ggplot2 geoms that
+do the heavy lifting of plotting MLB logos in high quality, with correct
+aspect ratio, and possible transparency.
 
 ## Installation
 
-You can install the released version of mlbplotR from
-[CRAN](https://CRAN.R-project.org) with:
-
-``` r
-install.packages("mlbplotR")
-```
-
-And the development version from [GitHub](https://github.com/) with:
+mlbplotR is currently not on [CRAN](https://CRAN.R-project.org) but you
+can get the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
