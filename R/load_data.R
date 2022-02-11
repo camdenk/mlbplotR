@@ -4,7 +4,7 @@
 #'
 #' @examples
 #' \donttest{
-#'   load__mlb_teams()
+#'   load_mlb_teams()
 #' }
 #'
 #' @return A tibble of team-level abbreviations, image URLs, and hex color codes.
@@ -13,7 +13,20 @@
 #'
 #' @export
 load_mlb_teams <- function(){
-  out <- readRDS("./R/MLB_Colors_Logos.rds")
-  #class(out) <- c("tbl_df","tbl","data.table","data.frame")
+  out <- teams_colors_logos
+  class(out) <- c("tbl_df","tbl","data.table","data.frame")
   out
 }
+
+#' Output Valid MLB Team Abbreviations
+#'
+#' @export
+#' @return A vector of type `"character"`.
+#' @examples
+#' # List valid team abbreviations excluding duplicates
+#' valid_team_names()
+#'
+valid_team_names <- function(){
+  sort(names(logo_list))
+}
+
