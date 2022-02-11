@@ -2,10 +2,20 @@ Package: mlbplotR
 Type: Package
 Title: What the Package Does (Title Case)
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Authors@R: 
+    c(
+    person(given = "Sebastian",
+           family = "Carl",
+           role = c("aut")
+           email = "mrcaseb@gmail.com),
+    person(given = "Camden",
+           family = "Kay",
+           role = c("aut", "cre"),
+           email = "camden.kay23@gmail.com")
+     )
+Maintainer: The package maintainer <camden.kay23@gmail.com>
+Description: A set of functions to help visualize MLB analysis in 'ggplot2'.
+URL: https://github.com/camdenk/mlbplotR
+BugReports: https://github.com/camdenk/mlbplotR/issues
 Encoding: UTF-8
 LazyData: true
