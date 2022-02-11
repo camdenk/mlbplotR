@@ -84,11 +84,11 @@
 #'   theme_void()
 #'
 #' # it's also possible to plot league logos
-#' league <- data.frame(a = 1:2, b = 0, teams = c("AL", "NL"))
+#' league <- data.frame(a = 1:3, b = 0, teams = c("AL", "NL", "MLB"))
 #' ggplot(league, aes(x = a, y = b)) +
 #'   geom_mlb_logos(aes(team_abbr = teams), width = 0.3) +
 #'   geom_label(aes(label = teams), nudge_y = -0.4, alpha = 0.5) +
-#'   coord_cartesian(xlim = c(0.5,2.5), ylim = c(-0.75,.75)) +
+#'   coord_cartesian(xlim = c(0.5,3.5), ylim = c(-0.75,.75)) +
 #'   theme_void()
 #' }
 geom_mlb_logos <- function(mapping = NULL, data = NULL,
