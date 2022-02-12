@@ -75,7 +75,7 @@ This geom is used to plot MLB team and league logos instead
 \itemize{
   \item{**x**}{ - The x-coordinate.}
   \item{**y**}{ - The y-coordinate.}
-  \item{**team_abbr**}{ - The team abbreviation. Need to use ESPN's abbreviation labels as that's what the links are based on.}
+  \item{**team_savant_abbr**}{ - The team abbreviation. Need to use Savant's abbreviation.}
   \item{`alpha = NULL`}{ - The alpha channel, i.e. transparency level, as a numerical value between 0 and 1.}
   \item{`colour = NULL`}{ - The image will be colourized with this colour. Use the special character `"b/w"` to set it to black and white. For more information on valid colour names in ggplot2 see <https://ggplot2.tidyverse.org/articles/ggplot2-specs.html?q=colour#colour-and-fill>}
   \item{`angle = 0`}{ - The angle of the image as a numerical value between 0° and 360°.}
@@ -115,7 +115,7 @@ df$colour <- ifelse(matches, NA, "gray")
 
 # scatterplot of all logos
 ggplot(df, aes(x = a, y = b)) +
-  geom_mlb_logos(aes(team_abbr = teams), width = 0.075) +
+  geom_mlb_logos(aes(team_savant_abbr = teams), width = 0.075) +
   geom_label(aes(label = teams), nudge_y = -0.35, alpha = 0.5) +
   theme_void()
 
@@ -123,7 +123,7 @@ ggplot(df, aes(x = a, y = b)) +
 # please note that you have to add scale_alpha_identity() to use the alpha
 # values in your dataset!
 ggplot(df, aes(x = a, y = b)) +
-  geom_mlb_logos(aes(team_abbr = teams, alpha = alpha), width = 0.075) +
+  geom_mlb_logos(aes(team_savant_abbr = teams, alpha = alpha), width = 0.075) +
   geom_label(aes(label = teams), nudge_y = -0.35, alpha = 0.5) +
   scale_alpha_identity() +
   theme_void()
@@ -132,7 +132,7 @@ ggplot(df, aes(x = a, y = b)) +
 # please note that you have to add scale_alpha_identity() as well as
 # scale_colour_identity() to use the alpha and colour values in your dataset!
 ggplot(df, aes(x = a, y = b)) +
-  geom_mlb_logos(aes(team_abbr = teams, alpha = alpha, colour = colour), width = 0.075) +
+  geom_mlb_logos(aes(team_savant_abbr = teams, alpha = alpha, colour = colour), width = 0.075) +
   geom_label(aes(label = teams), nudge_y = -0.35, alpha = 0.5) +
   scale_alpha_identity() +
   scale_colour_identity() +
@@ -140,14 +140,14 @@ ggplot(df, aes(x = a, y = b)) +
 
 # apply alpha as constant for all logos
 ggplot(df, aes(x = a, y = b)) +
-  geom_mlb_logos(aes(team_abbr = teams), width = 0.075, alpha = 0.6) +
+  geom_mlb_logos(aes(team_savant_abbr = teams), width = 0.075, alpha = 0.6) +
   geom_label(aes(label = teams), nudge_y = -0.35, alpha = 0.5) +
   theme_void()
 
 # it's also possible to plot league logos
 league <- data.frame(a = 1:3, b = 0, teams = c("AL", "NL", "MLB"))
 ggplot(league, aes(x = a, y = b)) +
-  geom_mlb_logos(aes(team_abbr = teams), width = 0.3) +
+  geom_mlb_logos(aes(team_savant_abbr = teams), width = 0.3) +
   geom_label(aes(label = teams), nudge_y = -0.4, alpha = 0.5) +
   coord_cartesian(xlim = c(0.5,3.5), ylim = c(-0.75,.75)) +
   theme_void()

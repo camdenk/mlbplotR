@@ -4,7 +4,7 @@ build_grobs <- function(i, alpha, colour, data, type = c("teams")) {
   make_null <- FALSE
   type <- rlang::arg_match(type)
   if(type == "teams") {
-    team_abbr <- data$team_abbr[i]
+    team_abbr <- data$team_savant_abbr[i]
     image_to_read <- logo_list[[team_abbr]]
     if (is.na(team_abbr)) make_null <- TRUE
   }
