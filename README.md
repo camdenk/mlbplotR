@@ -28,20 +28,42 @@ can get the development version from [GitHub](https://github.com/) with:
 devtools::install_github("camdenk/mlbplotR")
 ```
 
-## Example
+## Examples
+
+Let’s plot every team on a grid with some extra customization:
+
+``` r
+library(mlbplotR)
+library(ggplot2)
+library(dplyr)
+
+teams_colors_logos <- mlbplotR::load_mlb_teams() %>% 
+  dplyr::filter(!team_savant_abbr %in% c("AL", "NL", "MLB")) %>% 
+  dplyr::mutate(
+    a = rep(1:6, 5),
+    b = sort(rep(1:5, 6), decreasing = TRUE),
+    alpha = ifelse(grepl("A", team_savant_abbr), 1, 0.75), # Keep alpha == 1 for teams that have an "A"
+    color = ifelse(grepl("E", team_savant_abbr), "b/w", NA) # Set teams that have an "E" to black & white
+  )
+
+
+ ggplot2::ggplot(teams_colors_logos, aes(x = a, y = b)) +
+   mlbplotR::geom_mlb_logos(aes(team_savant_abbr = team_savant_abbr, color = color, alpha = alpha), width = 0.075) +
+   ggplot2::geom_label(aes(label = team_savant_abbr), nudge_y = -0.35, alpha = 0.5) +
+   ggplot2::scale_color_identity() +
+   ggplot2::scale_alpha_identity() +
+   ggplot2::theme_void() 
+```
+
+<img src="man/figures/README-every-team-1.png" width="100%" />
 
 This is a basic example with [Baseball
 Reference](https://baseball-reference.com) data which compares ERA to
 FIP:
 
 ``` r
-library(mlbplotR)
-library(ggplot2)
-library(dplyr)
 library(readr)
 library(scales)
-
-teams_colors_logos <- mlbplotR::load_mlb_teams()
 
 df <- readr::read_csv("./data-raw/2021-Team-Pitching-Stats.csv")
   
