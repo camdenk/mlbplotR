@@ -37,15 +37,16 @@ devtools::install_github("camdenk/mlbplotR")
 
 This is a basic example with [Baseball Reference](https://baseball-reference.com) data which compares ERA to FIP:
 
-```{r example}
+```{r scatter-example, message = FALSE}
 library(mlbplotR)
 library(ggplot2)
 library(dplyr)
 library(readr)
+library(scales)
 
 teams_colors_logos <- mlbplotR::load_mlb_teams()
 
-df <- readr::read_csv("./data-raw/2021 Team Pitching Stats.csv")
+df <- readr::read_csv("./data-raw/2021-Team-Pitching-Stats.csv")
   
 # Join leaderboard with abbrevations
 joined_df <- df %>% 
@@ -63,12 +64,32 @@ joined_df %>%
   ggplot2::theme(
     plot.title = ggplot2::element_text(face = "bold")
   ) +
-  ggplot2::scale_x_reverse() +
-  ggplot2::scale_y_reverse()
-  
-
-
+  ggplot2::scale_x_reverse(breaks = scales::pretty_breaks(), expand = c(.1, .1)) +
+  ggplot2::scale_y_reverse(breaks = scales::pretty_breaks(), expand = c(.1, .1))
 ```
+
+Here's another that looks at Home Runs Allowed by team:
+
+```{r bar-example, message = FALSE}
+joined_df %>% 
+  ggplot2::ggplot(aes(x = team_savant_abbr, y = HR)) +
+  ggplot2::geom_col(aes(color = team_savant_abbr, fill = team_savant_abbr), width = 0.5) +
+  mlbplotR::geom_mlb_logos(aes(team_savant_abbr = team_savant_abbr), width = 0.075, alpha = 0.9) +
+  mlbplotR::scale_color_mlb(type = "secondary") +
+  mlbplotR::scale_fill_mlb(alpha = 0.4) +
+  ggplot2::labs(
+    caption = "Data: Baseball Reference",
+    title = "2021: Home Runs Allowed"
+  ) +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(
+    plot.title = ggplot2::element_text(face = "bold"),
+    axis.title.x = ggplot2::element_blank(),
+    axis.text.x = ggplot2::element_blank()
+  ) +
+  ggplot2::scale_x_discrete(expand = c(0.075, 0.075))
+```
+
 
 ## Contributing
 
@@ -80,5 +101,6 @@ this project:
 ## To Do
 
 - Add ability to set axis labels to be logos
+- Add functions to automatically set theme
 - Add in player headshots (will likely have to wait until after the lockout)
 

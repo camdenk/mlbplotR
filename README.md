@@ -38,26 +38,12 @@ FIP:
 library(mlbplotR)
 library(ggplot2)
 library(dplyr)
-#> 
-#> Attaching package: 'dplyr'
-#> The following objects are masked from 'package:stats':
-#> 
-#>     filter, lag
-#> The following objects are masked from 'package:base':
-#> 
-#>     intersect, setdiff, setequal, union
 library(readr)
+library(scales)
 
 teams_colors_logos <- mlbplotR::load_mlb_teams()
 
-df <- readr::read_csv("./data-raw/2021 Team Pitching Stats.csv")
-#> 
-#> ── Column specification ────────────────────────────────────────────────────────
-#> cols(
-#>   .default = col_double(),
-#>   Tm = col_character()
-#> )
-#> ℹ Use `spec()` for the full column specifications.
+df <- readr::read_csv("./data-raw/2021-Team-Pitching-Stats.csv")
   
 # Join leaderboard with abbrevations
 joined_df <- df %>% 
@@ -75,11 +61,35 @@ joined_df %>%
   ggplot2::theme(
     plot.title = ggplot2::element_text(face = "bold")
   ) +
-  ggplot2::scale_x_reverse() +
-  ggplot2::scale_y_reverse()
+  ggplot2::scale_x_reverse(breaks = scales::pretty_breaks(), expand = c(.1, .1)) +
+  ggplot2::scale_y_reverse(breaks = scales::pretty_breaks(), expand = c(.1, .1))
 ```
 
-<img src="man/figures/README-example-1.png" width="100%" />
+<img src="man/figures/README-scatter-example-1.png" width="100%" />
+
+Here’s another that looks at Home Runs Allowed by team:
+
+``` r
+joined_df %>% 
+  ggplot2::ggplot(aes(x = team_savant_abbr, y = HR)) +
+  ggplot2::geom_col(aes(color = team_savant_abbr, fill = team_savant_abbr), width = 0.5) +
+  mlbplotR::geom_mlb_logos(aes(team_savant_abbr = team_savant_abbr), width = 0.075, alpha = 0.9) +
+  mlbplotR::scale_color_mlb(type = "secondary") +
+  mlbplotR::scale_fill_mlb(alpha = 0.4) +
+  ggplot2::labs(
+    caption = "Data: Baseball Reference",
+    title = "2021: Home Runs Allowed"
+  ) +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(
+    plot.title = ggplot2::element_text(face = "bold"),
+    axis.title.x = ggplot2::element_blank(),
+    axis.text.x = ggplot2::element_blank()
+  ) +
+  ggplot2::scale_x_discrete(expand = c(0.075, 0.075))
+```
+
+<img src="man/figures/README-bar-example-1.png" width="100%" />
 
 ## Contributing
 
@@ -93,5 +103,6 @@ this project:
 ## To Do
 
 -   Add ability to set axis labels to be logos
+-   Add functions to automatically set theme
 -   Add in player headshots (will likely have to wait until after the
     lockout)
