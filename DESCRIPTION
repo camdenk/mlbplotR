@@ -20,9 +20,12 @@ BugReports: https://github.com/camdenk/mlbplotR/issues
 Imports:
     cli,
     ggplot2,
+    ggtext,
+    gridtext,
     magick,
     magrittr,
-    rlang
+    rlang,
+    scales
 Suggests:
     dplyr
 Encoding: UTF-8
