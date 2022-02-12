@@ -91,6 +91,43 @@ joined_df %>%
 
 <img src="man/figures/README-bar-example-1.png" width="100%" />
 
+Lastly, here’s an example using Baseball Savant Statcast data:
+
+``` r
+library(qs)
+
+BAL_2021 <- qread("./data-raw/BAL-2021.qs") %>% 
+  dplyr::mutate(
+    fielding_team = ifelse(inning_topbot == "Bot", away_team, home_team),
+    batting_team = ifelse(inning_topbot == "Bot", home_team, away_team)
+  )
+
+Team_FB_Rate <- BAL_2021 %>%
+  dplyr::mutate(fastball = ifelse(pitch_type %in% c("FF", "FA", "SI", "FT", "FC"), 1, 0)) %>% 
+  dplyr::group_by(fielding_team) %>%
+  dplyr::summarise(n = n(), fb_per = mean(fastball, na.rm = TRUE))
+
+Team_FB_Rate %>% 
+  ggplot2::ggplot(aes(x = fielding_team, y = fb_per)) +
+  ggplot2::geom_col(aes(color = fielding_team, fill = fielding_team), width = 0.5) +
+  mlbplotR::scale_color_mlb(type = "secondary") +
+  mlbplotR::scale_fill_mlb(alpha = 0.4) +
+  ggplot2::labs(
+    title = "2021 Fastball Percentage in Orioles Games",
+    y = "Fastball %"
+  ) +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(
+    plot.title = ggplot2::element_text(face = "bold"),
+    # it's obvious what the x-axis is so we remove the title
+    axis.title.x = ggplot2::element_blank(),
+    # this line triggers the replacement of team abbreviations with logos
+    axis.text.x = element_mlb_logo()
+  )
+```
+
+<img src="man/figures/README-statcast-example-1.png" width="100%" />
+
 ## Contributing
 
 Many hands make light work! Here are some ways you can contribute to
