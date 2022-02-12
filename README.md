@@ -141,7 +141,6 @@ Team_FB_Rate %>%
   ggplot2::theme_minimal() +
   ggplot2::theme(
     plot.title = ggplot2::element_text(face = "bold"),
-    # it's obvious what the x-axis is so we remove the title
     axis.title.x = ggplot2::element_blank(),
     # this line triggers the replacement of team abbreviations with logos
     axis.text.x = element_mlb_logo()
@@ -161,7 +160,7 @@ this project:
 
 ## To Do
 
--   Add ability to set axis labels to be logos
--   Add functions to automatically set theme
--   Add in player headshots (will likely have to wait until after the
-    lockout)
+-   Create a package vignette
+-   Add in mean/median line geoms
+-   Add in player headshots (might have to wait until after the lockout)
+-   Add ability to include images from supplied links
