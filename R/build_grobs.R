@@ -1,13 +1,19 @@
 # INTERNAL HELPER THAT BUILDS THE GROBS FOR
-# GEOM LOGOS
-build_grobs <- function(i, alpha, colour, data, type = c("teams")) {
+# GEOM LOGOS AND HEADSHOTS
+build_grobs <- function(i, alpha, colour, data, type = c("teams", "headshots")) {
   make_null <- FALSE
   type <- rlang::arg_match(type)
   if(type == "teams") {
     team_abbr <- data$team_savant_abbr[i]
     image_to_read <- logo_list[[team_abbr]]
     if (is.na(team_abbr)) make_null <- TRUE
+  } else {
+    id <- data$player_id[i]
+    headshot_map <- load_headshots()
+    image_to_read <- headshot_map$espn_headshot[headshot_map$savant_id == id]
+    if(length(image_to_read) == 0 | is.na(image_to_read)) image_to_read <- na_headshot()
   }
+
   if (is.na(make_null)){
     grid <- grid::nullGrob()
   } else if (is.null(alpha)) {
@@ -60,13 +66,13 @@ build_grobs <- function(i, alpha, colour, data, type = c("teams")) {
     height = grid::unit(data$height[i], "npc"),
     just = c(data$hjust[i], data$vjust[i]),
     angle = data$angle[i],
-    name = paste("geom_nfl.panel", data$PANEL[i],
+    name = paste("geom_mlb.panel", data$PANEL[i],
                  "row", i,
                  sep = "."
     )
   )
 
-  grid$name <- paste("nfl.grob", i, sep = ".")
+  grid$name <- paste("mlb.grob", i, sep = ".")
 
   grid
 }
