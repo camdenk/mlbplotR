@@ -113,12 +113,12 @@ joined_df %>%
 
 <img src="man/figures/README-bar-example-1.png" width="100%" />
 
-Lastly, here’s an example using Baseball Savant Statcast data:
+Lastly, here are two examples using Baseball Savant Statcast data:
 
 ``` r
 library(qs)
 
-BAL_2021 <- qread("./data-raw/BAL-2021.qs") %>% 
+BAL_2021 <- qs::qread("./data-raw/BAL-2021.qs") %>% 
   dplyr::mutate(
     fielding_team = ifelse(inning_topbot == "Bot", away_team, home_team),
     batting_team = ifelse(inning_topbot == "Bot", home_team, away_team)
@@ -136,7 +136,8 @@ Team_FB_Rate %>%
   mlbplotR::scale_fill_mlb(alpha = 0.4) +
   ggplot2::labs(
     title = "2021 Fastball Percentage in Orioles Games",
-    y = "Fastball %"
+    y = "Fastball %",
+    caption = "Data: Baseball Savant"
   ) +
   ggplot2::theme_minimal() +
   ggplot2::theme(
@@ -148,6 +149,37 @@ Team_FB_Rate %>%
 ```
 
 <img src="man/figures/README-statcast-example-1.png" width="100%" />
+
+``` r
+BAL_2021_pitch_leaders <- BAL_2021 %>% 
+  # Convert IDs to character for cleaner plotting
+  dplyr::mutate(pitcher = as.character(pitcher)) %>% 
+  dplyr::filter(fielding_team == "BAL") %>% 
+  dplyr::group_by(fielding_team, pitcher) %>% 
+  dplyr::summarise(num_pitches = n()) %>%
+  dplyr::slice_max(num_pitches, n = 5)
+
+BAL_2021_pitch_leaders %>% 
+  ggplot(aes(x = reorder(pitcher, -num_pitches), y = num_pitches)) +
+  ggplot2::geom_col(aes(color = fielding_team, fill = fielding_team), width = 0.5) +
+  mlbplotR::geom_mlb_headshots(aes(player_id = pitcher), height = 0.15, vjust = 0) +
+  mlbplotR::scale_color_mlb(type = "secondary") +
+  mlbplotR::scale_fill_mlb(alpha = 0.4) +
+  ggplot2::labs(
+    title = "2021 Orioles Pitch Leaders",
+    y = "# Pitches Thrown",
+    caption = "Data: Baseball Savant"
+  ) +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(
+    plot.title = ggplot2::element_text(face = "bold"),
+    axis.title.x = ggplot2::element_blank(),
+    axis.text.x = ggplot2::element_blank()
+  ) +
+  ggplot2::scale_y_continuous(limits = c(0,3000))
+```
+
+<img src="man/figures/README-headshot-example-1.png" width="100%" />
 
 ## Contributing
 
