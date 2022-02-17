@@ -162,5 +162,4 @@ this project:
 
 -   Create a package vignette
 -   Add in mean/median line geoms
--   Add in player headshots (might have to wait until after the lockout)
 -   Add ability to include images from supplied links

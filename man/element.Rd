@@ -2,9 +2,19 @@
 % Please edit documentation in R/theme_elements.R
 \name{element}
 \alias{element_mlb_logo}
+\alias{element_mlb_headshot}
 \title{Theme Elements for Image Grobs}
 \usage{
 element_mlb_logo(
+  alpha = NULL,
+  colour = NA,
+  hjust = NULL,
+  vjust = NULL,
+  color = NULL,
+  size = 0.5
+)
+
+element_mlb_headshot(
   alpha = NULL,
   colour = NA,
   hjust = NULL,
@@ -35,9 +45,11 @@ In conjunction with the [ggplot2::theme] system, the following `element_`
 functions enable images in non-data components of the plot, e.g. axis text.
 
   - `element_mlb_logo()`: draws MLB team logos instead of their abbreviations.
+  - `element_mlb_headshot()`: draws MLB player headshots instead of their MLB IDs
 }
 \details{
-The elements translate MLB team abbreviations into logo images.
+The elements translate MLB team abbreviations or MLB player IDs
+  into logo images or headshots, respectively.
 }
 \examples{
 \donttest{
@@ -45,7 +57,7 @@ library(mlbplotR)
 library(ggplot2)
 
 team_abbr <- valid_team_names()
-# remove conference logos from this example
+# remove league logos from this example
 team_abbr <- team_abbr[!team_abbr \%in\% c("AL", "NL", "MLB")]
 
 df <- data.frame(
@@ -68,8 +80,42 @@ ggplot(df, aes(y = teams, x = random_value)) +
   scale_fill_mlb(alpha = 0.4) +
   theme_minimal() +
   theme(axis.text.y = element_mlb_logo())
+
+#############################################################################
+# Headshot Examples
+#############################################################################
+library(mlbplotR)
+library(ggplot2)
+
+
+dfh <- data.frame(
+  random_value = runif(9, 0, 1),
+  player_id = c("594798",
+                  "592450",
+                  "605141",
+                  "665742",
+                  "545361",
+                  "665487",
+                  "571448",
+                  "0",
+                  "543037")
+)
+
+# use headshots for x-axis
+ggplot(dfh, aes(x = player_id, y = random_value)) +
+  geom_col(width = 0.5) +
+  theme_minimal() +
+  theme(axis.text.x = element_mlb_headshot())
+
+# use headshots for y-axis
+ggplot(dfh, aes(y = player_id, x = random_value)) +
+  geom_col(width = 0.5) +
+  theme_minimal() +
+  theme(axis.text.y = element_mlb_headshot())
 }
 }
 \seealso{
-[geom_mlb_logos()] for more information on valid team abbreviations and other parameters.
+[geom_mlb_logos()] and [geom_mlb_headshots()]
+  for more information on valid team abbreviations, player ids, and other
+  parameters.
 }

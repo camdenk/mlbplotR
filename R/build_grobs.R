@@ -11,7 +11,11 @@ build_grobs <- function(i, alpha, colour, data, type = c("teams", "headshots")) 
     id <- data$player_id[i]
     headshot_map <- load_headshots()
     image_to_read <- headshot_map$espn_headshot[headshot_map$savant_id == id]
-    if(length(image_to_read) == 0 | is.na(image_to_read)) image_to_read <- na_headshot()
+    if(length(image_to_read) == 0){
+      image_to_read <- na_headshot()
+    } else if (is.na(image_to_read)){
+      image_to_read <- na_headshot()
+    }
   }
 
   if (is.na(make_null)){

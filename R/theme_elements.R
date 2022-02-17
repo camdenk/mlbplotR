@@ -5,8 +5,10 @@
 #' functions enable images in non-data components of the plot, e.g. axis text.
 #'
 #'   - `element_mlb_logo()`: draws MLB team logos instead of their abbreviations.
+#'   - `element_mlb_headshot()`: draws MLB player headshots instead of their MLB IDs
 #'
-#' @details The elements translate MLB team abbreviations into logo images.
+#' @details The elements translate MLB team abbreviations or MLB player IDs
+#'   into logo images or headshots, respectively.
 #' @param alpha The alpha channel, i.e. transparency level, as a numerical value
 #'   between 0 and 1.
 #' @param colour,color The image will be colorized with this color. Use the
@@ -16,7 +18,9 @@
 #' @param hjust,vjust The horizontal and vertical adjustment respectively.
 #'   Must be a numerical value between 0 and 1.
 #' @param size The output grob size in `cm` (!).
-#' @seealso [geom_mlb_logos()] for more information on valid team abbreviations and other parameters.
+#' @seealso [geom_mlb_logos()] and [geom_mlb_headshots()]
+#'   for more information on valid team abbreviations, player ids, and other
+#'   parameters.
 #' @return An S3 object of class `element`.
 #' @examples
 #' \donttest{
@@ -24,7 +28,7 @@
 #' library(ggplot2)
 #'
 #' team_abbr <- valid_team_names()
-#' # remove conference logos from this example
+#' # remove league logos from this example
 #' team_abbr <- team_abbr[!team_abbr %in% c("AL", "NL", "MLB")]
 #'
 #' df <- data.frame(
@@ -47,6 +51,38 @@
 #'   scale_fill_mlb(alpha = 0.4) +
 #'   theme_minimal() +
 #'   theme(axis.text.y = element_mlb_logo())
+#'
+#' #############################################################################
+#' # Headshot Examples
+#' #############################################################################
+#' library(mlbplotR)
+#' library(ggplot2)
+#'
+#'
+#' dfh <- data.frame(
+#'   random_value = runif(9, 0, 1),
+#'   player_id = c("594798",
+#'                   "592450",
+#'                   "605141",
+#'                   "665742",
+#'                   "545361",
+#'                   "665487",
+#'                   "571448",
+#'                   "0",
+#'                   "543037")
+#' )
+#'
+#' # use headshots for x-axis
+#' ggplot(dfh, aes(x = player_id, y = random_value)) +
+#'   geom_col(width = 0.5) +
+#'   theme_minimal() +
+#'   theme(axis.text.x = element_mlb_headshot())
+#'
+#' # use headshots for y-axis
+#' ggplot(dfh, aes(y = player_id, x = random_value)) +
+#'   geom_col(width = 0.5) +
+#'   theme_minimal() +
+#'   theme(axis.text.y = element_mlb_headshot())
 #' }
 #' @name element
 #' @aliases NULL
@@ -60,6 +96,17 @@ element_mlb_logo <- function(alpha = NULL, colour = NA, hjust = NULL, vjust = NU
   structure(
     list(alpha = alpha, colour = colour, hjust = hjust, vjust = vjust, size = size),
     class = c("element_mlb_logo", "element_text", "element")
+  )
+}
+
+#' @export
+#' @rdname element
+element_mlb_headshot <- function(alpha = NULL, colour = NA, hjust = NULL, vjust = NULL,
+                                 color = NULL, size = 0.5) {
+  if (!is.null(color))  colour <- color
+  structure(
+    list(alpha = alpha, colour = colour, hjust = hjust, vjust = vjust, size = size),
+    class = c("element_mlb_headshot", "element_text", "element")
   )
 }
 
@@ -104,16 +151,67 @@ element_grob.element_mlb_logo <- function(element, label = "", x = NULL, y = NUL
 }
 
 
+#' @export
+element_grob.element_mlb_headshot <- function(element, label = "", x = NULL, y = NULL,
+                                              alpha = NULL, colour = NULL,
+                                              hjust = NULL, vjust = NULL,
+                                              size = NULL, ...) {
+
+  if (is.null(label)) return(ggplot2::zeroGrob())
+
+  n <- max(length(x), length(y), 1)
+  vj <- vjust %||% element$vjust
+  hj <- hjust %||% element$hjust
+  x <- x %||% unit(rep(hj, n), "npc")
+  y <- y %||% unit(rep(vj, n), "npc")
+  alpha <- alpha %||% element$alpha
+  colour <- colour %||% rep(element$colour, n)
+  size <- size %||% element$size
+
+  grobs <- lapply(
+    seq_along(label),
+    axisImageGrob,
+    alpha = alpha,
+    colour = colour,
+    label = label,
+    x = x,
+    y = y,
+    hjust = hj,
+    vjust = vj,
+    type = "headshots"
+  )
+
+  class(grobs) <- "gList"
+
+  grid::gTree(
+    gp = grid::gpar(),
+    children = grobs,
+    size = size,
+    cl = "axisImageGrob"
+  )
+}
+
+
 axisImageGrob <- function(i, label, alpha, colour, data, x, y, hjust, vjust,
                           width = 1, height = 1,
-                          type = c("teams")) {
+                          type = c("teams", "headshots")) {
   make_null <- FALSE
   type <- rlang::arg_match(type)
   if(type == "teams") {
     team_abbr <- label[i]
     image_to_read <- logo_list[[team_abbr]]
     if (is.na(team_abbr)) make_null <- TRUE
+  } else {
+    id <- label[i]
+    headshot_map <- load_headshots()
+    image_to_read <- headshot_map$espn_headshot[headshot_map$savant_id == id]
+    if(length(image_to_read) == 0){
+      image_to_read <- na_headshot()
+    } else if (is.na(image_to_read)){
+      image_to_read <- na_headshot()
+    }
   }
+
   if (is.na(make_null)){
     return(grid::nullGrob())
   } else if (is.null(alpha[i])) {
