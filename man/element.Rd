@@ -3,6 +3,7 @@
 \name{element}
 \alias{element_mlb_logo}
 \alias{element_mlb_headshot}
+\alias{element_path}
 \title{Theme Elements for Image Grobs}
 \usage{
 element_mlb_logo(
@@ -15,6 +16,15 @@ element_mlb_logo(
 )
 
 element_mlb_headshot(
+  alpha = NULL,
+  colour = NA,
+  hjust = NULL,
+  vjust = NULL,
+  color = NULL,
+  size = 0.5
+)
+
+element_path(
   alpha = NULL,
   colour = NA,
   hjust = NULL,
@@ -46,6 +56,7 @@ functions enable images in non-data components of the plot, e.g. axis text.
 
   - `element_mlb_logo()`: draws MLB team logos instead of their abbreviations.
   - `element_mlb_headshot()`: draws MLB player headshots instead of their MLB IDs
+  - `element_path()`: draws images from valid image URLs instead of the URL.
 }
 \details{
 The elements translate MLB team abbreviations or MLB player IDs
@@ -115,7 +126,7 @@ ggplot(dfh, aes(y = player_id, x = random_value)) +
 }
 }
 \seealso{
-[geom_mlb_logos()] and [geom_mlb_headshots()]
+[geom_mlb_logos()], [geom_mlb_headshots()], and [geom_from_path()]
   for more information on valid team abbreviations, player ids, and other
   parameters.
 }

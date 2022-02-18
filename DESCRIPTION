@@ -29,7 +29,8 @@ Imports:
     scales
 Suggests:
     rstudioapi,
-    dplyr
+    dplyr,
+    rsvg
 Encoding: UTF-8
 LazyData: true
 License: MIT + file LICENSE
