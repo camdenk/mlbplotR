@@ -71,7 +71,7 @@ This geom is used to plot MLB team and league logos instead
 }
 \section{Aesthetics}{
 
-`geom_nfl_logos()` understands the following aesthetics (required aesthetics are in bold):
+`geom_mlb_logos()` understands the following aesthetics (required aesthetics are in bold):
 \itemize{
   \item{**x**}{ - The x-coordinate.}
   \item{**y**}{ - The y-coordinate.}
