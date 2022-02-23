@@ -112,7 +112,7 @@ joined_df %>%
   ggplot2::scale_x_discrete(expand = c(0.075, 0.075))
 ```
 
-Lastly, here are two examples using Baseball Savant Statcast data:
+Lastly, here are two examples using Baltimore Orioles data from Baseball Savant:
 
 ```{r statcast-example, message = FALSE}
 library(qs)
@@ -196,5 +196,4 @@ this project:
 
 - Create a package vignette
 - Add in mean/median line geoms
-- Add ability to include images from supplied links
 

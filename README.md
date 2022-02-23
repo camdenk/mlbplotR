@@ -113,7 +113,8 @@ joined_df %>%
 
 <img src="man/figures/README-bar-example-1.png" width="100%" />
 
-Lastly, here are two examples using Baseball Savant Statcast data:
+Lastly, here are two examples using Baltimore Orioles data from Baseball
+Savant:
 
 ``` r
 library(qs)
@@ -194,4 +195,3 @@ this project:
 
 -   Create a package vignette
 -   Add in mean/median line geoms
--   Add ability to include images from supplied links
