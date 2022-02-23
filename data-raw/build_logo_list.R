@@ -1,5 +1,5 @@
 # Save raw logos in internal data for more speed
-teams_colors_logos <- read_csv("./data-raw/MLB_Colors_Logos.csv")
+teams_colors_logos <- readr::read_csv("./data-raw/MLB_Colors_Logos.csv")
 
 logo_list <- lapply(teams_colors_logos$team_savant_abbr, function(x){
   url <- teams_colors_logos$team_logo_espn[teams_colors_logos$team_savant_abbr == x]
@@ -18,6 +18,6 @@ logo_urls <- teams_colors_logos$team_logo_espn
 names(logo_urls) <- teams_colors_logos$team_savant_abbr
 
 
-usethis::use_data(teams_colors_logos, logo_list, primary_colors,
-                  secondary_colors,
+usethis::use_data(teams_colors_logos, logo_list,
+                  primary_colors, secondary_colors,
                   logo_urls, internal = TRUE, overwrite = TRUE)
