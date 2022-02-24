@@ -246,7 +246,7 @@ element_grob.element_path <- function(element, label = "", x = NULL, y = NULL,
 
 axisImageGrob <- function(i, label, alpha, colour, data, x, y, hjust, vjust,
                           width = 1, height = 1,
-                          type = c("teams", "headshots")) {
+                          type = c("teams", "headshots", "path")) {
   make_null <- FALSE
   type <- rlang::arg_match(type)
   if(type == "teams") {
