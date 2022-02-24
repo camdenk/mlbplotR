@@ -98,26 +98,30 @@ library(mlbplotR)
 library(ggplot2)
 
 df <- data.frame(
-  a = rep(1:3, 3),
-  b = sort(rep(1:3, 3), decreasing = TRUE),
-  player_id = c("594798",
-                  "592450",
-                  "605141",
-                  "665742",
-                  "545361",
-                  "665487",
-                  "571448",
-                  "0",
-                  "543037"),
-  player_name = c("Jacob deGrom",
-                  "Aaron Judge",
-                  "Mookie Betts",
-                  "Juan Soto",
+  a = c(rep(1:3, 3), 1.5, 2.5),
+  b = c(sort(rep(1:3, 3), decreasing = TRUE), 2.5, 2.5),
+  player_id = c("660670",
+                "545361",
+                "605141",
+                "571448",
+                "594798",
+                "518692",
+                "0",
+                "521692",
+                "120074",
+                "665487",
+                "518934"),
+  player_name = c("Ronald Acuña Jr.",
                   "Mike Trout",
-                  "Fernando Tatis Jr.",
+                  "Mookie Betts",
                   "Nolan Arenado",
+                  "Jacob deGrom",
+                  "Freddie Freeman",
                   "Non Match",
-                  "Gerrit Cole")
+                  "Salvador Perez",
+                  "David Ortiz",
+                  "Fernanto Tatis Jr.",
+                  "DJ LeMahieu")
 )
 
 # set a custom fill colour for one player
