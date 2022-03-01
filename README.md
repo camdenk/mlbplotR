@@ -72,7 +72,7 @@ joined_df <- df %>%
   left_join(teams_colors_logos, by = c("Tm" = "team_name"))
 
 
-joined_df %>% 
+joined_df %>%
   ggplot2::ggplot(aes(x = ERA, y = FIP)) +
   mlbplotR::geom_mlb_logos(aes(team_savant_abbr = team_savant_abbr), width = 0.075, alpha = 0.7) +
   ggplot2::labs(
@@ -95,7 +95,7 @@ Here’s another that looks at Home Runs Allowed by team:
 joined_df %>% 
   ggplot2::ggplot(aes(x = team_savant_abbr, y = HR)) +
   ggplot2::geom_col(aes(color = team_savant_abbr, fill = team_savant_abbr), width = 0.5) +
-  mlbplotR::geom_mlb_logos(aes(team_savant_abbr = team_savant_abbr), width = 0.075, alpha = 0.9) +
+  mlbplotR::geom_mlb_logos(aes(team_savant_abbr = team_savant_abbr), width = 0.07, alpha = 0.9) +
   mlbplotR::scale_color_mlb(type = "secondary") +
   mlbplotR::scale_fill_mlb(alpha = 0.4) +
   ggplot2::labs(
@@ -106,9 +106,10 @@ joined_df %>%
   ggplot2::theme(
     plot.title = ggplot2::element_text(face = "bold"),
     axis.title.x = ggplot2::element_blank(),
-    axis.text.x = ggplot2::element_blank()
+    axis.text.x = ggplot2::element_blank(),
+    panel.grid.major.x = element_blank()
   ) +
-  ggplot2::scale_x_discrete(expand = c(0.075, 0.075))
+  ggplot2::scale_x_discrete(expand = c(0.05, 0.075))
 ```
 
 <img src="man/figures/README-bar-example-1.png" width="100%" />
@@ -144,6 +145,7 @@ Team_FB_Rate %>%
   ggplot2::theme(
     plot.title = ggplot2::element_text(face = "bold"),
     axis.title.x = ggplot2::element_blank(),
+    panel.grid.major.x = element_blank(),
     # this line triggers the replacement of team abbreviations with logos
     axis.text.x = element_mlb_logo()
   )
@@ -175,12 +177,16 @@ BAL_2021_pitch_leaders %>%
   ggplot2::theme(
     plot.title = ggplot2::element_text(face = "bold"),
     axis.title.x = ggplot2::element_blank(),
-    axis.text.x = ggplot2::element_blank()
+    axis.text.x = ggplot2::element_blank(),
+    panel.grid.major.x = element_blank()
   ) +
   ggplot2::scale_y_continuous(limits = c(0,3000))
 ```
 
 <img src="man/figures/README-headshot-example-1.png" width="100%" />
+
+Note: If a player’s headshot data can’t be found, their headshot will be
+replaced with the MLB logo.
 
 ## Contributing
 
@@ -195,3 +201,6 @@ this project:
 
 -   Create a package vignette
 -   Add in mean/median line geoms
+-   Continue to add more player ids for headshots
+-   Create a function that returns a dataframe with player ids and teams
+    played for in a given year
