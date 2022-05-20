@@ -18,7 +18,38 @@ logo_urls <- teams_colors_logos$team_logo_espn
 names(logo_urls) <- teams_colors_logos$team_primary_abbr
 
 
+
+scoreboard_logo_list <- lapply(teams_colors_logos$team_primary_abbr, function(x){
+  url <- teams_colors_logos$team_scoreboard_logo_espn[teams_colors_logos$team_primary_abbr == x]
+  curl::curl_fetch_memory(url)$content
+})
+
+scoreboard_logo_list <- rlang::set_names(scoreboard_logo_list, teams_colors_logos$team_primary_abbr)
+
+
+
+light_cap_logo_list <- lapply(teams_colors_logos$team_primary_abbr, function(x){
+  url <- teams_colors_logos$team_cap_logo_on_light[teams_colors_logos$team_primary_abbr == x]
+  #curl::curl_fetch_memory(url)$content
+})
+
+
+
+light_logo_list <- rlang::set_names(light_cap_logo_list, teams_colors_logos$team_primary_abbr)
+
+
+
+dark_cap_logo_list <- lapply(teams_colors_logos$team_primary_abbr, function(x){
+  url <- teams_colors_logos$team_cap_logo_on_dark[teams_colors_logos$team_primary_abbr == x]
+  #curl::curl_fetch_memory(url)$content
+})
+
+dark_logo_list <- rlang::set_names(dark_cap_logo_list, teams_colors_logos$team_primary_abbr)
+
+
+
 usethis::use_data(teams_colors_logos, logo_list,
                   primary_colors, secondary_colors,
-                  logo_urls,
+                  logo_urls, scoreboard_logo_list,
+                  light_logo_list, dark_logo_list,
                   internal = TRUE, overwrite = TRUE)
