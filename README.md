@@ -200,7 +200,7 @@ this project:
 ## To Do
 
 -   Create a package vignette
--   Clean team names/abbreviations before plotting
+-   Clean team names/abbreviations automatically before plotting
 -   Add in mean/median line geoms
 -   Continue to add player ids for headshots for those who haven’t
     played in the Statcast era
