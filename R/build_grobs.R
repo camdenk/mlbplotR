@@ -1,11 +1,23 @@
 # INTERNAL HELPER THAT BUILDS THE GROBS FOR
 # GEOM LOGOS AND HEADSHOTS
-build_grobs <- function(i, alpha, colour, data, type = c("teams", "headshots", "path")) {
+build_grobs <- function(i, alpha, colour, data, type = c("teams", "light_cap", "dark_cap", "scoreboard", "headshots", "path")) {
   make_null <- FALSE
   type <- rlang::arg_match(type)
   if(type == "teams") {
     team_abbr <- data$team_savant_abbr[i]
     image_to_read <- logo_list[[team_abbr]]
+    if (is.na(team_abbr)) make_null <- TRUE
+  } else if(type == "dark_cap"){
+    team_abbr <- data$team_abbr[i]
+    image_to_read <- dark_logo_list[[team_abbr]]
+    if (is.na(team_abbr)) make_null <- TRUE
+  } else if(type == "light_cap"){
+    team_abbr <- data$team_abbr[i]
+    image_to_read <- light_logo_list[[team_abbr]]
+    if (is.na(team_abbr)) make_null <- TRUE
+  } else if(type == "scoreboard"){
+    team_abbr <- data$team_abbr[i]
+    image_to_read <- scoreboard_logo_list[[team_abbr]]
     if (is.na(team_abbr)) make_null <- TRUE
   } else if (type == "path"){
     image_to_read <- data$path[i]
