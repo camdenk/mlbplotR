@@ -37,8 +37,8 @@ library(mlbplotR)
 library(ggplot2)
 library(dplyr)
 
-teams_colors_logos <- mlbplotR::load_mlb_teams() %>% 
-  dplyr::filter(!team_primary_abbr %in% c("AL", "NL", "MLB")) %>% 
+teams_colors_logos <- mlbplotR::load_mlb_teams() |> 
+  dplyr::filter(!team_primary_abbr %in% c("AL", "NL", "MLB")) |> 
   dplyr::mutate(
     a = rep(1:6, 5),
     b = sort(rep(1:5, 6), decreasing = TRUE),
@@ -48,7 +48,7 @@ teams_colors_logos <- mlbplotR::load_mlb_teams() %>%
 
 
  ggplot2::ggplot(teams_colors_logos, aes(x = a, y = b)) +
-   mlbplotR::geom_mlb_logos(aes(team_savant_abbr = team_primary_abbr, color = color, alpha = alpha), width = 0.075) +
+   mlbplotR::geom_mlb_logos(aes(team_abbr = team_primary_abbr, color = color, alpha = alpha), width = 0.075) +
    ggplot2::geom_label(aes(label = team_primary_abbr), nudge_y = -0.35, alpha = 0.5) +
    ggplot2::scale_color_identity() +
    ggplot2::scale_alpha_identity() +
@@ -68,13 +68,13 @@ library(scales)
 df <- readr::read_csv("./data-raw/2021-Team-Pitching-Stats.csv")
   
 # Join leaderboard with abbrevations
-joined_df <- df %>% 
+joined_df <- df |> 
   left_join(teams_colors_logos, by = c("Tm" = "team_name"))
 
 
-joined_df %>%
+joined_df |>
   ggplot2::ggplot(aes(x = ERA, y = FIP)) +
-  mlbplotR::geom_mlb_logos(aes(team_savant_abbr = team_primary_abbr), width = 0.075, alpha = 0.7) +
+  mlbplotR::geom_mlb_logos(aes(team_abbr = team_primary_abbr), width = 0.075, alpha = 0.7) +
   ggplot2::labs(
     caption = "Data: Baseball Reference",
     title = "2021: ERA vs. FIP"
@@ -92,10 +92,10 @@ joined_df %>%
 Here’s another that looks at Home Runs Allowed by team:
 
 ``` r
-joined_df %>% 
+joined_df |> 
   ggplot2::ggplot(aes(x = team_primary_abbr, y = HR)) +
   ggplot2::geom_col(aes(color = team_primary_abbr, fill = team_primary_abbr), width = 0.5) +
-  mlbplotR::geom_mlb_logos(aes(team_savant_abbr = team_primary_abbr), width = 0.07, alpha = 0.9) +
+  mlbplotR::geom_mlb_logos(aes(team_abbr = team_primary_abbr), width = 0.07, alpha = 0.9) +
   mlbplotR::scale_color_mlb(type = "secondary") +
   mlbplotR::scale_fill_mlb(alpha = 0.4) +
   ggplot2::labs(
@@ -120,18 +120,18 @@ Savant:
 ``` r
 library(qs)
 
-BAL_2021 <- qs::qread("./data-raw/BAL-2021.qs") %>% 
+BAL_2021 <- qs::qread("./data-raw/BAL-2021.qs") |> 
   dplyr::mutate(
     fielding_team = ifelse(inning_topbot == "Bot", away_team, home_team),
     batting_team = ifelse(inning_topbot == "Bot", home_team, away_team)
   )
 
-Team_FB_Rate <- BAL_2021 %>%
-  dplyr::mutate(fastball = ifelse(pitch_type %in% c("FF", "FA", "SI", "FT", "FC"), 1, 0)) %>% 
-  dplyr::group_by(fielding_team) %>%
+Team_FB_Rate <- BAL_2021 |>
+  dplyr::mutate(fastball = ifelse(pitch_type %in% c("FF", "FA", "SI", "FT", "FC"), 1, 0)) |> 
+  dplyr::group_by(fielding_team) |>
   dplyr::summarise(n = n(), fb_per = mean(fastball, na.rm = TRUE))
 
-Team_FB_Rate %>% 
+Team_FB_Rate |> 
   ggplot2::ggplot(aes(x = fielding_team, y = fb_per)) +
   ggplot2::geom_col(aes(color = fielding_team, fill = fielding_team), width = 0.5) +
   mlbplotR::scale_color_mlb(type = "secondary") +
@@ -154,15 +154,15 @@ Team_FB_Rate %>%
 <img src="man/figures/README-statcast-example-1.png" width="100%" />
 
 ``` r
-BAL_2021_pitch_leaders <- BAL_2021 %>% 
+BAL_2021_pitch_leaders <- BAL_2021 |> 
   # Convert IDs to character for cleaner plotting
-  dplyr::mutate(pitcher = as.character(pitcher)) %>% 
-  dplyr::filter(fielding_team == "BAL") %>% 
-  dplyr::group_by(fielding_team, pitcher) %>% 
-  dplyr::summarise(num_pitches = n()) %>%
+  dplyr::mutate(pitcher = as.character(pitcher)) |> 
+  dplyr::filter(fielding_team == "BAL") |> 
+  dplyr::group_by(fielding_team, pitcher) |> 
+  dplyr::summarise(num_pitches = n()) |>
   dplyr::slice_max(num_pitches, n = 5)
 
-BAL_2021_pitch_leaders %>% 
+BAL_2021_pitch_leaders |> 
   ggplot(aes(x = reorder(pitcher, -num_pitches), y = num_pitches)) +
   ggplot2::geom_col(aes(color = fielding_team, fill = fielding_team), width = 0.5) +
   mlbplotR::geom_mlb_headshots(aes(player_id = pitcher), height = 0.15, vjust = 0) +
@@ -201,6 +201,6 @@ this project:
 
 -   Create a package vignette
 -   Add in mean/median line geoms
--   Continue to add more player ids for headshots
--   Create a function that returns a dataframe with player ids and teams
-    played for in a given year
+-   Continue to add player ids for headshots for those who haven’t
+    played in the Statcast era
+-   Create a function that returns a dataframe with player ids
