@@ -2,11 +2,41 @@
 % Please edit documentation in R/theme_elements.R
 \name{element}
 \alias{element_mlb_logo}
+\alias{element_mlb_scoreboard_logo}
+\alias{element_mlb_dark_cap_logo}
+\alias{element_mlb_light_cap_logo}
 \alias{element_mlb_headshot}
 \alias{element_path}
 \title{Theme Elements for Image Grobs}
 \usage{
 element_mlb_logo(
+  alpha = NULL,
+  colour = NA,
+  hjust = NULL,
+  vjust = NULL,
+  color = NULL,
+  size = 0.5
+)
+
+element_mlb_scoreboard_logo(
+  alpha = NULL,
+  colour = NA,
+  hjust = NULL,
+  vjust = NULL,
+  color = NULL,
+  size = 0.5
+)
+
+element_mlb_dark_cap_logo(
+  alpha = NULL,
+  colour = NA,
+  hjust = NULL,
+  vjust = NULL,
+  color = NULL,
+  size = 0.5
+)
+
+element_mlb_light_cap_logo(
   alpha = NULL,
   colour = NA,
   hjust = NULL,
@@ -54,7 +84,8 @@ An S3 object of class `element`.
 In conjunction with the [ggplot2::theme] system, the following `element_`
 functions enable images in non-data components of the plot, e.g. axis text.
 
-  - `element_mlb_logo()`: draws MLB team logos instead of their abbreviations.
+  - `element_mlb_logo()` and `element_mlb_scoreboard_logo()`: draws MLB team logos instead of their abbreviations.
+  - `element_mlb_dark_cap_logo()` and `element_mlb_light_cap_logo()`: draws MLB team cap logos instead of their abbreviations.
   - `element_mlb_headshot()`: draws MLB player headshots instead of their MLB IDs
   - `element_path()`: draws images from valid image URLs instead of the URL.
 }
