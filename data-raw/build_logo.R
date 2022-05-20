@@ -18,7 +18,7 @@ df <- data.frame(
 )
 
 p <- ggplot(df, aes(x = a, y = b)) +
-  geom_mlb_logos(aes(team_abbr = teams), width = 0.08, alpha = 0.75) +
+  geom_mlb_logos(aes(team_savant_abbr = teams), width = 0.08, alpha = 0.75) +
   coord_cartesian(xlim = c(0.5,6.5), ylim = c(0.5,8.5)) +
   theme_void() +
   theme_transparent()
@@ -46,3 +46,13 @@ sticker(
 )
 
 #usethis::use_logo("./data-raw/logo.png")
+
+
+# Github preview logo ------------------------------------------------------------------------------
+
+# ggplot() +
+#   mlbplotR::geom_from_path(aes(x = 0, y = 0, path = "./data-raw/logo.png")) +
+#   theme_void()
+#
+#
+# ggsave("./data-raw/preview logo.png", width = 1280, height = 640, dpi = "retina", units = "px")

@@ -145,9 +145,9 @@ Team_FB_Rate |>
   ggplot2::theme(
     plot.title = ggplot2::element_text(face = "bold"),
     axis.title.x = ggplot2::element_blank(),
-    panel.grid.major.x = element_blank(),
+    panel.grid.major.x = ggplot2::element_blank(),
     # this line triggers the replacement of team abbreviations with logos
-    axis.text.x = element_mlb_logo()
+    axis.text.x = mlbplotR::element_mlb_logo()
   )
 ```
 
@@ -178,7 +178,7 @@ BAL_2021_pitch_leaders |>
     plot.title = ggplot2::element_text(face = "bold"),
     axis.title.x = ggplot2::element_blank(),
     axis.text.x = ggplot2::element_blank(),
-    panel.grid.major.x = element_blank()
+    panel.grid.major.x = ggplot2::element_blank()
   ) +
   ggplot2::scale_y_continuous(limits = c(0,3000))
 ```
@@ -200,6 +200,7 @@ this project:
 ## To Do
 
 -   Create a package vignette
+-   Clean team names/abbreviations before plotting
 -   Add in mean/median line geoms
 -   Continue to add player ids for headshots for those who haven’t
     played in the Statcast era

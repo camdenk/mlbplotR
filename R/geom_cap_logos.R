@@ -1,12 +1,12 @@
-#' ggplot2 Layer for Visualizing MLB Team Logos
+#' ggplot2 Layer for Visualizing MLB Team Cap Logos
 #'
-#' @description This geom is used to plot MLB team and league logos instead
+#' @description This geom is used to plot MLB team cap and league logos instead
 #'   of points in a ggplot. It requires x, y aesthetics as well as a valid MLB
 #'   team abbreviation. The latter can be checked with [`valid_team_names()`].
 #'
 #' @inheritParams ggplot2::geom_point
 #' @section Aesthetics:
-#' `geom_mlb_logos()` understands the following aesthetics (required aesthetics are in bold):
+#' `geom_mlb_dark_cap_logos()` understands the following aesthetics (required aesthetics are in bold):
 #' \itemize{
 #'   \item{**x**}{ - The x-coordinate.}
 #'   \item{**y**}{ - The y-coordinate.}
@@ -54,7 +54,7 @@
 #'
 #' # scatterplot of all logos
 #' ggplot(df, aes(x = a, y = b)) +
-#'   geom_mlb_logos(aes(team_abbr = teams), width = 0.075) +
+#'   geom_mlb_dark_cap_logos(aes(team_abbr = teams), width = 0.075) +
 #'   geom_label(aes(label = teams), nudge_y = -0.35, alpha = 0.5) +
 #'   theme_void()
 #'
@@ -62,7 +62,7 @@
 #' # please note that you have to add scale_alpha_identity() to use the alpha
 #' # values in your dataset!
 #' ggplot(df, aes(x = a, y = b)) +
-#'   geom_mlb_logos(aes(team_abbr = teams, alpha = alpha), width = 0.075) +
+#'   geom_mlb_dark_cap_logos(aes(team_abbr = teams, alpha = alpha), width = 0.075) +
 #'   geom_label(aes(label = teams), nudge_y = -0.35, alpha = 0.5) +
 #'   scale_alpha_identity() +
 #'   theme_void()
@@ -71,7 +71,7 @@
 #' # please note that you have to add scale_alpha_identity() as well as
 #' # scale_colour_identity() to use the alpha and colour values in your dataset!
 #' ggplot(df, aes(x = a, y = b)) +
-#'   geom_mlb_logos(aes(team_abbr = teams, alpha = alpha, colour = colour), width = 0.075) +
+#'   geom_mlb_dark_cap_logos(aes(team_abbr = teams, alpha = alpha, colour = colour), width = 0.075) +
 #'   geom_label(aes(label = teams), nudge_y = -0.35, alpha = 0.5) +
 #'   scale_alpha_identity() +
 #'   scale_colour_identity() +
@@ -79,19 +79,19 @@
 #'
 #' # apply alpha as constant for all logos
 #' ggplot(df, aes(x = a, y = b)) +
-#'   geom_mlb_logos(aes(team_abbr = teams), width = 0.075, alpha = 0.6) +
+#'   geom_mlb_dark_cap_logos(aes(team_abbr = teams), width = 0.075, alpha = 0.6) +
 #'   geom_label(aes(label = teams), nudge_y = -0.35, alpha = 0.5) +
 #'   theme_void()
 #'
 #' # it's also possible to plot league logos
 #' league <- data.frame(a = 1:3, b = 0, teams = c("AL", "NL", "MLB"))
 #' ggplot(league, aes(x = a, y = b)) +
-#'   geom_mlb_logos(aes(team_abbr = teams), width = 0.3) +
+#'   geom_mlb_dark_cap_logos(aes(team_abbr = teams), width = 0.3) +
 #'   geom_label(aes(label = teams), nudge_y = -0.4, alpha = 0.5) +
 #'   coord_cartesian(xlim = c(0.5,3.5), ylim = c(-0.75,.75)) +
 #'   theme_void()
 #' }
-geom_mlb_logos <- function(mapping = NULL, data = NULL,
+geom_mlb_dark_cap_logos <- function(mapping = NULL, data = NULL,
                            stat = "identity", position = "identity",
                            ...,
                            na.rm = FALSE,
@@ -102,7 +102,7 @@ geom_mlb_logos <- function(mapping = NULL, data = NULL,
     data = data,
     mapping = mapping,
     stat = stat,
-    geom = GeomMLBlogo,
+    geom = GeomMLBdarkcaplogo,
     position = position,
     show.legend = show.legend,
     inherit.aes = inherit.aes,
@@ -115,8 +115,8 @@ geom_mlb_logos <- function(mapping = NULL, data = NULL,
 
 #' @rdname mlbplotR-package
 #' @export
-GeomMLBlogo <- ggplot2::ggproto(
-  "GeomMLBlogo", ggplot2::Geom,
+GeomMLBdarkcaplogo <- ggplot2::ggproto(
+  "GeomMLBdarkcaplogo", ggplot2::Geom,
   required_aes = c("x", "y", "team_abbr"),
   # non_missing_aes = c(""),
   default_aes = ggplot2::aes(
@@ -126,7 +126,7 @@ GeomMLBlogo <- ggplot2::ggproto(
   draw_panel = function(data, panel_params, coord, na.rm = FALSE) {
     data <- coord$transform(data, panel_params)
 
-    grobs <- lapply(seq_along(data$team_abbr), build_grobs, alpha = data$alpha, colour = data$colour, data = data, type = "teams")
+    grobs <- lapply(seq_along(data$team_abbr), build_grobs, alpha = data$alpha, colour = data$colour, data = data, type = "dark_cap")
 
     class(grobs) <- "gList"
 
@@ -138,15 +138,15 @@ GeomMLBlogo <- ggplot2::ggproto(
 
 
 
-#' ggplot2 Layer for Visualizing MLB Team Logos
+#' ggplot2 Layer for Visualizing MLB Team Cap Logos
 #'
-#' @description This geom is used to plot MLB team and league logos instead
+#' @description This geom is used to plot MLB team cap and league logos instead
 #'   of points in a ggplot. It requires x, y aesthetics as well as a valid MLB
 #'   team abbreviation. The latter can be checked with [`valid_team_names()`].
 #'
 #' @inheritParams ggplot2::geom_point
 #' @section Aesthetics:
-#' `geom_mlb_scoreboard_logos()` understands the following aesthetics (required aesthetics are in bold):
+#' `geom_mlb_light_cap_logos()` understands the following aesthetics (required aesthetics are in bold):
 #' \itemize{
 #'   \item{**x**}{ - The x-coordinate.}
 #'   \item{**y**}{ - The y-coordinate.}
@@ -194,7 +194,7 @@ GeomMLBlogo <- ggplot2::ggproto(
 #'
 #' # scatterplot of all logos
 #' ggplot(df, aes(x = a, y = b)) +
-#'   geom_mlb_scoreboard_logos(aes(team_abbr = teams), width = 0.075) +
+#'   geom_mlb_light_cap_logos(aes(team_abbr = teams), width = 0.075) +
 #'   geom_label(aes(label = teams), nudge_y = -0.35, alpha = 0.5) +
 #'   theme_void()
 #'
@@ -202,7 +202,7 @@ GeomMLBlogo <- ggplot2::ggproto(
 #' # please note that you have to add scale_alpha_identity() to use the alpha
 #' # values in your dataset!
 #' ggplot(df, aes(x = a, y = b)) +
-#'   geom_mlb_scoreboard_logos(aes(team_abbr = teams, alpha = alpha), width = 0.075) +
+#'   geom_mlb_light_cap_logos(aes(team_abbr = teams, alpha = alpha), width = 0.075) +
 #'   geom_label(aes(label = teams), nudge_y = -0.35, alpha = 0.5) +
 #'   scale_alpha_identity() +
 #'   theme_void()
@@ -211,7 +211,7 @@ GeomMLBlogo <- ggplot2::ggproto(
 #' # please note that you have to add scale_alpha_identity() as well as
 #' # scale_colour_identity() to use the alpha and colour values in your dataset!
 #' ggplot(df, aes(x = a, y = b)) +
-#'   geom_mlb_scoreboard_logos(aes(team_abbr = teams, alpha = alpha, colour = colour), width = 0.075) +
+#'   geom_mlb_light_cap_logos(aes(team_abbr = teams, alpha = alpha, colour = colour), width = 0.075) +
 #'   geom_label(aes(label = teams), nudge_y = -0.35, alpha = 0.5) +
 #'   scale_alpha_identity() +
 #'   scale_colour_identity() +
@@ -219,30 +219,30 @@ GeomMLBlogo <- ggplot2::ggproto(
 #'
 #' # apply alpha as constant for all logos
 #' ggplot(df, aes(x = a, y = b)) +
-#'   geom_mlb_scoreboard_logos(aes(team_abbr = teams), width = 0.075, alpha = 0.6) +
+#'   geom_mlb_light_cap_logos(aes(team_abbr = teams), width = 0.075, alpha = 0.6) +
 #'   geom_label(aes(label = teams), nudge_y = -0.35, alpha = 0.5) +
 #'   theme_void()
 #'
 #' # it's also possible to plot league logos
 #' league <- data.frame(a = 1:3, b = 0, teams = c("AL", "NL", "MLB"))
 #' ggplot(league, aes(x = a, y = b)) +
-#'   geom_mlb_scoreboard_logos(aes(team_abbr = teams), width = 0.3) +
+#'   geom_mlb_light_cap_logos(aes(team_abbr = teams), width = 0.3) +
 #'   geom_label(aes(label = teams), nudge_y = -0.4, alpha = 0.5) +
 #'   coord_cartesian(xlim = c(0.5,3.5), ylim = c(-0.75,.75)) +
 #'   theme_void()
 #' }
-geom_mlb_scoreboard_logos <- function(mapping = NULL, data = NULL,
-                           stat = "identity", position = "identity",
-                           ...,
-                           na.rm = FALSE,
-                           show.legend = FALSE,
-                           inherit.aes = TRUE) {
+geom_mlb_light_cap_logos <- function(mapping = NULL, data = NULL,
+                                    stat = "identity", position = "identity",
+                                    ...,
+                                    na.rm = FALSE,
+                                    show.legend = FALSE,
+                                    inherit.aes = TRUE) {
 
   ggplot2::layer(
     data = data,
     mapping = mapping,
     stat = stat,
-    geom = GeomMLBscoreboardlogo,
+    geom = GeomMLBlightcaplogo,
     position = position,
     show.legend = show.legend,
     inherit.aes = inherit.aes,
@@ -255,8 +255,8 @@ geom_mlb_scoreboard_logos <- function(mapping = NULL, data = NULL,
 
 #' @rdname mlbplotR-package
 #' @export
-GeomMLBscoreboardlogo <- ggplot2::ggproto(
-  "GeomMLBscoreboardlogo", ggplot2::Geom,
+GeomMLBlightcaplogo <- ggplot2::ggproto(
+  "GeomMLBlightcaplogo", ggplot2::Geom,
   required_aes = c("x", "y", "team_abbr"),
   # non_missing_aes = c(""),
   default_aes = ggplot2::aes(
@@ -266,7 +266,7 @@ GeomMLBscoreboardlogo <- ggplot2::ggproto(
   draw_panel = function(data, panel_params, coord, na.rm = FALSE) {
     data <- coord$transform(data, panel_params)
 
-    grobs <- lapply(seq_along(data$team_abbr), build_grobs, alpha = data$alpha, colour = data$colour, data = data, type = "scoreboard")
+    grobs <- lapply(seq_along(data$team_abbr), build_grobs, alpha = data$alpha, colour = data$colour, data = data, type = "light_cap")
 
     class(grobs) <- "gList"
 
