@@ -47,9 +47,55 @@ dark_cap_logo_list <- lapply(teams_colors_logos$team_primary_abbr, function(x){
 dark_logo_list <- rlang::set_names(dark_cap_logo_list, teams_colors_logos$team_primary_abbr)
 
 
+# Build team name df that'll be used to clean abbreviations before plotting
+
+team_data <- tibble::tribble(~team, ~alternate,
+                           "ARI", "ARI",
+                           "ATL", "ATL",
+                           "BAL", "BAL",
+                           "BOS", "BOS",
+                           "CHC", "CHC",
+                           "CWS", "CWS",
+                           "CWS", "CHW",
+                           "CIN", "CIN",
+                           "CLE", "CLE",
+                           "COL", "COL",
+                           "DET", "DET",
+                           "HOU", "HOU",
+                           "KC" , "KC",
+                           "KC" , "KCR",
+                           "LAA", "LAA",
+                           "LAD", "LAD",
+                           "MIA", "MIA",
+                           "MIL", "MIL",
+                           "MIN", "MIN",
+                           "NYM", "NYM",
+                           "NYY", "NYY",
+                           "OAK", "OAK",
+                           "PHI", "PHI",
+                           "PIT", "PIT",
+                           "SD" , "SD",
+                           "SD" , "SDP",
+                           "SF" , "SF",
+                           "SF" , "SFG",
+                           "SEA", "SEA",
+                           "STL", "STL",
+                           "TB" , "TB",
+                           "TB" , "TBR",
+                           "TEX", "TEX",
+                           "TOR", "TOR",
+                           "WSH", "WSH",
+                           "WSH", "WAS") |>
+  dplyr::select(alternate, team) |>
+  tibble::deframe()
+
+
+
+
 
 usethis::use_data(teams_colors_logos, logo_list,
                   primary_colors, secondary_colors,
                   logo_urls, scoreboard_logo_list,
                   light_logo_list, dark_logo_list,
+                  team_data,
                   internal = TRUE, overwrite = TRUE)
