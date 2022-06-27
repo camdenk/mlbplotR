@@ -21,10 +21,7 @@ ggpreview(
 \arguments{
 \item{plot}{Plot to save, defaults to last plot displayed.}
 
-\item{width}{Plot size in \code{units} ("in", "cm", "mm", or "px").
-If not supplied, uses the size of current graphics device.}
-
-\item{height}{Plot size in \code{units} ("in", "cm", "mm", or "px").
+\item{width, height, units}{Plot size in \code{units} ("in", "cm", "mm", or "px").
 If not supplied, uses the size of current graphics device.}
 
 \item{asp}{The aspect ratio of the plot calculated as `width / height`. If
@@ -37,9 +34,6 @@ recalculated to `height = width / asp`.}
 \item{device}{Device to use. Can either be a device function
 (e.g. \link{png}), or one of "eps", "ps", "tex" (pictex),
 "pdf", "jpeg", "tiff", "png", "bmp", "svg" or "wmf" (windows only).}
-
-\item{units}{Plot size in \code{units} ("in", "cm", "mm", or "px").
-If not supplied, uses the size of current graphics device.}
 
 \item{scale}{Multiplicative scaling factor.}
 

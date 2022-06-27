@@ -43,6 +43,4 @@ rds_from_url <- function(url) {
 
 is_installed <- function(pkg) requireNamespace(pkg, quietly = TRUE)
 
-load_headshots <- function() rds_from_url("https://github.com/camdenk/Data/raw/main/Player-IDs.rds")
-
 na_headshot <- function() "https://a.espncdn.com/combiner/i?img=/i/teamlogos/leagues/500/mlb.png"

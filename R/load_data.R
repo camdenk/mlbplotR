@@ -30,3 +30,14 @@ valid_team_names <- function(){
   sort(names(logo_list))
 }
 
+
+#' Output MLB Team Abbreviations
+#'
+#' @export
+#' @return A tibble of player names and ids from various sources.
+#' @examples
+#' \donttest{
+#'   load_headshots()
+#' }
+#'
+load_headshots <- function() rds_from_url("https://github.com/camdenk/Data/raw/main/Player-IDs.rds")

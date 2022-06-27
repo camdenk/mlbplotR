@@ -1,7 +1,7 @@
 Package: mlbplotR
 Type: Package
 Title: Create ggplot2 Visuals with MLB Logos
-Version: 0.0.0.9007
+Version: 0.0.0.9008
 Authors@R: 
     c(
     person(given = "Sebastian",
@@ -22,7 +22,6 @@ Imports:
     data.table,
     ggplot2,
     ggtext,
-    gridtext,
     magick,
     magrittr,
     rlang,
@@ -30,10 +29,11 @@ Imports:
 Suggests:
     rstudioapi,
     dplyr,
+    gridtext,
     rsvg
 Encoding: UTF-8
 LazyData: true
 License: MIT + file LICENSE
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.0
 Depends: 
     R (>= 2.10)
