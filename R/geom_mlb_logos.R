@@ -126,6 +126,8 @@ GeomMLBlogo <- ggplot2::ggproto(
   draw_panel = function(data, panel_params, coord, na.rm = FALSE) {
     data <- coord$transform(data, panel_params)
 
+    data$team_abbr <- clean_team_abbrs(as.character(data$team_abbr), keep_non_matches = FALSE)
+
     grobs <- lapply(seq_along(data$team_abbr), build_grobs, alpha = data$alpha, colour = data$colour, data = data, type = "teams")
 
     class(grobs) <- "gList"
@@ -265,6 +267,8 @@ GeomMLBscoreboardlogo <- ggplot2::ggproto(
   ),
   draw_panel = function(data, panel_params, coord, na.rm = FALSE) {
     data <- coord$transform(data, panel_params)
+
+    data$team_abbr <- clean_team_abbrs(as.character(data$team_abbr), keep_non_matches = FALSE)
 
     grobs <- lapply(seq_along(data$team_abbr), build_grobs, alpha = data$alpha, colour = data$colour, data = data, type = "scoreboard")
 
