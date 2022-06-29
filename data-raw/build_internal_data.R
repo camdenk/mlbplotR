@@ -1,50 +1,50 @@
 # Save raw logos in internal data for more speed
 teams_colors_logos <- readr::read_csv("./data-raw/MLB_Colors_Logos.csv")
 
-logo_list <- lapply(teams_colors_logos$team_primary_abbr, function(x){
-  url <- teams_colors_logos$team_logo_espn[teams_colors_logos$team_primary_abbr == x]
+logo_list <- lapply(teams_colors_logos$team_abbr, function(x){
+  url <- teams_colors_logos$team_logo_espn[teams_colors_logos$team_abbr == x]
   curl::curl_fetch_memory(url)$content
 })
 
-logo_list <- rlang::set_names(logo_list, teams_colors_logos$team_primary_abbr)
+logo_list <- rlang::set_names(logo_list, teams_colors_logos$team_abbr)
 
 primary_colors <- teams_colors_logos$team_color
-names(primary_colors) <- teams_colors_logos$team_primary_abbr
+names(primary_colors) <- teams_colors_logos$team_abbr
 
 secondary_colors <- teams_colors_logos$team_color2
-names(secondary_colors) <- teams_colors_logos$team_primary_abbr
+names(secondary_colors) <- teams_colors_logos$team_abbr
 
 logo_urls <- teams_colors_logos$team_logo_espn
-names(logo_urls) <- teams_colors_logos$team_primary_abbr
+names(logo_urls) <- teams_colors_logos$team_abbr
 
 
 
-scoreboard_logo_list <- lapply(teams_colors_logos$team_primary_abbr, function(x){
-  url <- teams_colors_logos$team_scoreboard_logo_espn[teams_colors_logos$team_primary_abbr == x]
+scoreboard_logo_list <- lapply(teams_colors_logos$team_abbr, function(x){
+  url <- teams_colors_logos$team_scoreboard_logo_espn[teams_colors_logos$team_abbr == x]
   curl::curl_fetch_memory(url)$content
 })
 
-scoreboard_logo_list <- rlang::set_names(scoreboard_logo_list, teams_colors_logos$team_primary_abbr)
+scoreboard_logo_list <- rlang::set_names(scoreboard_logo_list, teams_colors_logos$team_abbr)
 
 
 
-light_cap_logo_list <- lapply(teams_colors_logos$team_primary_abbr, function(x){
-  url <- teams_colors_logos$team_cap_logo_on_light[teams_colors_logos$team_primary_abbr == x]
+light_cap_logo_list <- lapply(teams_colors_logos$team_abbr, function(x){
+  url <- teams_colors_logos$team_cap_logo_on_light[teams_colors_logos$team_abbr == x]
   #curl::curl_fetch_memory(url)$content
 })
 
 
 
-light_logo_list <- rlang::set_names(light_cap_logo_list, teams_colors_logos$team_primary_abbr)
+light_logo_list <- rlang::set_names(light_cap_logo_list, teams_colors_logos$team_abbr)
 
 
 
-dark_cap_logo_list <- lapply(teams_colors_logos$team_primary_abbr, function(x){
-  url <- teams_colors_logos$team_cap_logo_on_dark[teams_colors_logos$team_primary_abbr == x]
+dark_cap_logo_list <- lapply(teams_colors_logos$team_abbr, function(x){
+  url <- teams_colors_logos$team_cap_logo_on_dark[teams_colors_logos$team_abbr == x]
   #curl::curl_fetch_memory(url)$content
 })
 
-dark_logo_list <- rlang::set_names(dark_cap_logo_list, teams_colors_logos$team_primary_abbr)
+dark_logo_list <- rlang::set_names(dark_cap_logo_list, teams_colors_logos$team_abbr)
 
 
 # Build team name df that'll be used to clean abbreviations before plotting
@@ -85,7 +85,10 @@ team_data <- tibble::tribble(~team, ~alternate,
                            "TEX", "TEX",
                            "TOR", "TOR",
                            "WSH", "WSH",
-                           "WSH", "WAS") |>
+                           "WSH", "WAS",
+                           "WSH", "WSN",
+                           "MLB", "---",
+                           "MLB", "- - -") |>
   dplyr::select(alternate, team) |>
   tibble::deframe()
 
