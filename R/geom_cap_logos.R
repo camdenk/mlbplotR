@@ -16,14 +16,16 @@
 #'   \item{`angle = 0`}{ - The angle of the image as a numerical value between 0° and 360°.}
 #'   \item{`hjust = 0.5`}{ - The horizontal adjustment relative to the given x coordinate. Must be a numerical value between 0 and 1.}
 #'   \item{`vjust = 0.5`}{ - The vertical adjustment relative to the given y coordinate. Must be a numerical value between 0 and 1.}
-#'   \item{`width = 1.0`}{ - The desired width of the image in `npc` (Normalised Parent Coordinates).
-#'                           The default value is set to 1.0 which is *big* but it is necessary
-#'                           because all used values are computed relative to the default.
-#'                           A typical size is `width = 0.075` (see below examples).}
 #'   \item{`height = 1.0`}{ - The desired height of the image in `npc` (Normalised Parent Coordinates).
 #'                            The default value is set to 1.0 which is *big* but it is necessary
 #'                            because all used values are computed relative to the default.
-#'                            A typical size is `height = 0.1` (see below examples).}
+#'                            A typical size is `height = 0.1` (see below examples).
+#'                            For cap logos, the scaling works better when adjusting height and not width.}
+#'   \item{`width = 1.0`}{ - The desired width of the image in `npc` (Normalised Parent Coordinates).
+#'                           The default value is set to 1.0 which is *big* but it is necessary
+#'                           because all used values are computed relative to the default.
+#'                           A typical size is `width = 0.075` (see below examples).
+#'                           For cap logos, the scaling works better when adjusting height and not width.}
 #' }
 #' @param ... Other arguments passed on to [ggplot2::layer()]. These are
 #'   often aesthetics, used to set an aesthetic to a fixed value. See the below
@@ -158,14 +160,16 @@ GeomMLBdarkcaplogo <- ggplot2::ggproto(
 #'   \item{`angle = 0`}{ - The angle of the image as a numerical value between 0° and 360°.}
 #'   \item{`hjust = 0.5`}{ - The horizontal adjustment relative to the given x coordinate. Must be a numerical value between 0 and 1.}
 #'   \item{`vjust = 0.5`}{ - The vertical adjustment relative to the given y coordinate. Must be a numerical value between 0 and 1.}
-#'   \item{`width = 1.0`}{ - The desired width of the image in `npc` (Normalised Parent Coordinates).
-#'                           The default value is set to 1.0 which is *big* but it is necessary
-#'                           because all used values are computed relative to the default.
-#'                           A typical size is `width = 0.075` (see below examples).}
 #'   \item{`height = 1.0`}{ - The desired height of the image in `npc` (Normalised Parent Coordinates).
 #'                            The default value is set to 1.0 which is *big* but it is necessary
 #'                            because all used values are computed relative to the default.
-#'                            A typical size is `height = 0.1` (see below examples).}
+#'                            A typical size is `height = 0.1` (see below examples).
+#'                            For cap logos, the scaling works better when adjusting height and not width.}
+#'   \item{`width = 1.0`}{ - The desired width of the image in `npc` (Normalised Parent Coordinates).
+#'                           The default value is set to 1.0 which is *big* but it is necessary
+#'                           because all used values are computed relative to the default.
+#'                           A typical size is `width = 0.075` (see below examples).
+#'                           For cap logos, the scaling works better when adjusting height and not width.}
 #' }
 #' @param ... Other arguments passed on to [ggplot2::layer()]. These are
 #'   often aesthetics, used to set an aesthetic to a fixed value. See the below
