@@ -47,6 +47,7 @@ A set of functions to help visualize MLB analysis in 'ggplot2'.
 Useful links:
 \itemize{
   \item \url{https://github.com/camdenk/mlbplotR}
+  \item \url{https://camdenk.github.io/mlbplotR/}
   \item Report bugs at \url{https://github.com/camdenk/mlbplotR/issues}
 }
 
