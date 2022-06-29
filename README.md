@@ -57,130 +57,111 @@ teams_colors_logos <- mlbplotR::load_mlb_teams() |>
 
 <img src="man/figures/README-every-team-1.png" width="100%" />
 
-This is a basic example with [Baseball
-Reference](https://baseball-reference.com) data which compares ERA to
-FIP:
+This is a basic example with [FanGraphs](https://fangraphs.com) data
+(pulled using baseballr) which compares ERA to FIP for each team’s top
+starting pitcher by ERA:
 
 ``` r
-library(readr)
+library(baseballr)
 library(scales)
 
-df <- readr::read_csv("./data-raw/2021-Team-Pitching-Stats.csv")
-  
-# Join leaderboard with abbrevations
-joined_df <- df |> 
-  left_join(teams_colors_logos, by = c("Tm" = "team_name"))
+df <- baseballr::fg_pitcher_leaders(x = 2021, y = 2021, q = 100, pitcher_type = "sta")
 
+filtered_df <- df |>
+  dplyr::filter(Team != "- - -") |> 
+  # FanGraphs Team abbreviations aren't the standard
+  # for what's used in the plotting functions so 
+  # you could clean them with the following line, 
+  # but the geom_*_logos() functions should all
+  # clean the abbreviations before plotting
+  # 
+  # dplyr::mutate(Team = clean_team_abbrs(Team)) |> 
+  dplyr::group_by(Team) |> 
+  dplyr::slice_min(ERA, n = 1) |> 
+  dplyr::ungroup()
 
-joined_df |>
+filtered_df |> 
   ggplot2::ggplot(aes(x = ERA, y = FIP)) +
-  mlbplotR::geom_mlb_logos(aes(team_abbr = team_abbr), width = 0.075, alpha = 0.7) +
-  ggplot2::labs(
-    caption = "Data: Baseball Reference",
-    title = "2021: ERA vs. FIP"
-  ) +
+  mlbplotR::geom_mlb_logos(aes(team_abbr = Team), width = 0.075, alpha = 0.7) +
+  ggplot2::labs(title = "2021: ERA vs. FIP",
+                subtitle = "Each Team's Top Starter By ERA | Min. 100 IP",
+                caption = "Data: FanGraphs via baseballr") +
   ggplot2::theme_minimal() +
-  ggplot2::theme(
-    plot.title = ggplot2::element_text(face = "bold")
-  ) +
+  ggplot2::theme(plot.title = ggplot2::element_text(face = "bold")) +
   ggplot2::scale_x_reverse(breaks = scales::pretty_breaks(), expand = c(.1, .1)) +
   ggplot2::scale_y_reverse(breaks = scales::pretty_breaks(), expand = c(.1, .1))
 ```
 
 <img src="man/figures/README-scatter-example-1.png" width="100%" />
 
-Here’s another that looks at Home Runs Allowed by team:
+Here’s another that looks at Home Runs Allowed by top pitchers:
 
 ``` r
-joined_df |> 
-  ggplot2::ggplot(aes(x = team_abbr, y = HR)) +
-  ggplot2::geom_col(aes(color = team_abbr, fill = team_abbr), width = 0.5) +
-  mlbplotR::geom_mlb_logos(aes(team_abbr = team_abbr), width = 0.07, alpha = 0.9) +
+filtered_df |> 
+  ggplot2::ggplot(aes(x = Team, y = HR)) +
+  ggplot2::geom_col(aes(color = Team, fill = Team), width = 0.5) +
+  mlbplotR::geom_mlb_logos(aes(team_abbr = Team), width = 0.07, alpha = 0.9) +
   mlbplotR::scale_color_mlb(type = "secondary") +
   mlbplotR::scale_fill_mlb(alpha = 0.4) +
-  ggplot2::labs(
-    caption = "Data: Baseball Reference",
-    title = "2021: Home Runs Allowed"
-  ) +
+  ggplot2::labs(title = "2021: Home Runs Allowed For Top Pitchers",
+                subtitle = "HRs Allowed By Each Team's Top Starter By ERA | Min. 100 IP",
+                caption = "Data: FanGraphs via baseballr") +
   ggplot2::theme_minimal() +
-  ggplot2::theme(
-    plot.title = ggplot2::element_text(face = "bold"),
-    axis.title.x = ggplot2::element_blank(),
-    axis.text.x = ggplot2::element_blank(),
-    panel.grid.major.x = element_blank()
-  ) +
+  ggplot2::theme(plot.title = ggplot2::element_text(face = "bold"),
+                 axis.title.x = ggplot2::element_blank(),
+                 axis.text.x = ggplot2::element_blank(),
+                 panel.grid.major.x = element_blank()) +
   ggplot2::scale_x_discrete(expand = c(0.05, 0.075))
 ```
 
 <img src="man/figures/README-bar-example-1.png" width="100%" />
 
-Lastly, here are two examples using Baltimore Orioles data from Baseball
-Savant:
+Instead of putting the logos in the plot, we can have them be the axis
+labels:
 
 ``` r
-library(qs)
-
-BAL_2021 <- qs::qread("./data-raw/BAL-2021.qs") |> 
-  dplyr::mutate(
-    fielding_team = ifelse(inning_topbot == "Bot", away_team, home_team),
-    batting_team = ifelse(inning_topbot == "Bot", home_team, away_team)
-  )
-
-Team_FB_Rate <- BAL_2021 |>
-  dplyr::mutate(fastball = ifelse(pitch_type %in% c("FF", "FA", "SI", "FT", "FC"), 1, 0)) |> 
-  dplyr::group_by(fielding_team) |>
-  dplyr::summarise(n = n(), fb_per = mean(fastball, na.rm = TRUE))
-
-Team_FB_Rate |> 
-  ggplot2::ggplot(aes(x = fielding_team, y = fb_per)) +
-  ggplot2::geom_col(aes(color = fielding_team, fill = fielding_team), width = 0.5) +
+filtered_df |> 
+  # The scale_*_mlb() functions don't auto-clean abbreviations
+  dplyr::mutate(Team = clean_team_abbrs(Team)) |> 
+  ggplot2::ggplot(aes(x = Team, y = HR)) +
+  ggplot2::geom_col(aes(color = Team, fill = Team), width = 0.5) +
+  #mlbplotR::geom_mlb_logos(aes(team_abbr = Team), width = 0.07, alpha = 0.9) +
   mlbplotR::scale_color_mlb(type = "secondary") +
   mlbplotR::scale_fill_mlb(alpha = 0.4) +
-  ggplot2::labs(
-    title = "2021 Fastball Percentage in Orioles Games",
-    y = "Fastball %",
-    caption = "Data: Baseball Savant"
-  ) +
+  ggplot2::labs(title = "2021: Home Runs Allowed",
+                subtitle = "HRs Allowed By Each Team's Top Starter By ERA | Min. 100 IP",
+                caption = "Data: FanGraphs via baseballr") +
   ggplot2::theme_minimal() +
-  ggplot2::theme(
-    plot.title = ggplot2::element_text(face = "bold"),
-    axis.title.x = ggplot2::element_blank(),
-    panel.grid.major.x = ggplot2::element_blank(),
-    # this line triggers the replacement of team abbreviations with logos
-    axis.text.x = mlbplotR::element_mlb_logo()
-  )
+  ggplot2::theme(plot.title = ggplot2::element_text(face = "bold"),
+                 axis.title.x = ggplot2::element_blank(),
+                 panel.grid.major.x = ggplot2::element_blank(),
+                 # this line triggers the replacement of team abbreviations with logos
+                 axis.text.x = mlbplotR::element_mlb_logo()) +
+  ggplot2::scale_x_discrete(expand = c(0.05, 0.075))
 ```
 
-<img src="man/figures/README-statcast-example-1.png" width="100%" />
+<img src="man/figures/README-axis-example-1.png" width="100%" />
+
+The family of `element_*()` functions allows for a lot of extra
+customization with axes labels and can even be used for
+`facet_wrap()/facet_grid()` strip headers.
+
+Lastly, here’s an example using headshots:
 
 ``` r
-BAL_2021_pitch_leaders <- BAL_2021 |> 
-  # Convert IDs to character for cleaner plotting
-  dplyr::mutate(pitcher = as.character(pitcher)) |> 
-  dplyr::filter(fielding_team == "BAL") |> 
-  dplyr::group_by(fielding_team, pitcher) |> 
-  dplyr::summarise(num_pitches = n()) |>
-  dplyr::slice_max(num_pitches, n = 5)
-
-BAL_2021_pitch_leaders |> 
-  ggplot(aes(x = reorder(pitcher, -num_pitches), y = num_pitches)) +
-  ggplot2::geom_col(aes(color = fielding_team, fill = fielding_team), width = 0.5) +
-  mlbplotR::geom_mlb_headshots(aes(player_id = pitcher), height = 0.15, vjust = 0) +
-  mlbplotR::scale_color_mlb(type = "secondary") +
-  mlbplotR::scale_fill_mlb(alpha = 0.4) +
-  ggplot2::labs(
-    title = "2021 Orioles Pitch Leaders",
-    y = "# Pitches Thrown",
-    caption = "Data: Baseball Savant"
-  ) +
+df |> 
+  dplyr::mutate(playerid = as.double(playerid)) |> 
+  dplyr::left_join(mlbplotR::load_headshots(), by = c("playerid" = "fangraphs_id")) |> 
+  dplyr::slice_min(ERA, n = 12) |> 
+  ggplot(aes(x = ERA, y = FIP)) +
+  mlbplotR::geom_mlb_headshots(aes(player_id = savant_id), height = 0.15) +
+  ggplot2::scale_x_reverse(breaks = scales::pretty_breaks(), expand = c(.1, .1)) +
+  ggplot2::scale_y_reverse(breaks = scales::pretty_breaks(), expand = c(.1, .1)) +
+  ggplot2::labs(title = "2021 SP ERA Leaders",
+                subtitle = "Starters Who Only Played For One Team | Min 100 IP",
+                caption = "Data: FanGraphs via baseballr") +
   ggplot2::theme_minimal() +
-  ggplot2::theme(
-    plot.title = ggplot2::element_text(face = "bold"),
-    axis.title.x = ggplot2::element_blank(),
-    axis.text.x = ggplot2::element_blank(),
-    panel.grid.major.x = ggplot2::element_blank()
-  ) +
-  ggplot2::scale_y_continuous(limits = c(0,3000))
+  ggplot2::theme(plot.title = ggplot2::element_text(face = "bold"))
 ```
 
 <img src="man/figures/README-headshot-example-1.png" width="100%" />
@@ -200,8 +181,6 @@ this project:
 ## To Do
 
 -   Create a package vignette
--   Clean team names/abbreviations automatically before plotting
 -   Add in mean/median line geoms
 -   Continue to add player ids for headshots for those who haven’t
     played in the Statcast era
--   Create a function that returns a dataframe with player ids
