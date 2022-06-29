@@ -44,3 +44,8 @@ rds_from_url <- function(url) {
 is_installed <- function(pkg) requireNamespace(pkg, quietly = TRUE)
 
 na_headshot <- function() "https://a.espncdn.com/combiner/i?img=/i/teamlogos/leagues/500/mlb.png"
+
+
+`%c%` <- function(x,y){
+  ifelse(!is.na(x),x,y)
+}

@@ -87,6 +87,9 @@ team_data <- tibble::tribble(~team, ~alternate,
                            "WSH", "WSH",
                            "WSH", "WAS",
                            "WSH", "WSN",
+                           "AL", "AL",
+                           "NL", "NL",
+                           "MLB", "MLB",
                            "MLB", "---",
                            "MLB", "- - -") |>
   dplyr::select(alternate, team) |>
