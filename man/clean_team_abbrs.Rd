@@ -8,6 +8,8 @@ clean_team_abbrs(abbr, keep_non_matches = TRUE)
 }
 \arguments{
 \item{abbr}{a character vector of abbreviations}
+
+\item{keep_non_matches}{will non-matches be kept in the vector?}
 }
 \value{
 A character vector with the length of `abbr` and cleaned team abbreviations

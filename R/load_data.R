@@ -38,6 +38,7 @@ valid_team_names <- function(){
 #' This helps for joins and plotting
 #'
 #' @param abbr a character vector of abbreviations
+#' @param keep_non_matches will non-matches be kept in the vector?
 #'
 #' @return A character vector with the length of `abbr` and cleaned team abbreviations
 #'   if they are included in [`team_data`]. Non matches may be replaced
@@ -68,4 +69,4 @@ clean_team_abbrs <- function(abbr, keep_non_matches = TRUE) {
 #'   load_headshots()
 #' }
 #'
-load_headshots <- function() rds_from_url("https://github.com/camdenk/Data/raw/main/Player-IDs.rds")
+load_headshots <- function() rds_from_url("https://github.com/camdenk/mlbplotR-data/raw/main/Player-IDs.rds")
