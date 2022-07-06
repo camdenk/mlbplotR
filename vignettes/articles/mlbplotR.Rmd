@@ -151,7 +151,7 @@ df |>
   ggplot2::scale_x_reverse(breaks = scales::pretty_breaks(), expand = c(.1, .1)) +
   ggplot2::scale_y_reverse(breaks = scales::pretty_breaks(), expand = c(.1, .1)) +
   ggplot2::labs(title = "2021 SP ERA Leaders",
-                subtitle = "Starters Who Only Played For One Team | Min 100 IP",
+                subtitle = "Minimum 100 IP",
                 caption = "Data: FanGraphs via baseballr") +
   ggplot2::theme_minimal() +
   ggplot2::theme(plot.title = ggplot2::element_text(face = "bold"))
