@@ -93,6 +93,8 @@ Here's another that looks at Home Runs Allowed by top pitchers:
 
 ```{r bar-example, message = FALSE}
 filtered_df |> 
+  # The scale_*_mlb() functions don't auto-clean abbreviations
+  dplyr::mutate(Team = clean_team_abbrs(Team)) |> 
   ggplot2::ggplot(aes(x = Team, y = HR)) +
   ggplot2::geom_col(aes(color = Team, fill = Team), width = 0.5) +
   mlbplotR::geom_mlb_logos(aes(team_abbr = Team), width = 0.07, alpha = 0.9) +
