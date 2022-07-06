@@ -3,7 +3,7 @@ pkgdown: 2.0.5
 pkgdown_sha: ~
 articles:
   mlbplotR: mlbplotR.html
-last_built: 2022-07-06T02:56Z
+last_built: 2022-07-06T03:19Z
 urls:
   reference: https://camdenk.github.io/mlbplotR/reference
   article: https://camdenk.github.io/mlbplotR/articles
