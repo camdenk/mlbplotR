@@ -13,7 +13,7 @@ clean_team_abbrs(abbr, keep_non_matches = TRUE)
 }
 \value{
 A character vector with the length of `abbr` and cleaned team abbreviations
-  if they are included in [`team_data`]. Non matches may be replaced
+  if they are included in `team_data`. Non matches may be replaced
   with `NA` (depending on the value of `keep_non_matches`).
 }
 \description{

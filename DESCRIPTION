@@ -32,7 +32,9 @@ Suggests:
     dplyr,
     ggtext,
     gridtext,
-    rsvg
+    rsvg,
+    rmarkdown,
+    knitr
 Encoding: UTF-8
 LazyData: true
 License: MIT + file LICENSE

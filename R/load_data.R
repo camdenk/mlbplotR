@@ -41,7 +41,7 @@ valid_team_names <- function(){
 #' @param keep_non_matches will non-matches be kept in the vector?
 #'
 #' @return A character vector with the length of `abbr` and cleaned team abbreviations
-#'   if they are included in [`team_data`]. Non matches may be replaced
+#'   if they are included in `team_data`. Non matches may be replaced
 #'   with `NA` (depending on the value of `keep_non_matches`).
 #' @examples
 #' x <- c("PIE", "STL", "WSN", "CWS", "CHW")
