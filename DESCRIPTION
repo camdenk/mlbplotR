@@ -22,7 +22,6 @@ Imports:
     cli,
     data.table,
     ggplot2,
-    ggtext,
     magick,
     magrittr,
     rlang,
@@ -31,6 +30,7 @@ Suggests:
     rstudioapi,
     baseballr,
     dplyr,
+    ggtext,
     gridtext,
     rsvg
 Encoding: UTF-8
@@ -38,4 +38,4 @@ LazyData: true
 License: MIT + file LICENSE
 RoxygenNote: 7.2.0
 Depends: 
-    R (>= 2.10)
+    R (>= 3.5.0)
