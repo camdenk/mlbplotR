@@ -8,6 +8,7 @@ logo_list <- lapply(teams_colors_logos$team_abbr, function(x){
 
 logo_list <- rlang::set_names(logo_list, teams_colors_logos$team_abbr)
 
+
 primary_colors <- teams_colors_logos$team_color
 names(primary_colors) <- teams_colors_logos$team_abbr
 
@@ -17,12 +18,15 @@ names(secondary_colors) <- teams_colors_logos$team_abbr
 logo_urls <- teams_colors_logos$team_logo_espn
 names(logo_urls) <- teams_colors_logos$team_abbr
 
+scoreboard_logo_urls <- teams_colors_logos$team_scoreboard_logo_espn
+names(scoreboard_logo_urls) <- teams_colors_logos$team_abbr
 
 
 scoreboard_logo_list <- lapply(teams_colors_logos$team_abbr, function(x){
   url <- teams_colors_logos$team_scoreboard_logo_espn[teams_colors_logos$team_abbr == x]
   curl::curl_fetch_memory(url)$content
 })
+
 
 scoreboard_logo_list <- rlang::set_names(scoreboard_logo_list, teams_colors_logos$team_abbr)
 
@@ -101,7 +105,9 @@ team_data <- tibble::tribble(~team, ~alternate,
 
 usethis::use_data(teams_colors_logos, logo_list,
                   primary_colors, secondary_colors,
-                  logo_urls, scoreboard_logo_list,
+                  logo_urls, scoreboard_logo_urls,
+                  scoreboard_logo_list,
+
                   light_logo_list, dark_logo_list,
                   team_data,
                   internal = TRUE, overwrite = TRUE)
