@@ -9,5 +9,5 @@
 * Added the `geom_mlb_scoreboard_logos()`, `geom_mlb_dark_cap_logos()`, `geom_mlb_light_cap_logos()` geoms which translate MLB team abbreviations into team logos. Also added corresponding element functions (`element_mlb_scoreboard_logo()`, `element_mlb_dark_cap_logo()`, `element_mlb_light_cap_logo()`) which translates supplied abbreviations into images for theming. Also updated function parameter names. (v.0.0.9007)
 * Added the `load_headshots()` function to the exported functions. (v.0.0.9008)
 * Added the `clean_team_abbrs()` function and implemented it with proper geoms. (v.0.0.9009)
-* Added the `gt_fmt_mlb_logo()`, `gt_fmt_mlb_scoreboard_logo()`, and `gt_merge_stack_team_color()` functions to aid in making gt tables. (v.0.0.9010)
+* Added the `gt_fmt_mlb_logo()`, `gt_fmt_mlb_scoreboard_logo()`, `gt_fmt_mlb_headshot()` and `gt_merge_stack_team_color()` functions to aid in making gt tables. (v.0.0.9010)
 

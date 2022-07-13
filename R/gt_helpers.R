@@ -196,3 +196,74 @@ gt_merge_stack_team_color <- function (gt_object, col1, col2, team_col,
     }
   })
 }
+
+
+
+#' Add player headshots to a `gt_mlb` table
+#'
+#' @description
+#' Takes an existing `gt_tbl` object and converts MLBAM IDs into player headshots.
+#' This is a wrapper around
+#' [`gtExtras::gt_image_rows()`](https://jthomasmock.github.io/gtExtras/reference/gt_img_rows.html)
+#' written by Tom Mock, which is a wrapper around `gt::text_transform()` + `gt::web_image()`/
+#' `gt::local_image()` with the necessary boilerplate already applied.
+#'
+#' @param gt_object An existing gt table object of class `gt_tbl`
+#' @param columns The columns wherein changes to cell data colors should occur.
+#' @inheritParams gt::web_image
+#' @inheritParams gt::local_image
+#' @return An object of class `gt_tbl`.
+#' @importFrom gt %>%
+#' @importFrom tibble deframe
+#' @importFrom tibble add_row
+#' @export
+#' @examples
+#' library(gt)
+#' library(mlbplotR)
+#'
+#' mlbplotR::load_headshots() %>%
+#'   head(5) %>%
+#'   dplyr::select(player_name, savant_id) %>%
+#'   gt::gt() %>%
+#'   gt_fmt_mlb_headshot(columns = "savant_id")
+
+gt_fmt_mlb_headshot <- function(gt_object, columns, height = 30) {
+
+  stopifnot("'gt_object' must be a 'gt_tbl', have you accidentally passed raw data?" = "gt_tbl" %in% class(gt_object))
+
+  headshot_map <- mlbplotR::load_headshots()
+  headshot_map <- headshot_map[,c(5,10)]
+  headshot_map <- headshot_map[rowSums(is.na(headshot_map)) == 0, ]
+  headshot_map <- headshot_map %>%
+    tibble::add_row(savant_id = 0, espn_headshot = na_headshot())
+
+  id_options <- headshot_map$savant_id
+
+  headshot_map <- headshot_map %>%
+    tibble::deframe()
+
+  column_names <- gt:::resolve_cols_c(
+    expr = {{ columns }},
+    data = gt_object
+  )
+
+  stub_var <- gt_object[["_boxhead"]][["var"]][which(gt_object[["_boxhead"]][["type"]]=="stub")]
+  grp_var <- gt_object[["_boxhead"]][["var"]][which(gt_object[["_boxhead"]][["type"]]=="row_group")]
+
+  # need to correct for rownames
+  gt_object %>%
+    gt::text_transform(
+      locations = if(isTRUE(grp_var %in% column_names)){
+        gt::cells_row_groups()
+      } else if(isTRUE(stub_var %in% column_names)){
+        gt::cells_stub(rows = gt::everything())
+      } else {
+        gt::cells_body({{ columns }})
+      },
+      fn = function(x){
+
+        x[which(!x%in%id_options)] <- 0
+        gt::web_image(url = headshot_map[x], height = height)
+      }
+    )
+}

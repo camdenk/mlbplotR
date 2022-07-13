@@ -27,7 +27,8 @@ Imports:
     magick,
     magrittr,
     rlang,
-    scales
+    scales,
+    tibble
 Suggests:
     rstudioapi,
     baseballr,
