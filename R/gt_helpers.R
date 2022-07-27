@@ -24,8 +24,8 @@
 #'                  logo = valid_team_names()[1:5],
 #'                  scoreboard_logo = valid_team_names()[1:5])
 #'
-#' table <- df %>%
-#'  gt() %>%
+#' gt_logo_example <- df %>%
+#'  gt::gt() %>%
 #'  gt_fmt_mlb_logo(columns = "logo") %>%
 #'  gt_fmt_mlb_scoreboard_logo(columns = "scoreboard_logo")
 
@@ -132,7 +132,7 @@ gt_fmt_mlb_scoreboard_logo <- function(gt_object, columns, height = 30){
 #' library(gt)
 #' library(mlbplotR)
 #'
-#' mlbplotR::load_mlb_teams() %>%
+#' gt_merge_example <- mlbplotR::load_mlb_teams() %>%
 #'   dplyr::slice(1:5) %>%
 #'   dplyr::select(team_abbr, team_name) %>%
 #'   tidyr::separate(team_name, c("Team1", "Team2","Team3"), fill = "left") %>%
@@ -221,7 +221,7 @@ gt_merge_stack_team_color <- function (gt_object, col1, col2, team_col,
 #' library(gt)
 #' library(mlbplotR)
 #'
-#' mlbplotR::load_headshots() %>%
+#' gt_headshot_example <- mlbplotR::load_headshots() %>%
 #'   head(5) %>%
 #'   dplyr::select(player_name, savant_id) %>%
 #'   gt::gt() %>%

@@ -24,9 +24,9 @@ ggpreview(
 \item{width, height, units}{Plot size in \code{units} ("in", "cm", "mm", or "px").
 If not supplied, uses the size of current graphics device.}
 
-\item{asp}{The aspect ratio of the plot calculated as `width / height`. If
-this is a numeric value (and not `NULL`) the `height` of the plot will be
-recalculated to `height = width / asp`.}
+\item{asp}{The aspect ratio of the plot calculated as \code{width / height}. If
+this is a numeric value (and not \code{NULL}) the \code{height} of the plot will be
+recalculated to \code{height = width / asp}.}
 
 \item{dpi}{Plot resolution. Also accepts a string input: "retina" (320),
 "print" (300), or "screen" (72). Applies only to raster output types.}

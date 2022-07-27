@@ -19,5 +19,5 @@ Loads team colors, and logos - useful for plots!
 
 }
 \seealso{
-Issues with this data should be filed here: <https://github.com/camdenk/mlbplotR>
+Issues with this data should be filed here: \url{https://github.com/camdenk/mlbplotR}
 }

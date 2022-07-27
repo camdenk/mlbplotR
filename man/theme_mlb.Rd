@@ -10,19 +10,19 @@ theme_x_mlb()
 theme_y_mlb()
 }
 \value{
-A ggplot2 theme created with [ggplot2::theme()].
+A ggplot2 theme created with \code{\link[ggplot2:theme]{ggplot2::theme()}}.
 }
 \description{
 These functions are convenience wrappers around a theme call
-  that activates markdown in x-axis and y-axis labels
-  using [`ggtext::element_markdown()`].
+that activates markdown in x-axis and y-axis labels
+using \code{\link[ggtext:element_markdown]{ggtext::element_markdown()}}.
 }
 \details{
 These functions are a wrapper around the function calls
-  `ggplot2::theme(axis.text.x = ggtext::element_markdown())` as well as
-  `ggplot2::theme(axis.text.y = ggtext::element_markdown())`.
-  They are made to be used in conjunction with [`scale_x_mlb()`] and
-  [`scale_y_mlb()`] respectively.
+\code{ggplot2::theme(axis.text.x = ggtext::element_markdown())} as well as
+\code{ggplot2::theme(axis.text.y = ggtext::element_markdown())}.
+They are made to be used in conjunction with \code{\link[=scale_x_mlb]{scale_x_mlb()}} and
+\code{\link[=scale_y_mlb]{scale_y_mlb()}} respectively.
 }
 \examples{
 \donttest{
@@ -50,5 +50,5 @@ if (utils::packageVersion("gridtext") > "0.1.4"){
 }
 }
 \seealso{
-[`theme_x_mlb()`], [`theme_y_mlb()`]
+\code{\link[=theme_x_mlb]{theme_x_mlb()}}, \code{\link[=theme_y_mlb]{theme_y_mlb()}}
 }

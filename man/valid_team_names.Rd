@@ -7,7 +7,7 @@
 valid_team_names()
 }
 \value{
-A vector of type `"character"`.
+A vector of type \code{"character"}.
 }
 \description{
 Output Valid MLB Team Abbreviations

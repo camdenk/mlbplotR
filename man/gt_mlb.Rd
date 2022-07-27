@@ -4,29 +4,29 @@
 \alias{gt_mlb}
 \alias{gt_fmt_mlb_logo}
 \alias{gt_fmt_mlb_scoreboard_logo}
-\title{Add logos into rows of a `gt` table}
+\title{Add logos into rows of a \code{gt} table}
 \usage{
 gt_fmt_mlb_logo(gt_object, columns, height = 30)
 
 gt_fmt_mlb_scoreboard_logo(gt_object, columns, height = 30)
 }
 \arguments{
-\item{gt_object}{An existing gt table object of class `gt_tbl`}
+\item{gt_object}{An existing gt table object of class \code{gt_tbl}}
 
 \item{columns}{The columns wherein changes to cell data colors should occur.}
 
 \item{height}{The absolute height (px) of the image in the table cell.}
 }
 \value{
-An object of class `gt_tbl`.
+An object of class \code{gt_tbl}.
 }
 \description{
-The `gt_fmt_mlb_logo` and `gt_fmt_mlb_scoreboard_logo` functions take an existing
-`gt_tbl` object and converts MLB team names from `valid_team_names()` into team logos.
+The \code{gt_fmt_mlb_logo} and \code{gt_fmt_mlb_scoreboard_logo} functions take an existing
+\code{gt_tbl} object and converts MLB team names from \code{valid_team_names()} into team logos.
 This is a wrapper around
-[`gtExtras::gt_image_rows()`](https://jthomasmock.github.io/gtExtras/reference/gt_img_rows.html)
-written by Tom Mock, which is a wrapper around `gt::text_transform()` + `gt::web_image()`/
-`gt::local_image()` with the necessary boilerplate already applied.
+\href{https://jthomasmock.github.io/gtExtras/reference/gt_img_rows.html}{\code{gtExtras::gt_image_rows()}}
+written by Tom Mock, which is a wrapper around \code{gt::text_transform()} + \code{gt::web_image()}/
+\code{gt::local_image()} with the necessary boilerplate already applied.
 }
 \examples{
 library(gt)
@@ -36,8 +36,8 @@ df <- data.frame(team = valid_team_names()[1:5],
                  logo = valid_team_names()[1:5],
                  scoreboard_logo = valid_team_names()[1:5])
 
-table <- df \%>\%
- gt() \%>\%
+gt_logo_example <- df \%>\%
+ gt::gt() \%>\%
  gt_fmt_mlb_logo(columns = "logo") \%>\%
  gt_fmt_mlb_scoreboard_logo(columns = "scoreboard_logo")
 }

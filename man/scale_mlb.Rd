@@ -40,14 +40,14 @@ scale_fill_mlb(
 )
 }
 \arguments{
-\item{type}{One of `"primary"` or `"secondary"` to decide which colortype to use.}
+\item{type}{One of \code{"primary"} or \code{"secondary"} to decide which colortype to use.}
 
-\item{values}{If `NULL` (the default) use the internal team color vectors. Otherwise
+\item{values}{If \code{NULL} (the default) use the internal team color vectors. Otherwise
 a set of aesthetic values to map data values to. The values
 will be matched in order (usually alphabetical) with the limits of the
-scale, or with `breaks` if provided. If this is a named vector, then the
+scale, or with \code{breaks} if provided. If this is a named vector, then the
 values will be matched based on the names instead. Data values that don't
-match will be given `na.value`.}
+match will be given \code{na.value}.}
 
 \item{...}{
   Arguments passed on to \code{\link[ggplot2:discrete_scale]{discrete_scale}}
@@ -107,16 +107,16 @@ as output
 
 \item{na.value}{The aesthetic value to use for missing (\code{NA}) values}
 
-\item{guide}{A function used to create a guide or its name. If `NULL` (the default)
-no guide will be plotted for this scale. See [ggplot2::guides()] for more information.}
+\item{guide}{A function used to create a guide or its name. If \code{NULL} (the default)
+no guide will be plotted for this scale. See \code{\link[ggplot2:guides]{ggplot2::guides()}} for more information.}
 
-\item{alpha}{Factor to modify color transparency via a call to [`scales::alpha()`].
-If `NA` (the default) no transparency will be applied. Can also be a vector of
-alphas. All alpha levels must be in range `[0,1]`.}
+\item{alpha}{Factor to modify color transparency via a call to \code{\link[scales:alpha]{scales::alpha()}}.
+If \code{NA} (the default) no transparency will be applied. Can also be a vector of
+alphas. All alpha levels must be in range \verb{[0,1]}.}
 }
 \description{
 These functions map MLB team names to their team colors in
-  color and fill aesthetics
+color and fill aesthetics
 }
 \examples{
 \donttest{

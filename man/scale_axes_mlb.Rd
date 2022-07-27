@@ -92,21 +92,21 @@ expand the scale by 5\% on each side for continuous variables, and by
 and as width for an y-scale.}
 }
 \value{
-A discrete ggplot2 scale created with [ggplot2::scale_x_discrete()] or
-  [ggplot2::scale_y_discrete()].
+A discrete ggplot2 scale created with \code{\link[ggplot2:scale_discrete]{ggplot2::scale_x_discrete()}} or
+\code{\link[ggplot2:scale_discrete]{ggplot2::scale_y_discrete()}}.
 }
 \description{
 These functions map MLB team names to their team logos and make
-  them available as axis labels
+them available as axis labels
 }
 \details{
 The scale translates MLB team abbreviations into raw image
-  html and places the html as axis labels. Because of the way ggplots are
-  constructed, it is necessary to adjust the [`theme()`] after calling this
-  scale. This can be done by calling [`theme_x_mlb()`] or [`theme_y_mlb()`]
-  or alternatively by manually changing the relevant `axis.text` to
-  [`ggtext::element_markdown()`]. However, this will only work if an underlying
-  dependency, "gridtext", is installed with a newer version than 0.1.4
+html and places the html as axis labels. Because of the way ggplots are
+constructed, it is necessary to adjust the \code{\link[=theme]{theme()}} after calling this
+scale. This can be done by calling \code{\link[=theme_x_mlb]{theme_x_mlb()}} or \code{\link[=theme_y_mlb]{theme_y_mlb()}}
+or alternatively by manually changing the relevant \code{axis.text} to
+\code{\link[ggtext:element_markdown]{ggtext::element_markdown()}}. However, this will only work if an underlying
+dependency, "gridtext", is installed with a newer version than 0.1.4
 }
 \examples{
 \donttest{

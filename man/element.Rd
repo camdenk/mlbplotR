@@ -68,30 +68,31 @@ element_path(
 between 0 and 1.}
 
 \item{colour, color}{The image will be colorized with this color. Use the
-special character `"b/w"` to set it to black and white. For more information
+special character \code{"b/w"} to set it to black and white. For more information
 on valid color names in ggplot2 see
-<https://ggplot2.tidyverse.org/articles/ggplot2-specs.html?q=colour#colour-and-fill>.}
+\url{https://ggplot2.tidyverse.org/articles/ggplot2-specs.html?q=colour#colour-and-fill}.}
 
 \item{hjust, vjust}{The horizontal and vertical adjustment respectively.
 Must be a numerical value between 0 and 1.}
 
-\item{size}{The output grob size in `cm` (!).}
+\item{size}{The output grob size in \code{cm} (!).}
 }
 \value{
-An S3 object of class `element`.
+An S3 object of class \code{element}.
 }
 \description{
-In conjunction with the [ggplot2::theme] system, the following `element_`
+In conjunction with the \link[ggplot2:theme]{ggplot2::theme} system, the following \code{element_}
 functions enable images in non-data components of the plot, e.g. axis text.
-
-  - `element_mlb_logo()` and `element_mlb_scoreboard_logo()`: draws MLB team logos instead of their abbreviations.
-  - `element_mlb_dark_cap_logo()` and `element_mlb_light_cap_logo()`: draws MLB team cap logos instead of their abbreviations.
-  - `element_mlb_headshot()`: draws MLB player headshots instead of their MLB IDs
-  - `element_path()`: draws images from valid image URLs instead of the URL.
+\itemize{
+\item \code{element_mlb_logo()} and \code{element_mlb_scoreboard_logo()}: draws MLB team logos instead of their abbreviations.
+\item \code{element_mlb_dark_cap_logo()} and \code{element_mlb_light_cap_logo()}: draws MLB team cap logos instead of their abbreviations.
+\item \code{element_mlb_headshot()}: draws MLB player headshots instead of their MLB IDs
+\item \code{element_path()}: draws images from valid image URLs instead of the URL.
+}
 }
 \details{
 The elements translate MLB team abbreviations or MLB player IDs
-  into logo images or headshots, respectively.
+into logo images or headshots, respectively.
 }
 \examples{
 \donttest{
@@ -157,7 +158,7 @@ ggplot(dfh, aes(y = player_id, x = random_value)) +
 }
 }
 \seealso{
-[geom_mlb_logos()], [geom_mlb_headshots()], and [geom_from_path()]
-  for more information on valid team abbreviations, player ids, and other
-  parameters.
+\code{\link[=geom_mlb_logos]{geom_mlb_logos()}}, \code{\link[=geom_mlb_headshots]{geom_mlb_headshots()}}, and \code{\link[=geom_from_path]{geom_from_path()}}
+for more information on valid team abbreviations, player ids, and other
+parameters.
 }

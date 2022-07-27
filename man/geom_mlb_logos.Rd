@@ -42,7 +42,7 @@ layer, as a string.}
 \item{position}{Position adjustment, either as a string, or the result of
 a call to a position adjustment function.}
 
-\item{...}{Other arguments passed on to [ggplot2::layer()]. These are
+\item{...}{Other arguments passed on to \code{\link[ggplot2:layer]{ggplot2::layer()}}. These are
 often aesthetics, used to set an aesthetic to a fixed value. See the below
 section "Aesthetics" for a full list of possible arguments.}
 
@@ -61,34 +61,34 @@ that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 }
 \value{
-A ggplot2 layer ([ggplot2::layer()]) that can be added to a plot
-  created with [ggplot2::ggplot()].
+A ggplot2 layer (\code{\link[ggplot2:layer]{ggplot2::layer()}}) that can be added to a plot
+created with \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}.
 }
 \description{
 This geom is used to plot MLB team and league logos instead
-  of points in a ggplot. It requires x, y aesthetics as well as a valid MLB
-  team abbreviation. The latter can be checked with [`valid_team_names()`].
+of points in a ggplot. It requires x, y aesthetics as well as a valid MLB
+team abbreviation. The latter can be checked with \code{\link[=valid_team_names]{valid_team_names()}}.
 }
 \section{Aesthetics}{
 
-`geom_mlb_logos()` understands the following aesthetics (required aesthetics are in bold):
+\code{geom_mlb_logos()} understands the following aesthetics (required aesthetics are in bold):
 \itemize{
-  \item{**x**}{ - The x-coordinate.}
-  \item{**y**}{ - The y-coordinate.}
-  \item{**team_abbr**}{ - The team abbreviation. Need to use Savant's abbreviation.}
-  \item{`alpha = NULL`}{ - The alpha channel, i.e. transparency level, as a numerical value between 0 and 1.}
-  \item{`colour = NULL`}{ - The image will be colourized with this colour. Use the special character `"b/w"` to set it to black and white. For more information on valid colour names in ggplot2 see <https://ggplot2.tidyverse.org/articles/ggplot2-specs.html?q=colour#colour-and-fill>}
-  \item{`angle = 0`}{ - The angle of the image as a numerical value between 0° and 360°.}
-  \item{`hjust = 0.5`}{ - The horizontal adjustment relative to the given x coordinate. Must be a numerical value between 0 and 1.}
-  \item{`vjust = 0.5`}{ - The vertical adjustment relative to the given y coordinate. Must be a numerical value between 0 and 1.}
-  \item{`width = 1.0`}{ - The desired width of the image in `npc` (Normalised Parent Coordinates).
-                          The default value is set to 1.0 which is *big* but it is necessary
-                          because all used values are computed relative to the default.
-                          A typical size is `width = 0.075` (see below examples).}
-  \item{`height = 1.0`}{ - The desired height of the image in `npc` (Normalised Parent Coordinates).
-                           The default value is set to 1.0 which is *big* but it is necessary
-                           because all used values are computed relative to the default.
-                           A typical size is `height = 0.1` (see below examples).}
+\item{\strong{x}}{ - The x-coordinate.}
+\item{\strong{y}}{ - The y-coordinate.}
+\item{\strong{team_abbr}}{ - The team abbreviation. Need to use Savant's abbreviation.}
+\item{\code{alpha = NULL}}{ - The alpha channel, i.e. transparency level, as a numerical value between 0 and 1.}
+\item{\code{colour = NULL}}{ - The image will be colourized with this colour. Use the special character \code{"b/w"} to set it to black and white. For more information on valid colour names in ggplot2 see \url{https://ggplot2.tidyverse.org/articles/ggplot2-specs.html?q=colour#colour-and-fill}}
+\item{\code{angle = 0}}{ - The angle of the image as a numerical value between 0° and 360°.}
+\item{\code{hjust = 0.5}}{ - The horizontal adjustment relative to the given x coordinate. Must be a numerical value between 0 and 1.}
+\item{\code{vjust = 0.5}}{ - The vertical adjustment relative to the given y coordinate. Must be a numerical value between 0 and 1.}
+\item{\code{width = 1.0}}{ - The desired width of the image in \code{npc} (Normalised Parent Coordinates).
+The default value is set to 1.0 which is \emph{big} but it is necessary
+because all used values are computed relative to the default.
+A typical size is \code{width = 0.075} (see below examples).}
+\item{\code{height = 1.0}}{ - The desired height of the image in \code{npc} (Normalised Parent Coordinates).
+The default value is set to 1.0 which is \emph{big} but it is necessary
+because all used values are computed relative to the default.
+A typical size is \code{height = 0.1} (see below examples).}
 }
 }
 

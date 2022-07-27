@@ -2,7 +2,7 @@
 % Please edit documentation in R/gt_helpers.R
 \name{gt_merge_stack_team_color}
 \alias{gt_merge_stack_team_color}
-\title{Merge and stack text from two columns in `gt` and color one with team colors}
+\title{Merge and stack text from two columns in \code{gt} and color one with team colors}
 \usage{
 gt_merge_stack_team_color(
   gt_object,
@@ -15,13 +15,13 @@ gt_merge_stack_team_color(
 )
 }
 \arguments{
-\item{gt_object}{An existing gt table object of class `gt_tbl`}
+\item{gt_object}{An existing gt table object of class \code{gt_tbl}}
 
 \item{col1}{The column to stack on top. Will be converted to all caps, with black and bold text.}
 
-\item{col2}{The column to merge and place below. Will be smaller and the team color that corresponds to `team_col`.}
+\item{col2}{The column to merge and place below. Will be smaller and the team color that corresponds to \code{team_col}.}
 
-\item{team_col}{The column of team names that match `valid_team_names()` for the color of the bottom.}
+\item{team_col}{The column of team names that match \code{valid_team_names()} for the color of the bottom.}
 
 \item{font_size_top}{the font size for the top text.}
 
@@ -30,20 +30,20 @@ gt_merge_stack_team_color(
 \item{color}{The color for the top text.}
 }
 \value{
-An object of class `gt_tbl`.
+An object of class \code{gt_tbl}.
 }
 \description{
-The `gt_merge_stack_team_color()` function takes an existing `gt` table and merges
+The \code{gt_merge_stack_team_color()} function takes an existing \code{gt} table and merges
 column 1 and column 2, stacking column 1's text on top of column 2's.
 Top text is in all caps while the lower text is bigger, bolded,
 and colored by the team name in another column.
-This is a slightly modified version of [`gtExtras::gt_merge_stack()`](https://jthomasmock.github.io/gtExtras/reference/gt_merge_stack.html)  written by Tom Mock.
+This is a slightly modified version of \href{https://jthomasmock.github.io/gtExtras/reference/gt_merge_stack.html}{\code{gtExtras::gt_merge_stack()}}  written by Tom Mock.
 }
 \examples{
 library(gt)
 library(mlbplotR)
 
-mlbplotR::load_mlb_teams() \%>\%
+gt_merge_example <- mlbplotR::load_mlb_teams() \%>\%
   dplyr::slice(1:5) \%>\%
   dplyr::select(team_abbr, team_name) \%>\%
   tidyr::separate(team_name, c("Team1", "Team2","Team3"), fill = "left") \%>\%
