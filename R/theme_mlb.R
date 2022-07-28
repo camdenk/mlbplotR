@@ -41,6 +41,8 @@ NULL
 #' @rdname theme_mlb
 #' @export
 theme_x_mlb <- function(){
+  .Deprecated("element_*()")
+
   if (!is_installed("ggtext")) {
     cli::cli_abort(c(
       "Package {.val ggtext} required to create this scale.",
@@ -54,6 +56,7 @@ theme_x_mlb <- function(){
 #' @rdname theme_mlb
 #' @export
 theme_y_mlb <- function(){
+  .Deprecated("element_*()")
   if (!is_installed("ggtext")) {
     cli::cli_abort(c(
       "Package {.val ggtext} required to create this scale.",

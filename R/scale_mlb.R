@@ -176,6 +176,7 @@ scale_x_mlb <- function(...,
                         guide = ggplot2::waiver(),
                         position = "bottom",
                         size = 12) {
+  .Deprecated("element_*()")
 
   position <- rlang::arg_match0(position, c("top", "bottom"))
 
@@ -197,6 +198,7 @@ scale_y_mlb <- function(...,
                         guide = ggplot2::waiver(),
                         position = "left",
                         size = 12) {
+  .Deprecated("element_*()")
 
   position <- rlang::arg_match0(position, c("left", "right"))
 
