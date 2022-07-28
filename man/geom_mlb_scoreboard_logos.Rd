@@ -2,7 +2,7 @@
 % Please edit documentation in R/geom_mlb_logos.R
 \name{geom_mlb_scoreboard_logos}
 \alias{geom_mlb_scoreboard_logos}
-\title{ggplot2 Layer for Visualizing MLB Team Logos}
+\title{ggplot2 Layer for Visualizing MLB Team Scoreboard Logos}
 \usage{
 geom_mlb_scoreboard_logos(
   mapping = NULL,

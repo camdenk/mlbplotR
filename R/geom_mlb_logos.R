@@ -140,7 +140,7 @@ GeomMLBlogo <- ggplot2::ggproto(
 
 
 
-#' ggplot2 Layer for Visualizing MLB Team Logos
+#' ggplot2 Layer for Visualizing MLB Team Scoreboard Logos
 #'
 #' @description This geom is used to plot MLB team and league logos instead
 #'   of points in a ggplot. It requires x, y aesthetics as well as a valid MLB
