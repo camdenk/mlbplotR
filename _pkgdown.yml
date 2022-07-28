@@ -1,7 +1,59 @@
 url: https://camdenk.github.io/mlbplotR/
 template:
   bootstrap: 5
+
+
+authors:
+  Sebastian Carl:
+    href: https://twitter.com/mrcaseb
+  Camden Kay:
+    href: https://twitter.com/k_camden
+
+
 navbar:
   structure:
-    left:  [intro, reference, articles, tutorials, news]
-    right: [search, github]
+    left:  [home, intro, reference, articles, tutorials, news]
+    right: [twitter, github]
+  components:
+    home:
+      title: mlbplotR
+      icon: fa-home
+      href: index.html
+    reference:
+      icon: "fas fa-code"
+      text: "Functions"
+      href: reference/index.html
+    news:
+      icon: "fas fa-newspaper"
+      text: "Changelog"
+      href: news/index.html
+    twitter:
+      icon: "fab fa-twitter fa-lg"
+      href: http://twitter.com/mlbplotR
+    github:
+      icon: "fab fa-github fa-lg"
+      href: https://github.com/camdenk/mlbplotR/
+
+
+
+reference:
+  - title: Geoms
+    contents: starts_with("geom")
+  - title: GT
+    contents: starts_with("gt")
+  - title: Theme Elements
+    contents: starts_with("element")
+  - title: Scales
+    contents:
+      - '`scale_mlb`'
+  - title: Utilities
+    contents:
+      - '`load_mlb_teams`'
+      - '`load_headshots`'
+      - '`clean_team_abbrs`'
+      - '`valid_team_names`'
+      - '`ggpreview`'
+  - title: Deprecated
+    contents:
+      - '`theme_mlb`'
+      - '`scale_axes_mlb`'
