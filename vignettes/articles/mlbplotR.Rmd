@@ -84,8 +84,14 @@ filtered_df |>
                 caption = "Data: FanGraphs via baseballr") +
   ggplot2::theme_minimal() +
   ggplot2::theme(plot.title = ggplot2::element_text(face = "bold")) +
-  ggplot2::scale_x_reverse(breaks = scales::pretty_breaks(), expand = c(.1, .1)) +
-  ggplot2::scale_y_reverse(breaks = scales::pretty_breaks(), expand = c(.1, .1))
+  ggplot2::scale_x_reverse(breaks = scales::pretty_breaks(), 
+                           labels = scales::number_format(accuracy = 0.01,
+                                                    decimal.mark = '.'),
+                           expand = c(.1, .1)) +
+  ggplot2::scale_y_reverse(breaks = scales::pretty_breaks(), 
+                           labels = scales::number_format(accuracy = 0.01,
+                                                    decimal.mark = '.'),
+                           expand = c(.1, .1))
 ```
 
 Here's another that looks at Home Runs Allowed by top pitchers:
@@ -131,7 +137,8 @@ filtered_df |>
                  panel.grid.major.x = ggplot2::element_blank(),
                  # this line triggers the replacement of team abbreviations with logos
                  axis.text.x = mlbplotR::element_mlb_logo()) +
-  ggplot2::scale_x_discrete(expand = c(0.05, 0.075))
+  ggplot2::scale_x_discrete(expand = c(0.05, 0.075)) +
+  ggplot2::scale_y_continuous(expand = c(0, 0, 0.05, 0))
 ```
 
 The family of `element_*()` functions allows for a lot of extra customization with axes labels and can even be used for `facet_wrap()/facet_grid()` strip headers.
@@ -148,8 +155,14 @@ df |>
   dplyr::slice_min(ERA, n = 12) |> 
   ggplot(aes(x = ERA, y = FIP)) +
   mlbplotR::geom_mlb_headshots(aes(player_id = savant_id), height = 0.15) +
-  ggplot2::scale_x_reverse(breaks = scales::pretty_breaks(), expand = c(.1, .1)) +
-  ggplot2::scale_y_reverse(breaks = scales::pretty_breaks(), expand = c(.1, .1)) +
+  ggplot2::scale_x_reverse(breaks = scales::pretty_breaks(), 
+                           labels = scales::number_format(accuracy = 0.01,
+                                                    decimal.mark = '.'),
+                           expand = c(.1, .1)) +
+  ggplot2::scale_y_reverse(breaks = scales::pretty_breaks(), 
+                           labels = scales::number_format(accuracy = 0.01,
+                                                    decimal.mark = '.'),
+                           expand = c(.1, .1)) +
   ggplot2::labs(title = "2021 SP ERA Leaders",
                 subtitle = "Minimum 100 IP",
                 caption = "Data: FanGraphs via baseballr") +
