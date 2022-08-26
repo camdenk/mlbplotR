@@ -88,18 +88,18 @@
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span>  <span class="fu">load_headshots</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          player_name      last_first    chadwick_name      espn_name savant_id</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    1: Alex Rodriguez Rodriguez, Alex   Alex Rodriguez Alex Rodriguez    121347</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    2: LaTroy Hawkins Hawkins, LaTroy   LaTroy Hawkins LaTroy Hawkins    115629</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    3:     Joe Hudson     Hudson, Joe       Joe Hudson     Joe Hudson    621529</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    4:  Bartolo Colon  Colon, Bartolo    Bartolo Colon  Bartolo Colon    112526</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    5:   Torii Hunter   Hunter, Torii     Torii Hunter   Torii Hunter    116338</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ---                                                                         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3133:           &lt;NA&gt;            &lt;NA&gt;     Brayan Bello           &lt;NA&gt;    678394</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3134:           &lt;NA&gt;            &lt;NA&gt;     Garrett Hill           &lt;NA&gt;    682051</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3135:           &lt;NA&gt;            &lt;NA&gt; Cristofer Ogando           &lt;NA&gt;    642657</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3136:           &lt;NA&gt;            &lt;NA&gt; Michael Stefanic           &lt;NA&gt;    683021</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3137:           &lt;NA&gt;            &lt;NA&gt;     David Villar           &lt;NA&gt;    681584</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          player_name      last_first  chadwick_name      espn_name savant_id</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    1: Alex Rodriguez Rodriguez, Alex Alex Rodriguez Alex Rodriguez    121347</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    2: LaTroy Hawkins Hawkins, LaTroy LaTroy Hawkins LaTroy Hawkins    115629</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    3:     Joe Hudson     Hudson, Joe     Joe Hudson     Joe Hudson    621529</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    4:  Bartolo Colon  Colon, Bartolo  Bartolo Colon  Bartolo Colon    112526</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    5:   Torii Hunter   Hunter, Torii   Torii Hunter   Torii Hunter    116338</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ---                                                                       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3175:           &lt;NA&gt;            &lt;NA&gt;        DL Hall        DL Hall    669084</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3176:           &lt;NA&gt;            &lt;NA&gt;   A. J. Ladwig           &lt;NA&gt;    607609</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3177:           &lt;NA&gt;            &lt;NA&gt;    Cole Ragans           &lt;NA&gt;    666142</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3178:           &lt;NA&gt;            &lt;NA&gt;  Cal Stevenson           &lt;NA&gt;    670276</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3179:           &lt;NA&gt;            &lt;NA&gt; Bubba Thompson           &lt;NA&gt;    669352</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        bbref_id retro_id fangraphs_id espn_id</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    1: rodrial01 rodra001         1274    3115</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    2: hawkila01 hawkl001          729    3176</span>
@@ -107,23 +107,23 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span>    4: colonba01 colob001          375    3602</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    5: hunteto01 huntt001          731    3723</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ---                                        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3133: bellobr01 bellb002           NA      NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3134:  hillga02 hillg002           NA      NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3135: ogandcr01 oganc001           NA      NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3136: stefami01 stefm001           NA      NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3137: villada01 villd001           NA      NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                     espn_headshot</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    1: https://a.espncdn.com/combiner/i?img=/i/headshots/mlb/players/full/3115.png</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    2: https://a.espncdn.com/combiner/i?img=/i/headshots/mlb/players/full/3176.png</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    3: https://a.espncdn.com/combiner/i?img=/i/headshots/mlb/players/full/3258.png</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    4: https://a.espncdn.com/combiner/i?img=/i/headshots/mlb/players/full/3602.png</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    5: https://a.espncdn.com/combiner/i?img=/i/headshots/mlb/players/full/3723.png</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ---                                                                            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3133:                                                                        &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3134:                                                                        &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3135:                                                                        &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3136:                                                                        &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3137:                                                                        &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3175:      &lt;NA&gt;     &lt;NA&gt;           NA   41018</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3176:      &lt;NA&gt;     &lt;NA&gt;           NA      NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3177: raganco01 ragac001           NA      NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3178: steveca01 stevc001           NA      NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3179: thompbu01 thomb003           NA      NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                      espn_headshot</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    1:  https://a.espncdn.com/combiner/i?img=/i/headshots/mlb/players/full/3115.png</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    2:  https://a.espncdn.com/combiner/i?img=/i/headshots/mlb/players/full/3176.png</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    3:  https://a.espncdn.com/combiner/i?img=/i/headshots/mlb/players/full/3258.png</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    4:  https://a.espncdn.com/combiner/i?img=/i/headshots/mlb/players/full/3602.png</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    5:  https://a.espncdn.com/combiner/i?img=/i/headshots/mlb/players/full/3723.png</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ---                                                                             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3175: https://a.espncdn.com/combiner/i?img=/i/headshots/mlb/players/full/41018.png</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3176:                                                                         &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3177:                                                                         &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3178:                                                                         &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3179:                                                                         &lt;NA&gt;</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
