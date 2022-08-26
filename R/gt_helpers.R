@@ -122,6 +122,8 @@ gt_fmt_mlb_scoreboard_logo <- function(gt_object, columns, height = 30){
 #' @param team_col The column of team names that match `valid_team_names()` for the color of the bottom.
 #' @param font_size_top the font size for the top text.
 #' @param font_size_bottom the font size for the bottom text.
+#' @param font_weight_top the font weight of the top text - defaults to "lighter"
+#' @param font_weight_bottom the font weight of the bottom text - defaults to "bold"
 #' @param color The color for the top text.
 #' @return An object of class `gt_tbl`.
 #' @importFrom gt %>%
@@ -147,6 +149,7 @@ gt_fmt_mlb_scoreboard_logo <- function(gt_object, columns, height = 30){
 
 gt_merge_stack_team_color <- function (gt_object, col1, col2, team_col,
                                        font_size_top = 12, font_size_bottom = 14,
+                                       font_weight_top = "lighter", font_weight_bottom = "bold",
                                        color = "black"){
 
   stopifnot("'gt_object' must be a 'gt_tbl', have you accidentally passed raw data?" = "gt_tbl" %in% class(gt_object))
@@ -185,10 +188,10 @@ gt_merge_stack_team_color <- function (gt_object, col1, col2, team_col,
     })
   }, fn = function(x) {
     glue::glue("<div style='line-height:10px'>
-          <span style='font-variant:small-caps;font-weight:lighter;color:{color};font-size:{font_size_top}px'>{x}
+          <span style='font-variant:small-caps;font-weight:{font_weight_top};color:{color};font-size:{font_size_top}px'>{x}
           </div>
           <div style='line-height:12px'>
-          <span style ='font-variant:small-caps;font-weight:bold;color:{team_color};font-size:{font_size_bottom}px'>{data_in}
+          <span style ='font-variant:small-caps;font-weight:{font_weight_bottom};color:{team_color};font-size:{font_size_bottom}px'>{data_in}
           </span></div>")
   }) %>% gt::cols_hide(columns = {
     {

@@ -11,6 +11,8 @@ gt_merge_stack_team_color(
   team_col,
   font_size_top = 12,
   font_size_bottom = 14,
+  font_weight_top = "lighter",
+  font_weight_bottom = "bold",
   color = "black"
 )
 }
@@ -26,6 +28,10 @@ gt_merge_stack_team_color(
 \item{font_size_top}{the font size for the top text.}
 
 \item{font_size_bottom}{the font size for the bottom text.}
+
+\item{font_weight_top}{the font weight of the top text - defaults to "lighter"}
+
+\item{font_weight_bottom}{the font weight of the bottom text - defaults to "bold"}
 
 \item{color}{The color for the top text.}
 }
