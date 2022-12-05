@@ -54,7 +54,8 @@ dark_logo_list <- rlang::set_names(dark_cap_logo_list, teams_colors_logos$team_a
 # Build team name df that'll be used to clean abbreviations before plotting
 
 team_data <- tibble::tribble(~team, ~alternate,
-                           "ARI", "ARI",
+                           "AZ", "AZ",
+                           "AZ", "ARI",
                            "ATL", "ATL",
                            "BAL", "BAL",
                            "BOS", "BOS",
