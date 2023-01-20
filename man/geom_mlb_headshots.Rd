@@ -120,7 +120,7 @@ df <- data.frame(
                   "Non Match",
                   "Salvador Perez",
                   "David Ortiz",
-                  "Fernanto Tatis Jr.",
+                  "Fernando Tatis Jr.",
                   "DJ LeMahieu")
 )
 
