@@ -1,6 +1,9 @@
 #' Theme for MLB Team Logos
 #'
-#' @description These functions are convenience wrappers around a theme call
+#' @description
+#'   `r lifecycle::badge("superseded")`
+#'   `theme_x_mlb()` and `theme_y_mlb()` have been superceded in favor of `element_*_logo()` functions
+#'   These functions are convenience wrappers around a theme call
 #'   that activates markdown in x-axis and y-axis labels
 #'   using [`ggtext::element_markdown()`].
 #' @details These functions are a wrapper around the function calls
@@ -41,7 +44,6 @@ NULL
 #' @rdname theme_mlb
 #' @export
 theme_x_mlb <- function(){
-  .Deprecated("element_*()")
 
   if (!is_installed("ggtext")) {
     cli::cli_abort(c(
@@ -56,7 +58,6 @@ theme_x_mlb <- function(){
 #' @rdname theme_mlb
 #' @export
 theme_y_mlb <- function(){
-  .Deprecated("element_*()")
   if (!is_installed("ggtext")) {
     cli::cli_abort(c(
       "Package {.val ggtext} required to create this scale.",

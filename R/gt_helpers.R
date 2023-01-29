@@ -127,7 +127,6 @@ gt_fmt_mlb_scoreboard_logo <- function(gt_object, columns, height = 30){
 #' @param color The color for the top text.
 #' @return An object of class `gt_tbl`.
 #' @importFrom gt %>%
-#' @importFrom glue glue
 #' @export
 #' @import gt
 #' @examples
@@ -187,12 +186,12 @@ gt_merge_stack_team_color <- function (gt_object, col1, col2, team_col,
       }
     })
   }, fn = function(x) {
-    glue::glue("<div style='line-height:10px'>
-          <span style='font-variant:small-caps;font-weight:{font_weight_top};color:{color};font-size:{font_size_top}px'>{x}
-          </div>
+    paste0("<div style='line-height:10px'>
+          <span style='font-variant:small-caps;font-weight:", font_weight_top, ";color:", color, ";font-size:", font_size_top, "px'>", x,
+          "</div>
           <div style='line-height:12px'>
-          <span style ='font-variant:small-caps;font-weight:{font_weight_bottom};color:{team_color};font-size:{font_size_bottom}px'>{data_in}
-          </span></div>")
+          <span style ='font-variant:small-caps;font-weight:", font_weight_bottom, ";color:", team_color, ";font-size:", font_size_bottom, "px'>", data_in,
+          "</span></div>")
   }) %>% gt::cols_hide(columns = {
     {
       col2

@@ -42,13 +42,17 @@ teams_colors_logos <- mlbplotR::load_mlb_teams() |>
   dplyr::mutate(
     a = rep(1:6, 5),
     b = sort(rep(1:5, 6), decreasing = TRUE),
-    alpha = ifelse(grepl("A", team_abbr), 1, 0.75), # Keep alpha == 1 for teams that have an "A"
-    color = ifelse(grepl("E", team_abbr), "b/w", NA) # Set teams that have an "E" to black & white
+    # Keep alpha == 1 for teams that have an "A"
+    alpha = ifelse(grepl("A", team_abbr), 1, 0.75),
+    # Set teams that have an "E" to black & white
+    color = ifelse(grepl("E", team_abbr), "b/w", NA) 
   )
 
 
  ggplot2::ggplot(teams_colors_logos, aes(x = a, y = b)) +
-   mlbplotR::geom_mlb_logos(aes(team_abbr = team_abbr, color = color, alpha = alpha), width = 0.075) +
+   mlbplotR::geom_mlb_logos(aes(team_abbr = team_abbr, 
+                                color = color, alpha = alpha), 
+                            width = 0.075) +
    ggplot2::geom_label(aes(label = team_abbr), nudge_y = -0.35, alpha = 0.5) +
    ggplot2::scale_color_identity() +
    ggplot2::scale_alpha_identity() +
@@ -61,7 +65,8 @@ This is a basic example with [FanGraphs](https://fangraphs.com) data (pulled usi
 library(baseballr)
 library(scales)
 
-df <- baseballr::fg_pitcher_leaders(x = 2021, y = 2021, q = 100, pitcher_type = "sta")
+df <- baseballr::fg_pitcher_leaders(x = 2021, y = 2021, 
+                                    q = 100, pitcher_type = "sta")
 
 filtered_df <- df |>
   dplyr::filter(Team != "- - -") |> 
@@ -151,7 +156,8 @@ Lastly, here's an example using headshots:
 
 df |> 
   dplyr::mutate(playerid = as.double(playerid)) |> 
-  dplyr::left_join(mlbplotR::load_headshots(), by = c("playerid" = "fangraphs_id")) |> 
+  dplyr::left_join(mlbplotR::load_headshots(), 
+                   by = c("playerid" = "fangraphs_id")) |> 
   dplyr::slice_min(ERA, n = 12) |> 
   ggplot(aes(x = ERA, y = FIP)) +
   mlbplotR::geom_mlb_headshots(aes(player_id = savant_id), height = 0.15) +

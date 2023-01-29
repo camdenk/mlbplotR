@@ -96,6 +96,8 @@ A discrete ggplot2 scale created with \code{\link[ggplot2:scale_discrete]{ggplot
 \code{\link[ggplot2:scale_discrete]{ggplot2::scale_y_discrete()}}.
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}}
+\code{scale_x_mlb()} and \code{scale_y_mlb()} have been superceded in favor of \verb{element_*_logo()} functions
 These functions map MLB team names to their team logos and make
 them available as axis labels
 }

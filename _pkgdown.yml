@@ -53,7 +53,7 @@ reference:
       - '`clean_team_abbrs`'
       - '`valid_team_names`'
       - '`ggpreview`'
-  - title: Deprecated
+  - title: Superceded
     contents:
       - '`theme_mlb`'
       - '`scale_axes_mlb`'

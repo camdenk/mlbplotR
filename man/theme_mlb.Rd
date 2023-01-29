@@ -13,6 +13,8 @@ theme_y_mlb()
 A ggplot2 theme created with \code{\link[ggplot2:theme]{ggplot2::theme()}}.
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}}
+\code{theme_x_mlb()} and \code{theme_y_mlb()} have been superceded in favor of \verb{element_*_logo()} functions
 These functions are convenience wrappers around a theme call
 that activates markdown in x-axis and y-axis labels
 using \code{\link[ggtext:element_markdown]{ggtext::element_markdown()}}.

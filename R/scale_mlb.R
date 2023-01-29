@@ -115,7 +115,10 @@ scale_fill_mlb <- function(type = c("primary", "secondary"),
 
 #' Axis Scales for MLB Team Logos
 #'
-#' @description These functions map MLB team names to their team logos and make
+#' @description
+#'   `r lifecycle::badge("superseded")`
+#'   `scale_x_mlb()` and `scale_y_mlb()` have been superceded in favor of `element_*_logo()` functions
+#'   These functions map MLB team names to their team logos and make
 #'   them available as axis labels
 #' @details The scale translates MLB team abbreviations into raw image
 #'   html and places the html as axis labels. Because of the way ggplots are
@@ -176,7 +179,6 @@ scale_x_mlb <- function(...,
                         guide = ggplot2::waiver(),
                         position = "bottom",
                         size = 12) {
-  .Deprecated("element_*()")
 
   position <- rlang::arg_match0(position, c("top", "bottom"))
 
@@ -198,7 +200,6 @@ scale_y_mlb <- function(...,
                         guide = ggplot2::waiver(),
                         position = "left",
                         size = 12) {
-  .Deprecated("element_*()")
 
   position <- rlang::arg_match0(position, c("left", "right"))
 
