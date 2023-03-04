@@ -232,4 +232,4 @@ top_12 |>
 
 ```
 
-Note: If a player's headshot data can't be found, their headshot will be replaced with the MLB logo.
+Note: If a player's headshot data can't be found, their headshot will be replaced with the MLB logo by default.

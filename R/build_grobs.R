@@ -1,6 +1,6 @@
 # INTERNAL HELPER THAT BUILDS THE GROBS FOR
 # GEOM LOGOS AND HEADSHOTS
-build_grobs <- function(i, alpha, colour, data, type = c("teams", "light_cap", "dark_cap", "scoreboard", "headshots", "path")) {
+build_grobs <- function(i, alpha, colour, data, type = c("teams", "light_cap", "dark_cap", "scoreboard", "logo_headshots", "gray_headshots", "path")) {
   make_null <- FALSE
   type <- rlang::arg_match(type)
   if(type == "teams") {
@@ -21,14 +21,19 @@ build_grobs <- function(i, alpha, colour, data, type = c("teams", "light_cap", "
     if (is.na(team_abbr)) make_null <- TRUE
   } else if (type == "path"){
     image_to_read <- data$path[i]
-  } else {
+  } else if (type == "logo_headshots") {
     id <- data$player_id[i]
     headshot_map <- load_headshots()
     image_to_read <- headshot_map$espn_headshot[headshot_map$savant_id == id]
-    if(length(image_to_read) == 0){
-      image_to_read <- na_headshot()
-    } else if (is.na(image_to_read)){
-      image_to_read <- na_headshot()
+    if(length(image_to_read) == 0 || is.na(image_to_read)){
+      image_to_read <- na_headshot(TRUE)
+    }
+  } else if (type == "gray_headshots") {
+    id <- data$player_id[i]
+    headshot_map <- load_headshots()
+    image_to_read <- headshot_map$espn_headshot[headshot_map$savant_id == id]
+    if(length(image_to_read) == 0 || is.na(image_to_read)){
+      image_to_read <- na_headshot(FALSE)
     }
   }
 

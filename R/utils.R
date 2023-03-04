@@ -43,7 +43,7 @@ rds_from_url <- function(url) {
 
 is_installed <- function(pkg) requireNamespace(pkg, quietly = TRUE)
 
-na_headshot <- function() "https://a.espncdn.com/combiner/i?img=/i/teamlogos/leagues/500/mlb.png"
+na_headshot <- function(mlb_logo = TRUE) if (mlb_logo) "https://a.espncdn.com/combiner/i?img=/i/teamlogos/leagues/500/mlb.png" else "https://raw.githubusercontent.com/camdenk/mlbplotR-data/main/na_gray_headshot.png"
 
 
 `%c%` <- function(x,y){
