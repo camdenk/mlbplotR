@@ -12,7 +12,8 @@ geom_mlb_headshots(
   ...,
   na.rm = FALSE,
   show.legend = FALSE,
-  inherit.aes = TRUE
+  inherit.aes = TRUE,
+  na_headshot_to_logo = TRUE
 )
 }
 \arguments{
@@ -63,6 +64,9 @@ display.}
 rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
+
+\item{na_headshot_to_logo}{should NA/non matches return the MLB logo instead
+of a grayed out blank headshot? Defaults to \code{TRUE}}
 }
 \value{
 A ggplot2 layer (\code{\link[ggplot2:layer]{ggplot2::layer()}}) that can be added to a plot
@@ -138,9 +142,10 @@ ggplot(df, aes(x = a, y = b)) +
   coord_cartesian(xlim = c(0.75, 3.25), ylim = c(0.7, 3.25)) +
   theme_void()
 
-# apply alpha as constant
+# apply alpha as constant and use non default na replacement
 ggplot(df, aes(x = a, y = b)) +
-  geom_mlb_headshots(aes(player_id = player_id), height = 0.2, alpha = 0.5) +
+  geom_mlb_headshots(aes(player_id = player_id), height = 0.2, alpha = 0.5,
+                     na_headshot_to_logo = FALSE) +
   geom_label(aes(label = player_name), nudge_y = -0.35, alpha = 0.5) +
   coord_cartesian(xlim = c(0.75, 3.25), ylim = c(0.7, 3.25)) +
   theme_void()

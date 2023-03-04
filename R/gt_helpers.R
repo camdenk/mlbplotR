@@ -1,10 +1,9 @@
 #' @name gt_mlb
 #' @title
-#' Add logos/headshots into rows of a `gt` table
+#' Add MLB team logos into rows of a `gt` table
 #' @description
 #' The `gt_fmt_mlb_logo` and `gt_fmt_mlb_scoreboard_logo` functions take an existing
 #' `gt_tbl` object and converts MLB team names from `valid_team_names()` into team logos.
-#' `gt_fmt_mlb_headshot` takes an existing `gt_tbl` object and converts player ids into headshots.
 #' This is a wrapper around
 #' [`gtExtras::gt_image_rows()`](https://jthomasmock.github.io/gtExtras/reference/gt_img_rows.html)
 #' written by Tom Mock, which is a wrapper around `gt::text_transform()` + `gt::web_image()`/
@@ -15,7 +14,7 @@
 #'   Has no effect if `locations` is not `NULL`
 #' @param height The absolute height (px) of the image in the table cell
 #' @param locations If `NULL` (the default), the function will render
-#'   logos/headshots in argument `columns`.
+#'   logos in argument `columns`.
 #'   Otherwise, the cell or set of cells to be associated with the team name/player id
 #'   transformation. Only the [gt::cells_body()], [gt::cells_stub()],
 #'   [gt::cells_column_labels()], and [gt::cells_row_groups()] helper functions
@@ -35,14 +34,6 @@
 #'  gt::gt() %>%
 #'  gt_fmt_mlb_logo(columns = "logo") %>%
 #'  gt_fmt_mlb_scoreboard_logo(columns = "scoreboard_logo")
-#'
-#'
-#' gt_headshot_example <- mlbplotR::load_headshots() %>%
-#'   head(5) %>%
-#'   dplyr::select(player_name, savant_id) %>%
-#'   gt::gt() %>%
-#'   gt_fmt_mlb_headshot(columns = "savant_id")
-
 
 gt_fmt_mlb_logo <- function(gt_object, columns, height = 30, locations = NULL){
 
@@ -139,12 +130,45 @@ get_image_uri <- function(team_abbr, type = c("mlb_logo", "scoreboard_logo")) {
 
 
 
-#' @rdname gt_mlb
+#' Render Player Headshots in 'gt' Tables
+
+#' @description
+#' `gt_fmt_mlb_headshot` takes an existing `gt_tbl` object and converts player ids into headshots.
+#' This is a wrapper around
+#' [`gtExtras::gt_image_rows()`](https://jthomasmock.github.io/gtExtras/reference/gt_img_rows.html)
+#' written by Tom Mock, which is a wrapper around `gt::text_transform()` + `gt::web_image()`/
+#' `gt::local_image()` with the necessary boilerplate already applied.
+#'
+#' @param gt_object An existing gt table object of class `gt_tbl`
+#' @param columns The columns wherein changes to cell data colors should occur.
+#'   Has no effect if `locations` is not `NULL`
+#' @param height The absolute height (px) of the image in the table cell
+#' @param locations If `NULL` (the default), the function will render
+#'   headshots in argument `columns`.
+#'   Otherwise, the cell or set of cells to be associated with the team name/player id
+#'   transformation. Only the [gt::cells_body()], [gt::cells_stub()],
+#'   [gt::cells_column_labels()], and [gt::cells_row_groups()] helper functions
+#'   can be used here. We can enclose several of these calls within a `list()`
+#'   if we wish to make the transformation happen at different locations.
+#' @param na_headshot_to_logo should NA/non matches return the MLB logo instead
+#'   of a grayed out blank headshot? Defaults to `TRUE`
+#'
+#' @return An object of class `gt_tbl`.
+#' @export
+#' @examples
+#' library(gt)
+#' library(mlbplotR)
+#' gt_headshot_example <- mlbplotR::load_headshots() %>%
+#'   head(5) %>%
+#'   dplyr::select(player_name, savant_id) %>%
+#'   gt::gt() %>%
+#'   gt_fmt_mlb_headshot(columns = "savant_id")
 #' @export
 gt_fmt_mlb_headshot <- function(gt_object,
                                 columns,
                                 height = 30,
-                                locations = NULL) {
+                                locations = NULL,
+                                na_headshot_to_logo = TRUE) {
 
   stopifnot("'gt_object' must be a 'gt_tbl', have you accidentally passed raw data?" = "gt_tbl" %in% class(gt_object))
 
@@ -166,7 +190,7 @@ gt_fmt_mlb_headshot <- function(gt_object,
         USE.NAMES = FALSE,
         FUN = function(id) {
           ret <- headshot_map$espn_headshot[headshot_map$savant_id == id]
-          if(length(ret) == 0 || is.na(ret)) ret <- na_headshot()
+          if(length(ret) == 0 || is.na(ret)) ret <- na_headshot(na_headshot_to_logo)
           ret
         }
       )

@@ -5,6 +5,8 @@
 #'   id (The same ID associated with their baseball savant page).
 #'
 #' @inheritParams ggplot2::geom_point
+#' @param na_headshot_to_logo should NA/non matches return the MLB logo instead
+#'   of a grayed out blank headshot? Defaults to `TRUE`
 #' @section Aesthetics:
 #' `geom_mlb_headshots()` understands the following aesthetics (required aesthetics are in bold):
 #' \itemize{
@@ -73,9 +75,10 @@
 #'   coord_cartesian(xlim = c(0.75, 3.25), ylim = c(0.7, 3.25)) +
 #'   theme_void()
 #'
-#' # apply alpha as constant
+#' # apply alpha as constant and use non default na replacement
 #' ggplot(df, aes(x = a, y = b)) +
-#'   geom_mlb_headshots(aes(player_id = player_id), height = 0.2, alpha = 0.5) +
+#'   geom_mlb_headshots(aes(player_id = player_id), height = 0.2, alpha = 0.5,
+#'                      na_headshot_to_logo = FALSE) +
 #'   geom_label(aes(label = player_name), nudge_y = -0.35, alpha = 0.5) +
 #'   coord_cartesian(xlim = c(0.75, 3.25), ylim = c(0.7, 3.25)) +
 #'   theme_void()
@@ -94,7 +97,8 @@ geom_mlb_headshots <- function(mapping = NULL, data = NULL,
                                ...,
                                na.rm = FALSE,
                                show.legend = FALSE,
-                               inherit.aes = TRUE) {
+                               inherit.aes = TRUE,
+                               na_headshot_to_logo = TRUE) {
 
   ggplot2::layer(
     data = data,
@@ -106,6 +110,7 @@ geom_mlb_headshots <- function(mapping = NULL, data = NULL,
     inherit.aes = inherit.aes,
     params = list(
       na.rm = na.rm,
+      na_headshot_to_logo = na_headshot_to_logo,
       ...
     )
   )
@@ -119,12 +124,18 @@ GeomMLBheads <- ggplot2::ggproto(
   # non_missing_aes = c(""),
   default_aes = ggplot2::aes(
     alpha = NULL, colour = NULL, angle = 0, hjust = 0.5,
-    vjust = 0.5, width = 1.0, height = 1.0
+    vjust = 0.5, width = 1.0, height = 1.0, na_headshot_to_logo = TRUE
   ),
-  draw_panel = function(data, panel_params, coord, na.rm = FALSE) {
+  draw_panel = function(data, panel_params, coord, na.rm = FALSE, na_headshot_to_logo = TRUE) {
     data <- coord$transform(data, panel_params)
 
-    grobs <- lapply(seq_along(data$player_id), build_grobs, alpha = data$alpha, colour = data$colour, data = data, type = "headshots")
+    if (na_headshot_to_logo) {
+      grobs <- lapply(seq_along(data$player_id), build_grobs, alpha = data$alpha, colour = data$colour, data = data, type = "logo_headshots")
+    } else {
+      grobs <- lapply(seq_along(data$player_id), build_grobs, alpha = data$alpha, colour = data$colour, data = data, type = "gray_headshots")
+    }
+
+
 
     class(grobs) <- "gList"
 
