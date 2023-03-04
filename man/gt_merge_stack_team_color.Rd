@@ -13,6 +13,8 @@ gt_merge_stack_team_color(
   font_size_bottom = 14,
   font_weight_top = "lighter",
   font_weight_bottom = "bold",
+  font_variant_top = "small-caps",
+  font_variant_bottom = "small-caps",
   color = "black"
 )
 }
@@ -32,6 +34,10 @@ gt_merge_stack_team_color(
 \item{font_weight_top}{the font weight of the top text - defaults to "lighter"}
 
 \item{font_weight_bottom}{the font weight of the bottom text - defaults to "bold"}
+
+\item{font_variant_top}{the font variant of the top text - defaults to "small-caps"}
+
+\item{font_variant_bottom}{the font variant of the bottom text - defaults to "small-caps"}
 
 \item{color}{The color for the top text.}
 }
