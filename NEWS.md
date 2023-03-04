@@ -12,3 +12,4 @@
 * Added the `gt_fmt_mlb_logo()`, `gt_fmt_mlb_scoreboard_logo()`, `gt_fmt_mlb_headshot()` and `gt_merge_stack_team_color()` functions to aid in making gt tables. (v0.0.0.9010)
 * Updated internal data to use "AZ" as Diamondbacks new team abbreviation. (v0.0.0.9011)
 * Removed `glue` dependency, updated "Getting Started" vignette, and set `scale_x_mlb()`, `scale_y_mlb()`, `theme_x_mlb()`, and `theme_y_mlb()` as superceded (v0.0.0.9012)
+* Updated gt helper functions to prepare for an eventual CRAN submission (v0.0.0.9013)

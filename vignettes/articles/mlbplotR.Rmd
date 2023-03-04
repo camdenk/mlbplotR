@@ -181,7 +181,6 @@ filtered_df |>
 Instead of putting the logos in the plot, we can have them be the axis labels:
 
 ```{r axis-example, message = FALSE}
-
 filtered_df |> 
   # The scale_*_mlb() functions don't auto-clean abbreviations
   dplyr::mutate(Team = clean_team_abbrs(Team)) |> 
