@@ -29,80 +29,103 @@
 #'  gt_fmt_mlb_logo(columns = "logo") %>%
 #'  gt_fmt_mlb_scoreboard_logo(columns = "scoreboard_logo")
 
-gt_fmt_mlb_logo <- function(gt_object, columns, height = 30){
+gt_fmt_mlb_logo <- function(gt_object, columns, height = 30, locations = NULL){
 
   stopifnot("'gt_object' must be a 'gt_tbl', have you accidentally passed raw data?" = "gt_tbl" %in% class(gt_object))
 
-  # convert tidyeval column to bare string
-  column_names <- gt:::resolve_cols_c(
-    expr = {{ columns }},
-    data = gt_object
+  gt_mlbplotR_image(
+    gt_object = gt_object,
+    columns = columns,
+    height = height,
+    locations = locations,
+    type = "mlb_logo"
   )
 
-  stub_var <- gt_object[["_boxhead"]][["var"]][which(gt_object[["_boxhead"]][["type"]]=="stub")]
-  grp_var <- gt_object[["_boxhead"]][["var"]][which(gt_object[["_boxhead"]][["type"]]=="row_group")]
-
-  img_source <- "web"
-
-  gt_object %>%
-    gt::text_transform(
-      locations = if(isTRUE(grp_var %in% column_names)){
-        gt::cells_row_groups()
-      } else if(isTRUE(stub_var %in% column_names)){
-        gt::cells_stub(rows = gt::everything())
-      } else {
-        gt::cells_body({{ columns }})
-      },
-      fn = function(x){
-        if(img_source == "web"){
-          x <- mlbplotR::clean_team_abbrs(as.character(x))
-          x[which(!x%in%valid_team_names())] <- "MLB"
-          gt::web_image(url = logo_urls[x], height = height)
-        } else {
-          gt::local_image(filename = x, height = height)
-        }
-      }
-    )
 }
 
 #' @rdname gt_mlb
 #' @export
 
-gt_fmt_mlb_scoreboard_logo <- function(gt_object, columns, height = 30){
+gt_fmt_mlb_scoreboard_logo <- function(gt_object,
+                                       columns,
+                                       height = 30,
+                                       locations = NULL){
 
   stopifnot("'gt_object' must be a 'gt_tbl', have you accidentally passed raw data?" = "gt_tbl" %in% class(gt_object))
 
-  # convert tidyeval column to bare string
-  column_names <- gt:::resolve_cols_c(
-    expr = {{ columns }},
-    data = gt_object
+  gt_mlbplotR_image(
+    gt_object = gt_object,
+    columns = columns,
+    height = height,
+    locations = locations,
+    type = "scoreboard_logo"
+  )
+}
+
+
+# Taken from nflplotR package and adapted for MLB purposes
+gt_mlbplotR_image <- function(gt_object,
+                              columns,
+                              height = 30,
+                              locations = NULL,
+                              type = c("mlb_logo", "scoreboard_logo")){
+
+  rlang::check_installed("gt (>= 0.8.0)", "to render images in gt tables.")
+
+  type <- match.arg(type)
+
+  if(is.null(locations)){
+    locations <- gt::cells_body({{ columns }})
+  }
+
+  if (is.numeric(height)) {
+    height <- paste0(height, "px")
+  }
+
+  gt::text_transform(
+    data = gt_object,
+    locations = locations,
+    fn = function(x){
+      team_abbr <- clean_team_abbrs(as.character(x), keep_non_matches = FALSE)
+      # Create the image URI
+      uri <- get_image_uri(team_abbr = team_abbr, type = type)
+      # Generate the Base64-encoded image and place it within <img> tags
+      paste0("<img src=\"", uri, "\" style=\"height:", height, ";\">")
+    }
   )
 
-  stub_var <- gt_object[["_boxhead"]][["var"]][which(gt_object[["_boxhead"]][["type"]]=="stub")]
-  grp_var <- gt_object[["_boxhead"]][["var"]][which(gt_object[["_boxhead"]][["type"]]=="row_group")]
-
-  img_source <- "web"
-
-  gt_object %>%
-    gt::text_transform(
-      locations = if(isTRUE(grp_var %in% column_names)){
-        gt::cells_row_groups()
-      } else if(isTRUE(stub_var %in% column_names)){
-        gt::cells_stub(rows = gt::everything())
-      } else {
-        gt::cells_body({{ columns }})
-      },
-      fn = function(x){
-        if(img_source == "web"){
-          x <- mlbplotR::clean_team_abbrs(as.character(x))
-          x[which(!x%in%valid_team_names())] <- "MLB"
-          gt::web_image(url = scoreboard_logo_urls[x], height = height)
-        } else {
-          gt::local_image(filename = x, height = height)
-        }
-      }
-    )
 }
+
+
+
+# Taken from gt and nflplotR package
+# Get image URIs from image lists as a vector Base64-encoded image strings
+get_image_uri <- function(team_abbr, type = c("mlb_logo", "scoreboard_logo")) {
+
+  lookup_list <- switch (type,
+                         "mlb_logo" = logo_list,
+                         "scoreboard_logo" = scoreboard_logo_list
+  )
+
+  vapply(
+    team_abbr,
+    FUN.VALUE = character(1),
+    USE.NAMES = FALSE,
+    FUN = function(team) {
+      paste0(
+        "data:", "image/png",
+        ";base64,", base64enc::base64encode(lookup_list[[team]])
+      )
+    }
+  )
+}
+
+
+
+
+
+
+
 
 
 
@@ -198,6 +221,8 @@ gt_merge_stack_team_color <- function (gt_object, col1, col2, team_col,
     }
   })
 }
+
+
 
 
 
