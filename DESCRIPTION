@@ -30,7 +30,6 @@ Imports:
     scales
 Suggests:
     rstudioapi,
-    baseballr,
     base64enc,
     dplyr,
     tidyr,

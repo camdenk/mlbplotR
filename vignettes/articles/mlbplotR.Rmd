@@ -16,6 +16,61 @@ knitr::opts_chunk$set(
   out.width = "100%",
   dpi = 600
 )
+
+
+# Preset dataframes
+library(dplyr)
+
+filtered_df <- tibble::tribble(
+  ~Team, ~ERA, ~FIP, ~HR,
+  "ARI",  4.3, 4.25,  19,
+  "ATL", 3.04, 3.31,  15,
+  "BAL", 3.62, 4.62,  30,
+  "BOS", 3.75, 2.79,  15,
+  "CHC", 4.77, 4.89,  31,
+  "CHW", 2.37, 2.65,  13,
+  "CIN", 3.37, 3.97,  17,
+  "CLE", 3.12, 4.05,  14,
+  "COL", 4.33, 4.63,  20,
+  "DET", 3.71, 4.71,  24,
+  "HOU", 3.14, 4.01,  12,
+  "KCR", 4.77,  5.6,  22,
+  "LAA", 3.18, 3.52,  15,
+  "LAD", 2.47, 3.16,  19,
+  "MIA", 2.64, 2.55,   6,
+  "MIL", 2.43, 1.63,   7,
+  "MIN", 3.72, 4.27,  17,
+  "NYM", 3.02, 3.49,  17,
+  "NYY", 3.23, 2.92,  24,
+  "OAK", 3.15, 3.34,  15,
+  "PHI", 2.78, 2.59,  16,
+  "PIT", 5.36, 5.16,  28,
+  "SDP", 3.27, 3.73,  22,
+  "SEA", 3.61, 3.89,  19,
+  "SFG", 2.81,    3,  20,
+  "STL", 3.05, 3.66,  21,
+  "TBR", 3.43, 3.31,  14,
+  "TEX", 4.55, 3.94,  12,
+  "TOR", 2.84, 3.69,  33,
+  "WSN", 4.02, 4.43,  17
+  )
+
+top_12 <- tibble::tribble(
+  ~playerid, ~ERA, ~FIP,
+      16137, 2.37, 2.65,
+      19361, 2.43, 1.63,
+       3137, 2.46, 2.97,
+      19374, 2.47, 3.16,
+      16162, 2.56, 2.96,
+      12703, 2.59, 4.03,
+      22286, 2.64, 2.55,
+       2520, 2.69, 3.32,
+      10310, 2.78, 2.59,
+      14107, 2.81,    3,
+      11486, 2.84, 3.69,
+      18679, 2.85, 3.14
+  )
+
 ```
 
 ## Installation
@@ -62,24 +117,28 @@ teams_colors_logos <- mlbplotR::load_mlb_teams() |>
 This is a basic example with [FanGraphs](https://fangraphs.com) data (pulled using baseballr) which compares ERA to FIP for each team's top starting pitcher by ERA:
 
 ```{r scatter-example, message = FALSE}
-library(baseballr)
+# Uncomment this to pull data, currently commented out to save 
+# a dependency on baseballr
+# 
+# library(baseballr)
+# 
+# df <- baseballr::fg_pitcher_leaders(x = 2021, y = 2021, 
+#                                     q = 100, pitcher_type = "sta")
+# 
+# filtered_df <- df |>
+#   dplyr::filter(Team != "- - -") |> 
+#   # FanGraphs Team abbreviations aren't the standard
+#   # for what's used in the plotting functions so 
+#   # you could clean them with the following line, 
+#   # but the geom_*_logos() functions should all
+#   # clean the abbreviations before plotting
+#   # 
+#   # dplyr::mutate(Team = clean_team_abbrs(Team)) |> 
+#   dplyr::group_by(Team) |> 
+#   dplyr::slice_min(ERA, n = 1) |> 
+#   dplyr::ungroup()
+
 library(scales)
-
-df <- baseballr::fg_pitcher_leaders(x = 2021, y = 2021, 
-                                    q = 100, pitcher_type = "sta")
-
-filtered_df <- df |>
-  dplyr::filter(Team != "- - -") |> 
-  # FanGraphs Team abbreviations aren't the standard
-  # for what's used in the plotting functions so 
-  # you could clean them with the following line, 
-  # but the geom_*_logos() functions should all
-  # clean the abbreviations before plotting
-  # 
-  # dplyr::mutate(Team = clean_team_abbrs(Team)) |> 
-  dplyr::group_by(Team) |> 
-  dplyr::slice_min(ERA, n = 1) |> 
-  dplyr::ungroup()
 
 filtered_df |> 
   ggplot2::ggplot(aes(x = ERA, y = FIP)) +
@@ -90,12 +149,10 @@ filtered_df |>
   ggplot2::theme_minimal() +
   ggplot2::theme(plot.title = ggplot2::element_text(face = "bold")) +
   ggplot2::scale_x_reverse(breaks = scales::pretty_breaks(), 
-                           labels = scales::number_format(accuracy = 0.01,
-                                                    decimal.mark = '.'),
+                           labels = scales::number_format(accuracy = 0.01),
                            expand = c(.1, .1)) +
   ggplot2::scale_y_reverse(breaks = scales::pretty_breaks(), 
-                           labels = scales::number_format(accuracy = 0.01,
-                                                    decimal.mark = '.'),
+                           labels = scales::number_format(accuracy = 0.01),
                            expand = c(.1, .1))
 ```
 
@@ -153,21 +210,20 @@ The family of `element_*()` functions allows for a lot of extra customization wi
 Lastly, here's an example using headshots:
 
 ```{r headshot-example, message = FALSE}
+# top_12 <- df |>
+#   dplyr::mutate(playerid = as.double(playerid)) |> 
+#   dplyr::slice_min(ERA, n = 12)
 
-df |> 
-  dplyr::mutate(playerid = as.double(playerid)) |> 
+top_12 |> 
   dplyr::left_join(mlbplotR::load_headshots(), 
                    by = c("playerid" = "fangraphs_id")) |> 
-  dplyr::slice_min(ERA, n = 12) |> 
   ggplot(aes(x = ERA, y = FIP)) +
   mlbplotR::geom_mlb_headshots(aes(player_id = savant_id), height = 0.15) +
   ggplot2::scale_x_reverse(breaks = scales::pretty_breaks(), 
-                           labels = scales::number_format(accuracy = 0.01,
-                                                    decimal.mark = '.'),
+                           labels = scales::number_format(accuracy = 0.01),
                            expand = c(.1, .1)) +
   ggplot2::scale_y_reverse(breaks = scales::pretty_breaks(), 
-                           labels = scales::number_format(accuracy = 0.01,
-                                                    decimal.mark = '.'),
+                           labels = scales::number_format(accuracy = 0.01),
                            expand = c(.1, .1)) +
   ggplot2::labs(title = "2021 SP ERA Leaders",
                 subtitle = "Minimum 100 IP",
