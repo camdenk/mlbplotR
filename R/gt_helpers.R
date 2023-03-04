@@ -1,9 +1,10 @@
 #' @name gt_mlb
 #' @title
-#' Add logos into rows of a `gt` table
+#' Add logos/headshots into rows of a `gt` table
 #' @description
 #' The `gt_fmt_mlb_logo` and `gt_fmt_mlb_scoreboard_logo` functions take an existing
 #' `gt_tbl` object and converts MLB team names from `valid_team_names()` into team logos.
+#' `gt_fmt_mlb_headshot` takes an existing `gt_tbl` object and converts player ids into headshots.
 #' This is a wrapper around
 #' [`gtExtras::gt_image_rows()`](https://jthomasmock.github.io/gtExtras/reference/gt_img_rows.html)
 #' written by Tom Mock, which is a wrapper around `gt::text_transform()` + `gt::web_image()`/
@@ -11,10 +12,16 @@
 #'
 #' @param gt_object An existing gt table object of class `gt_tbl`
 #' @param columns The columns wherein changes to cell data colors should occur.
-#' @inheritParams gt::web_image
-#' @inheritParams gt::local_image
+#'   Has no effect if `locations` is not `NULL`
+#' @param height The absolute height (px) of the image in the table cell
+#' @param locations If `NULL` (the default), the function will render
+#'   logos/headshots in argument `columns`.
+#'   Otherwise, the cell or set of cells to be associated with the team name/player id
+#'   transformation. Only the [gt::cells_body()], [gt::cells_stub()],
+#'   [gt::cells_column_labels()], and [gt::cells_row_groups()] helper functions
+#'   can be used here. We can enclose several of these calls within a `list()`
+#'   if we wish to make the transformation happen at different locations.
 #' @return An object of class `gt_tbl`.
-#' @importFrom gt %>%
 #' @export
 #' @examples
 #' library(gt)
@@ -28,6 +35,14 @@
 #'  gt::gt() %>%
 #'  gt_fmt_mlb_logo(columns = "logo") %>%
 #'  gt_fmt_mlb_scoreboard_logo(columns = "scoreboard_logo")
+#'
+#'
+#' gt_headshot_example <- mlbplotR::load_headshots() %>%
+#'   head(5) %>%
+#'   dplyr::select(player_name, savant_id) %>%
+#'   gt::gt() %>%
+#'   gt_fmt_mlb_headshot(columns = "savant_id")
+
 
 gt_fmt_mlb_logo <- function(gt_object, columns, height = 30, locations = NULL){
 
@@ -124,6 +139,43 @@ get_image_uri <- function(team_abbr, type = c("mlb_logo", "scoreboard_logo")) {
 
 
 
+#' @rdname gt_mlb
+#' @export
+gt_fmt_mlb_headshot <- function(gt_object,
+                                columns,
+                                height = 30,
+                                locations = NULL) {
+
+  stopifnot("'gt_object' must be a 'gt_tbl', have you accidentally passed raw data?" = "gt_tbl" %in% class(gt_object))
+
+
+  rlang::check_installed("gt (>= 0.8.0)", "to render images in gt tables.")
+
+  if(is.null(locations)){
+    locations <- gt::cells_body({{ columns }})
+  }
+
+  gt::text_transform(
+    data = gt_object,
+    locations = locations,
+    fn = function(mlb_id){
+      headshot_map <- load_headshots()
+      image_urls <- vapply(
+        mlb_id,
+        FUN.VALUE = character(1),
+        USE.NAMES = FALSE,
+        FUN = function(id) {
+          ret <- headshot_map$espn_headshot[headshot_map$savant_id == id]
+          if(length(ret) == 0 || is.na(ret)) ret <- na_headshot()
+          ret
+        }
+      )
+      gt::web_image(image_urls, height = height)
+    }
+  )
+
+}
+
 
 
 
@@ -147,6 +199,8 @@ get_image_uri <- function(team_abbr, type = c("mlb_logo", "scoreboard_logo")) {
 #' @param font_size_bottom the font size for the bottom text.
 #' @param font_weight_top the font weight of the top text - defaults to "lighter"
 #' @param font_weight_bottom the font weight of the bottom text - defaults to "bold"
+#' @param font_variant_top the font variant of the top text - defaults to "small-caps"
+#' @param font_variant_bottom the font variant of the bottom text - defaults to "small-caps"
 #' @param color The color for the top text.
 #' @return An object of class `gt_tbl`.
 #' @importFrom gt %>%
@@ -169,9 +223,16 @@ get_image_uri <- function(team_abbr, type = c("mlb_logo", "scoreboard_logo")) {
 #'   gt::gt() %>%
 #'   gt_merge_stack_team_color(col1 = "Team2", col2 = "Team3", team_col = "team_abbr")
 
-gt_merge_stack_team_color <- function (gt_object, col1, col2, team_col,
-                                       font_size_top = 12, font_size_bottom = 14,
-                                       font_weight_top = "lighter", font_weight_bottom = "bold",
+gt_merge_stack_team_color <- function (gt_object,
+                                       col1,
+                                       col2,
+                                       team_col,
+                                       font_size_top = 12,
+                                       font_size_bottom = 14,
+                                       font_weight_top = "lighter",
+                                       font_weight_bottom = "bold",
+                                       font_variant_top = "small-caps",
+                                       font_variant_bottom = "small-caps",
                                        color = "black"){
 
   stopifnot("'gt_object' must be a 'gt_tbl', have you accidentally passed raw data?" = "gt_tbl" %in% class(gt_object))
@@ -210,10 +271,16 @@ gt_merge_stack_team_color <- function (gt_object, col1, col2, team_col,
     })
   }, fn = function(x) {
     paste0("<div style='line-height:10px'>
-          <span style='font-variant:small-caps;font-weight:", font_weight_top, ";color:", color, ";font-size:", font_size_top, "px'>", x,
+          <span style='font-variant:", font_variant_top,
+          ";font-weight:", font_weight_top,
+          ";color:", color,
+          ";font-size:", font_size_top, "px'>", x,
           "</div>
           <div style='line-height:12px'>
-          <span style ='font-variant:small-caps;font-weight:", font_weight_bottom, ";color:", team_color, ";font-size:", font_size_bottom, "px'>", data_in,
+          <span style ='font-variant:", font_variant_bottom,
+          ";font-weight:", font_weight_bottom,
+          ";color:", team_color,
+          ";font-size:", font_size_bottom, "px'>", data_in,
           "</span></div>")
   }) %>% gt::cols_hide(columns = {
     {
@@ -224,73 +291,3 @@ gt_merge_stack_team_color <- function (gt_object, col1, col2, team_col,
 
 
 
-
-
-#' Add player headshots to a `gt_mlb` table
-#'
-#' @description
-#' Takes an existing `gt_tbl` object and converts MLBAM IDs into player headshots.
-#' This is a wrapper around
-#' [`gtExtras::gt_image_rows()`](https://jthomasmock.github.io/gtExtras/reference/gt_img_rows.html)
-#' written by Tom Mock, which is a wrapper around `gt::text_transform()` + `gt::web_image()`/
-#' `gt::local_image()` with the necessary boilerplate already applied.
-#'
-#' @param gt_object An existing gt table object of class `gt_tbl`
-#' @param columns The columns wherein changes to cell data colors should occur.
-#' @inheritParams gt::web_image
-#' @inheritParams gt::local_image
-#' @return An object of class `gt_tbl`.
-#' @importFrom gt %>%
-#' @importFrom tibble deframe
-#' @importFrom tibble add_row
-#' @export
-#' @examples
-#' library(gt)
-#' library(mlbplotR)
-#'
-#' gt_headshot_example <- mlbplotR::load_headshots() %>%
-#'   head(5) %>%
-#'   dplyr::select(player_name, savant_id) %>%
-#'   gt::gt() %>%
-#'   gt_fmt_mlb_headshot(columns = "savant_id")
-
-gt_fmt_mlb_headshot <- function(gt_object, columns, height = 30) {
-
-  stopifnot("'gt_object' must be a 'gt_tbl', have you accidentally passed raw data?" = "gt_tbl" %in% class(gt_object))
-
-  headshot_map <- mlbplotR::load_headshots()
-  headshot_map <- headshot_map[,c(5,10)]
-  headshot_map <- headshot_map[rowSums(is.na(headshot_map)) == 0, ]
-  headshot_map <- headshot_map %>%
-    tibble::add_row(savant_id = 0, espn_headshot = na_headshot())
-
-  id_options <- headshot_map$savant_id
-
-  headshot_map <- headshot_map %>%
-    tibble::deframe()
-
-  column_names <- gt:::resolve_cols_c(
-    expr = {{ columns }},
-    data = gt_object
-  )
-
-  stub_var <- gt_object[["_boxhead"]][["var"]][which(gt_object[["_boxhead"]][["type"]]=="stub")]
-  grp_var <- gt_object[["_boxhead"]][["var"]][which(gt_object[["_boxhead"]][["type"]]=="row_group")]
-
-  # need to correct for rownames
-  gt_object %>%
-    gt::text_transform(
-      locations = if(isTRUE(grp_var %in% column_names)){
-        gt::cells_row_groups()
-      } else if(isTRUE(stub_var %in% column_names)){
-        gt::cells_stub(rows = gt::everything())
-      } else {
-        gt::cells_body({{ columns }})
-      },
-      fn = function(x){
-
-        x[which(!x%in%id_options)] <- 0
-        gt::web_image(url = headshot_map[x], height = height)
-      }
-    )
-}
