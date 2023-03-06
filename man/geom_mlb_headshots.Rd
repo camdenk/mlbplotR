@@ -12,8 +12,7 @@ geom_mlb_headshots(
   ...,
   na.rm = FALSE,
   show.legend = FALSE,
-  inherit.aes = TRUE,
-  na_headshot_to_logo = TRUE
+  inherit.aes = TRUE
 )
 }
 \arguments{
@@ -64,9 +63,6 @@ display.}
 rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
-
-\item{na_headshot_to_logo}{should NA/non matches return the MLB logo instead
-of a grayed out blank headshot? Defaults to \code{TRUE}}
 }
 \value{
 A ggplot2 layer (\code{\link[ggplot2:layer]{ggplot2::layer()}}) that can be added to a plot
@@ -84,6 +80,8 @@ id (The same ID associated with their baseball savant page).
 \item{\strong{x}}{ - The x-coordinate.}
 \item{\strong{y}}{ - The y-coordinate.}
 \item{\strong{player_id}}{ - The players' MLB (Baseball Savant) id.}
+\item{\code{na_headshot_to_logo = TRUE}}{ - Should NA/non-matches return the MLB logo
+Instead of a grayed out blank headshot? Defaults to \code{TRUE}}
 \item{\code{alpha = NULL}}{ - The alpha channel, i.e. transparency level, as a numerical value between 0 and 1.}
 \item{\code{colour = NULL}}{ - The image will be colorized with this colour. Use the special character \code{"b/w"} to set it to black and white. For more information on valid colour names in ggplot2 see \url{https://ggplot2.tidyverse.org/articles/ggplot2-specs.html?q=colour#colour-and-fill}}
 \item{\code{angle = 0}}{ - The angle of the image as a numerical value between 0° and 360°.}

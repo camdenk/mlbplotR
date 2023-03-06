@@ -5,14 +5,14 @@
 #'   id (The same ID associated with their baseball savant page).
 #'
 #' @inheritParams ggplot2::geom_point
-#' @param na_headshot_to_logo should NA/non matches return the MLB logo instead
-#'   of a grayed out blank headshot? Defaults to `TRUE`
 #' @section Aesthetics:
 #' `geom_mlb_headshots()` understands the following aesthetics (required aesthetics are in bold):
 #' \itemize{
 #'   \item{**x**}{ - The x-coordinate.}
 #'   \item{**y**}{ - The y-coordinate.}
 #'   \item{**player_id**}{ - The players' MLB (Baseball Savant) id.}
+#'   \item{`na_headshot_to_logo = TRUE`}{ - Should NA/non-matches return the MLB logo
+#'                                          Instead of a grayed out blank headshot? Defaults to `TRUE`}
 #'   \item{`alpha = NULL`}{ - The alpha channel, i.e. transparency level, as a numerical value between 0 and 1.}
 #'   \item{`colour = NULL`}{ - The image will be colorized with this colour. Use the special character `"b/w"` to set it to black and white. For more information on valid colour names in ggplot2 see <https://ggplot2.tidyverse.org/articles/ggplot2-specs.html?q=colour#colour-and-fill>}
 #'   \item{`angle = 0`}{ - The angle of the image as a numerical value between 0° and 360°.}
@@ -97,8 +97,7 @@ geom_mlb_headshots <- function(mapping = NULL, data = NULL,
                                ...,
                                na.rm = FALSE,
                                show.legend = FALSE,
-                               inherit.aes = TRUE,
-                               na_headshot_to_logo = TRUE) {
+                               inherit.aes = TRUE) {
 
   ggplot2::layer(
     data = data,
@@ -110,7 +109,6 @@ geom_mlb_headshots <- function(mapping = NULL, data = NULL,
     inherit.aes = inherit.aes,
     params = list(
       na.rm = na.rm,
-      na_headshot_to_logo = na_headshot_to_logo,
       ...
     )
   )
