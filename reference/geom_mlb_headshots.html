@@ -88,8 +88,7 @@ id (The same ID associated with their baseball savant page).</p>
 <span>  <span class="va">...</span>,</span>
 <span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  show.legend <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  na_headshot_to_logo <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -155,11 +154,6 @@ rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. <code><a href="https://ggplot2.tidyverse.org/reference/borders.html" class="external-link">borders()</a></code>.</p></dd>
 
-
-<dt>na_headshot_to_logo</dt>
-<dd><p>should NA/non matches return the MLB logo instead
-of a grayed out blank headshot? Defaults to <code>TRUE</code></p></dd>
-
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -175,6 +169,8 @@ created with <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html"
 <p><code>geom_mlb_headshots()</code> understands the following aesthetics (required aesthetics are in bold):</p><ul><li><p><strong>x</strong> - The x-coordinate.</p></li>
 <li><p><strong>y</strong> - The y-coordinate.</p></li>
 <li><p><strong>player_id</strong> - The players' MLB (Baseball Savant) id.</p></li>
+<li><p><code>na_headshot_to_logo = TRUE</code> - Should NA/non-matches return the MLB logo
+Instead of a grayed out blank headshot? Defaults to <code>TRUE</code></p></li>
 <li><p><code>alpha = NULL</code> - The alpha channel, i.e. transparency level, as a numerical value between 0 and 1.</p></li>
 <li><p><code>colour = NULL</code> - The image will be colorized with this colour. Use the special character <code>"b/w"</code> to set it to black and white. For more information on valid colour names in ggplot2 see <a href="https://ggplot2.tidyverse.org/articles/ggplot2-specs.html?q=colour#colour-and-fill" class="external-link">https://ggplot2.tidyverse.org/articles/ggplot2-specs.html?q=colour#colour-and-fill</a></p></li>
 <li><p><code>angle = 0</code> - The angle of the image as a numerical value between 0° and 360°.</p></li>
