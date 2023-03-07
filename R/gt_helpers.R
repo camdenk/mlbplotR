@@ -176,7 +176,7 @@ gt_fmt_mlb_headshot <- function(gt_object,
 
 
 
-#' Replace Team Abbreviations With Images In Column Labels
+#' Replace Team Abbreviations/Player IDs With Images In Column Labels
 #'
 #' @description
 #' `gt_column_example` takes in a value of a team abbreviation or player id and

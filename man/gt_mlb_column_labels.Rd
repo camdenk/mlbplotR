@@ -2,7 +2,7 @@
 % Please edit documentation in R/gt_helpers.R
 \name{gt_mlb_column_labels}
 \alias{gt_mlb_column_labels}
-\title{Replace Team Abbreviations With Images In Column Labels}
+\title{Replace Team Abbreviations/Player IDs With Images In Column Labels}
 \usage{
 gt_mlb_column_labels(
   value,
