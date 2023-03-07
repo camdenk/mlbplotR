@@ -14,3 +14,4 @@
 * Removed `glue` dependency, updated "Getting Started" vignette, and set `scale_x_mlb()`, `scale_y_mlb()`, `theme_x_mlb()`, and `theme_y_mlb()` as superceded (v0.0.0.9012)
 * Updated gt helper functions to prepare for an eventual CRAN submission (v0.0.0.9013)
 * Updated `na_headshot()`, `gt_fmt_mlb_headshot()`, and `geom_mlb_headshots()` to allow for use of a general gray headshot instead of just returning the MLB logo (v0.0.0.9014)
+* Added `gt_mlb_column_labels()` to easily replace column labels with images (v0.0.0.9015)

@@ -6,25 +6,16 @@
 \alias{gt_fmt_mlb_scoreboard_logo}
 \title{Add MLB team logos into rows of a \code{gt} table}
 \usage{
-gt_fmt_mlb_logo(gt_object, columns, height = 30, locations = NULL)
+gt_fmt_mlb_logo(gt_object, columns, height = 30)
 
-gt_fmt_mlb_scoreboard_logo(gt_object, columns, height = 30, locations = NULL)
+gt_fmt_mlb_scoreboard_logo(gt_object, columns, height = 30)
 }
 \arguments{
 \item{gt_object}{An existing gt table object of class \code{gt_tbl}}
 
-\item{columns}{The columns wherein changes to cell data colors should occur.
-Has no effect if \code{locations} is not \code{NULL}}
+\item{columns}{The columns wherein changes to cell data colors should occur.}
 
 \item{height}{The absolute height (px) of the image in the table cell}
-
-\item{locations}{If \code{NULL} (the default), the function will render
-logos in argument \code{columns}.
-Otherwise, the cell or set of cells to be associated with the team name/player id
-transformation. Only the \code{\link[gt:cells_body]{gt::cells_body()}}, \code{\link[gt:cells_stub]{gt::cells_stub()}},
-\code{\link[gt:cells_column_labels]{gt::cells_column_labels()}}, and \code{\link[gt:cells_row_groups]{gt::cells_row_groups()}} helper functions
-can be used here. We can enclose several of these calls within a \code{list()}
-if we wish to make the transformation happen at different locations.}
 }
 \value{
 An object of class \code{gt_tbl}.

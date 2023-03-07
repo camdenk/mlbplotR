@@ -8,7 +8,6 @@ gt_fmt_mlb_headshot(
   gt_object,
   columns,
   height = 30,
-  locations = NULL,
   na_headshot_to_logo = TRUE
 )
 }
@@ -19,14 +18,6 @@ gt_fmt_mlb_headshot(
 Has no effect if \code{locations} is not \code{NULL}}
 
 \item{height}{The absolute height (px) of the image in the table cell}
-
-\item{locations}{If \code{NULL} (the default), the function will render
-headshots in argument \code{columns}.
-Otherwise, the cell or set of cells to be associated with the team name/player id
-transformation. Only the \code{\link[gt:cells_body]{gt::cells_body()}}, \code{\link[gt:cells_stub]{gt::cells_stub()}},
-\code{\link[gt:cells_column_labels]{gt::cells_column_labels()}}, and \code{\link[gt:cells_row_groups]{gt::cells_row_groups()}} helper functions
-can be used here. We can enclose several of these calls within a \code{list()}
-if we wish to make the transformation happen at different locations.}
 
 \item{na_headshot_to_logo}{should NA/non matches return the MLB logo instead
 of a grayed out blank headshot? Defaults to \code{TRUE}}
