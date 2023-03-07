@@ -18,7 +18,7 @@ gt::local_image() with the necessary boilerplate already applied."><meta propert
     
     <a class="navbar-brand me-2" href="../index.html">mlbplotR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9014</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9015</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -90,7 +90,6 @@ written by Tom Mock, which is a wrapper around <code><a href="https://gt.rstudio
 <span>  <span class="va">gt_object</span>,</span>
 <span>  <span class="va">columns</span>,</span>
 <span>  height <span class="op">=</span> <span class="fl">30</span>,</span>
-<span>  locations <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  na_headshot_to_logo <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -108,16 +107,6 @@ Has no effect if <code>locations</code> is not <code>NULL</code></p></dd>
 
 <dt>height</dt>
 <dd><p>The absolute height (px) of the image in the table cell</p></dd>
-
-
-<dt>locations</dt>
-<dd><p>If <code>NULL</code> (the default), the function will render
-headshots in argument <code>columns</code>.
-Otherwise, the cell or set of cells to be associated with the team name/player id
-transformation. Only the <code><a href="https://gt.rstudio.com/reference/cells_body.html" class="external-link">gt::cells_body()</a></code>, <code><a href="https://gt.rstudio.com/reference/cells_stub.html" class="external-link">gt::cells_stub()</a></code>,
-<code><a href="https://gt.rstudio.com/reference/cells_column_labels.html" class="external-link">gt::cells_column_labels()</a></code>, and <code><a href="https://gt.rstudio.com/reference/cells_row_groups.html" class="external-link">gt::cells_row_groups()</a></code> helper functions
-can be used here. We can enclose several of these calls within a <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code>
-if we wish to make the transformation happen at different locations.</p></dd>
 
 
 <dt>na_headshot_to_logo</dt>
