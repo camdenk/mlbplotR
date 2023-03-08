@@ -63,17 +63,5 @@ will walk you through more use cases for the package.
 
 ## Contributing
 
-Many hands make light work! Here are some ways you can contribute to
-this project:
-
--   You can [open an
-    issue](https://github.com/camdenk/mlbplotR/issues/new/choose) if
-    you’d like to request specific data or report a bug/error.
-
-## To Do
-
--   Create more package tutorials
--   Add in mean/median line geoms
--   Add tests
--   Continue to add player ids for headshots for those who haven’t
-    played in the Statcast era
+- [Open an issue](https://github.com/camdenk/mlbplotR/issues/new/choose)
+  if you’d like to request specific data or report a bug/error.
