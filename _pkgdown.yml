@@ -46,12 +46,15 @@ reference:
   - title: Scales
     contents:
       - '`scale_mlb`'
+  - title: Tiers
+    contents: ends_with("tiers")
   - title: Utilities
     contents:
       - '`load_mlb_teams`'
       - '`load_headshots`'
       - '`clean_team_abbrs`'
       - '`valid_team_names`'
+      - '`mlb_team_factor`'
       - '`ggpreview`'
   - title: Superceded
     contents:
