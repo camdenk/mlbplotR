@@ -85,7 +85,7 @@ Adapted from \href{https://nflplotr.nflverse.com/reference/nfl_team_tiers.html}{
 library(ggplot2)
 library(dplyr, warn.conflicts = FALSE)
 player_ids <- load_headshots() |>
-  head(30) |>
+  head(35) |>
   pull(savant_id)
 
 # Build the player tiers data frame
