@@ -93,7 +93,7 @@ For cap logos, the scaling works better when adjusting height and not width.}
 \item{\code{width = 1.0}}{ - The desired width of the image in \code{npc} (Normalised Parent Coordinates).
 The default value is set to 1.0 which is \emph{big} but it is necessary
 because all used values are computed relative to the default.
-A typical size is \code{width = 0.075} (see below examples).
+A typical size is \code{height = 0.05} (see below examples).
 For cap logos, the scaling works better when adjusting height and not width.}
 }
 }
@@ -121,7 +121,7 @@ df$colour <- ifelse(matches, NA, "gray")
 
 # scatterplot of all logos
 ggplot(df, aes(x = a, y = b)) +
-  geom_mlb_light_cap_logos(aes(team_abbr = teams), width = 0.075) +
+  geom_mlb_light_cap_logos(aes(team_abbr = teams), height = 0.05) +
   geom_label(aes(label = teams), nudge_y = -0.35, alpha = 0.5) +
   theme_void()
 
@@ -129,7 +129,7 @@ ggplot(df, aes(x = a, y = b)) +
 # please note that you have to add scale_alpha_identity() to use the alpha
 # values in your dataset!
 ggplot(df, aes(x = a, y = b)) +
-  geom_mlb_light_cap_logos(aes(team_abbr = teams, alpha = alpha), width = 0.075) +
+  geom_mlb_light_cap_logos(aes(team_abbr = teams, alpha = alpha), height = 0.05) +
   geom_label(aes(label = teams), nudge_y = -0.35, alpha = 0.5) +
   scale_alpha_identity() +
   theme_void()
@@ -138,7 +138,7 @@ ggplot(df, aes(x = a, y = b)) +
 # please note that you have to add scale_alpha_identity() as well as
 # scale_colour_identity() to use the alpha and colour values in your dataset!
 ggplot(df, aes(x = a, y = b)) +
-  geom_mlb_light_cap_logos(aes(team_abbr = teams, alpha = alpha, colour = colour), width = 0.075) +
+  geom_mlb_light_cap_logos(aes(team_abbr = teams, alpha = alpha, colour = colour), height = 0.05) +
   geom_label(aes(label = teams), nudge_y = -0.35, alpha = 0.5) +
   scale_alpha_identity() +
   scale_colour_identity() +
@@ -146,14 +146,14 @@ ggplot(df, aes(x = a, y = b)) +
 
 # apply alpha as constant for all logos
 ggplot(df, aes(x = a, y = b)) +
-  geom_mlb_light_cap_logos(aes(team_abbr = teams), width = 0.075, alpha = 0.6) +
+  geom_mlb_light_cap_logos(aes(team_abbr = teams), height = 0.05, alpha = 0.6) +
   geom_label(aes(label = teams), nudge_y = -0.35, alpha = 0.5) +
   theme_void()
 
 # it's also possible to plot league logos
 league <- data.frame(a = 1:3, b = 0, teams = c("AL", "NL", "MLB"))
 ggplot(league, aes(x = a, y = b)) +
-  geom_mlb_light_cap_logos(aes(team_abbr = teams), width = 0.3) +
+  geom_mlb_light_cap_logos(aes(team_abbr = teams), height = 0.3) +
   geom_label(aes(label = teams), nudge_y = -0.4, alpha = 0.5) +
   coord_cartesian(xlim = c(0.5,3.5), ylim = c(-0.75,.75)) +
   theme_void()
