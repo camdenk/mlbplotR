@@ -17,3 +17,4 @@
 * Added `gt_mlb_column_labels()` to easily replace column labels with images (v0.0.0.9015)
 * Reworked `gt_mlb_column_labels()` to more cleanly accept customization (v0.0.0.9016)
 * Added `mlb_team_tiers()` and `mlb_player_tiers()` (v0.0.0.9017)
+* Added `mlb_team_factor()` (v0.0.0.9018)
