@@ -263,7 +263,6 @@ gt_mlb_column_labels <- function(value,
 #' @param font_variants the font variant of the top and bottom text. Can be vector of length 1 or 2. Defaults to "small-caps"
 #' @param color The color for the top text.
 #' @return An object of class `gt_tbl`.
-#' @import gt
 #' @examples
 #' library(gt)
 #' library(mlbplotR)

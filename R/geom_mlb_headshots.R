@@ -12,7 +12,7 @@
 #'   \item{**y**}{ - The y-coordinate.}
 #'   \item{**player_id**}{ - The players' MLB (Baseball Savant) id.}
 #'   \item{`na_headshot_to_logo = TRUE`}{ - Should NA/non-matches return the MLB logo
-#'                                          Instead of a grayed out blank headshot? Defaults to `TRUE`}
+#'                                          instead of a grayed out blank headshot? Defaults to `TRUE`}
 #'   \item{`alpha = NULL`}{ - The alpha channel, i.e. transparency level, as a numerical value between 0 and 1.}
 #'   \item{`colour = NULL`}{ - The image will be colorized with this colour. Use the special character `"b/w"` to set it to black and white. For more information on valid colour names in ggplot2 see <https://ggplot2.tidyverse.org/articles/ggplot2-specs.html?q=colour#colour-and-fill>}
 #'   \item{`angle = 0`}{ - The angle of the image as a numerical value between 0° and 360°.}
