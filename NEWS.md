@@ -15,3 +15,4 @@
 * Updated gt helper functions to prepare for an eventual CRAN submission (v0.0.0.9013)
 * Updated `na_headshot()`, `gt_fmt_mlb_headshot()`, and `geom_mlb_headshots()` to allow for use of a general gray headshot instead of just returning the MLB logo (v0.0.0.9014)
 * Added `gt_mlb_column_labels()` to easily replace column labels with images (v0.0.0.9015)
+* Reworked `gt_mlb_column_labels()` to more cleanly accept customization (v0.0.0.9016)

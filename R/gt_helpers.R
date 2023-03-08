@@ -252,22 +252,17 @@ gt_mlb_column_labels <- function(value,
 #' column 1 and column 2, stacking column 1's text on top of column 2's.
 #' Top text is in all caps while the lower text is bigger, bolded,
 #' and colored by the team name in another column.
-#' This is a slightly modified version of [`gtExtras::gt_merge_stack()`](https://jthomasmock.github.io/gtExtras/reference/gt_merge_stack.html)  written by Tom Mock.
+#' This is a slightly modified version of [`gtExtras::gt_merge_stack()`](https://jthomasmock.github.io/gtExtras/reference/gt_merge_stack.html) written by Tom Mock.
 #'
 #' @param gt_object An existing gt table object of class `gt_tbl`
-#' @param col1 The column to stack on top. Will be converted to all caps, with black and bold text.
-#' @param col2 The column to merge and place below. Will be smaller and the team color that corresponds to `team_col`.
-#' @param team_col The column of team names that match `valid_team_names()` for the color of the bottom.
-#' @param font_size_top the font size for the top text.
-#' @param font_size_bottom the font size for the bottom text.
-#' @param font_weight_top the font weight of the top text - defaults to "lighter"
-#' @param font_weight_bottom the font weight of the bottom text - defaults to "bold"
-#' @param font_variant_top the font variant of the top text - defaults to "small-caps"
-#' @param font_variant_bottom the font variant of the bottom text - defaults to "small-caps"
+#' @param col1 The column to stack on top.
+#' @param col2 The column to merge and place below with the text team color that corresponds to `team_col`.
+#' @param team_col The column of team abbreviations (cleaned with `clean_team_abbrs()`) that match `valid_team_names()` for the color of the bottom text.
+#' @param font_sizes the font size for the top and bottom text in px. Can be vector of length 1 or 2. Defaults to c(12, 14)
+#' @param font_weights the font weight of the top and bottom text. Can be vector of length 1 or 2. Defaults to c("lighter", "bold")
+#' @param font_variants the font variant of the top and bottom text. Can be vector of length 1 or 2. Defaults to "small-caps"
 #' @param color The color for the top text.
 #' @return An object of class `gt_tbl`.
-#' @importFrom gt %>%
-#' @export
 #' @import gt
 #' @examples
 #' library(gt)
@@ -275,30 +270,30 @@ gt_mlb_column_labels <- function(value,
 #'
 #' gt_merge_example <- mlbplotR::load_mlb_teams() %>%
 #'   dplyr::slice(1:5) %>%
-#'   dplyr::select(team_abbr, team_name) %>%
-#'   tidyr::separate(team_name, c("Team1", "Team2","Team3"), fill = "left") %>%
-#'   dplyr::mutate(Team3 = dplyr::if_else(Team3 %in% c("Sox", "Jays"), paste(Team2, Team3), Team3),
-#'                 Team2 = dplyr::case_when(grepl("Sox|Jays", Team3) ~ Team1,
-#'                                          Team3 == "Cardinals" ~ paste(Team1, Team2, sep = ". "),
-#'                                          is.na(Team1) ~ Team2,
-#'                                          TRUE ~ paste(Team1, Team2))) %>%
-#'   dplyr::select(team_abbr, Team2, Team3) %>%
+#'   dplyr::select(team_abbr, team_location, team_mascot) %>%
 #'   gt::gt() %>%
-#'   gt_merge_stack_team_color(col1 = "Team2", col2 = "Team3", team_col = "team_abbr")
-
+#'   gt_merge_stack_team_color(col1 = "team_location",
+#'                             col2 = "team_mascot",
+#'                             team_col = "team_abbr")
+#' @export
 gt_merge_stack_team_color <- function (gt_object,
                                        col1,
                                        col2,
                                        team_col,
-                                       font_size_top = 12,
-                                       font_size_bottom = 14,
-                                       font_weight_top = "lighter",
-                                       font_weight_bottom = "bold",
-                                       font_variant_top = "small-caps",
-                                       font_variant_bottom = "small-caps",
+                                       font_sizes = c(12, 14),
+                                       font_weights = c("lighter", "bold"),
+                                       font_variants = c("small-caps"),
                                        color = "black"){
 
   stopifnot("'gt_object' must be a 'gt_tbl', have you accidentally passed raw data?" = "gt_tbl" %in% class(gt_object))
+  stopifnot("`font_sizes` should be of length 1 or 2" = length(font_sizes) >= 1 && length(font_sizes) <= 2)
+  stopifnot("`font_weights` should be of length 1 or 2" = length(font_weights) >= 1 && length(font_weights) <= 2)
+  stopifnot("`font_variants` should be of length 1 or 2" = length(font_variants) >= 1 && length(font_variants) <= 2)
+
+  if(length(font_sizes) == 1) font_sizes <- rep(font_sizes, 2)
+  if(length(font_weights) == 1) font_weights <- rep(font_weights, 2)
+  if(length(font_variants) == 1) font_variants <- rep(font_variants, 2)
+
 
 
   team <- rlang::enexpr(team_col) %>% rlang::as_string()
@@ -322,34 +317,29 @@ gt_merge_stack_team_color <- function (gt_object,
                                                            "stub")]
   col2_bare <- rlang::enexpr(col2) %>% rlang::as_string()
   data_in <- gt_object[["_data"]][[col2_bare]]
-  gt_object %>% gt::text_transform(locations = if (isTRUE(row_name_var ==
-                                                      col1_bare)) {
+
+  gt_object %>%
+    gt::text_transform(locations = if (isTRUE(row_name_var == col1_bare)) {
     gt::cells_stub(rows = gt::everything())
   }
   else {
-    gt::cells_body(columns = {
-      {
-        col1
-      }
-    })
+    gt::cells_body(columns = {{ col1 }})
   }, fn = function(x) {
     paste0("<div style='line-height:10px'>
-          <span style='font-variant:", font_variant_top,
-          ";font-weight:", font_weight_top,
+          <span style='font-variant:", font_variants[1],
+          ";font-weight:", font_weights[1],
           ";color:", color,
-          ";font-size:", font_size_top, "px'>", x,
-          "</div>
-          <div style='line-height:12px'>
-          <span style ='font-variant:", font_variant_bottom,
-          ";font-weight:", font_weight_bottom,
+          ";font-size:", font_sizes[1], "px'>", x,
+          "</div>",
+
+          "<div style='line-height:12px'>
+          <span style ='font-variant:", font_variants[2],
+          ";font-weight:", font_weights[2],
           ";color:", team_color,
-          ";font-size:", font_size_bottom, "px'>", data_in,
+          ";font-size:", font_sizes[2], "px'>", data_in,
           "</span></div>")
-  }) %>% gt::cols_hide(columns = {
-    {
-      col2
-    }
-  })
+  }) %>%
+    gt::cols_hide(columns = {{ col2 }})
 }
 
 

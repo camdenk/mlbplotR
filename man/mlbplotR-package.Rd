@@ -41,7 +41,7 @@ GeomMLBscoreboardlogo
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-A set of functions to help visualize MLB analysis in 'ggplot2'.
+A set of functions to help visualize MLB analysis in 'ggplot2' and 'gt'.
 }
 \seealso{
 Useful links:

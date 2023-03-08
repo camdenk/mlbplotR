@@ -9,35 +9,26 @@ gt_merge_stack_team_color(
   col1,
   col2,
   team_col,
-  font_size_top = 12,
-  font_size_bottom = 14,
-  font_weight_top = "lighter",
-  font_weight_bottom = "bold",
-  font_variant_top = "small-caps",
-  font_variant_bottom = "small-caps",
+  font_sizes = c(12, 14),
+  font_weights = c("lighter", "bold"),
+  font_variants = c("small-caps"),
   color = "black"
 )
 }
 \arguments{
 \item{gt_object}{An existing gt table object of class \code{gt_tbl}}
 
-\item{col1}{The column to stack on top. Will be converted to all caps, with black and bold text.}
+\item{col1}{The column to stack on top.}
 
-\item{col2}{The column to merge and place below. Will be smaller and the team color that corresponds to \code{team_col}.}
+\item{col2}{The column to merge and place below with the text team color that corresponds to \code{team_col}.}
 
-\item{team_col}{The column of team names that match \code{valid_team_names()} for the color of the bottom.}
+\item{team_col}{The column of team abbreviations (cleaned with \code{clean_team_abbrs()}) that match \code{valid_team_names()} for the color of the bottom text.}
 
-\item{font_size_top}{the font size for the top text.}
+\item{font_sizes}{the font size for the top and bottom text in px. Can be vector of length 1 or 2. Defaults to c(12, 14)}
 
-\item{font_size_bottom}{the font size for the bottom text.}
+\item{font_weights}{the font weight of the top and bottom text. Can be vector of length 1 or 2. Defaults to c("lighter", "bold")}
 
-\item{font_weight_top}{the font weight of the top text - defaults to "lighter"}
-
-\item{font_weight_bottom}{the font weight of the bottom text - defaults to "bold"}
-
-\item{font_variant_top}{the font variant of the top text - defaults to "small-caps"}
-
-\item{font_variant_bottom}{the font variant of the bottom text - defaults to "small-caps"}
+\item{font_variants}{the font variant of the top and bottom text. Can be vector of length 1 or 2. Defaults to "small-caps"}
 
 \item{color}{The color for the top text.}
 }
@@ -49,7 +40,7 @@ The \code{gt_merge_stack_team_color()} function takes an existing \code{gt} tabl
 column 1 and column 2, stacking column 1's text on top of column 2's.
 Top text is in all caps while the lower text is bigger, bolded,
 and colored by the team name in another column.
-This is a slightly modified version of \href{https://jthomasmock.github.io/gtExtras/reference/gt_merge_stack.html}{\code{gtExtras::gt_merge_stack()}}  written by Tom Mock.
+This is a slightly modified version of \href{https://jthomasmock.github.io/gtExtras/reference/gt_merge_stack.html}{\code{gtExtras::gt_merge_stack()}} written by Tom Mock.
 }
 \examples{
 library(gt)
@@ -57,14 +48,9 @@ library(mlbplotR)
 
 gt_merge_example <- mlbplotR::load_mlb_teams() \%>\%
   dplyr::slice(1:5) \%>\%
-  dplyr::select(team_abbr, team_name) \%>\%
-  tidyr::separate(team_name, c("Team1", "Team2","Team3"), fill = "left") \%>\%
-  dplyr::mutate(Team3 = dplyr::if_else(Team3 \%in\% c("Sox", "Jays"), paste(Team2, Team3), Team3),
-                Team2 = dplyr::case_when(grepl("Sox|Jays", Team3) ~ Team1,
-                                         Team3 == "Cardinals" ~ paste(Team1, Team2, sep = ". "),
-                                         is.na(Team1) ~ Team2,
-                                         TRUE ~ paste(Team1, Team2))) \%>\%
-  dplyr::select(team_abbr, Team2, Team3) \%>\%
+  dplyr::select(team_abbr, team_location, team_mascot) \%>\%
   gt::gt() \%>\%
-  gt_merge_stack_team_color(col1 = "Team2", col2 = "Team3", team_col = "team_abbr")
+  gt_merge_stack_team_color(col1 = "team_location",
+                            col2 = "team_mascot",
+                            team_col = "team_abbr")
 }

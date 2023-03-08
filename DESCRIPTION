@@ -1,7 +1,7 @@
 Package: mlbplotR
 Type: Package
 Title: Create ggplot2 Visuals with MLB Logos
-Version: 0.0.0.9015
+Version: 0.0.0.9016
 Authors@R: 
     c(
     person(given = "Sebastian",
@@ -14,7 +14,7 @@ Authors@R:
            email = "camden.kay23@gmail.com")
      )
 Maintainer: The package maintainer <camden.kay23@gmail.com>
-Description: A set of functions to help visualize MLB analysis in 'ggplot2'.
+Description: A set of functions to help visualize MLB analysis in 'ggplot2' and 'gt'.
 URL: https://github.com/camdenk/mlbplotR,
     https://camdenk.github.io/mlbplotR/
 BugReports: https://github.com/camdenk/mlbplotR/issues
@@ -29,15 +29,14 @@ Imports:
     rlang,
     scales
 Suggests:
-    rstudioapi,
     base64enc,
     dplyr,
-    tidyr,
     ggtext,
     gridtext,
+    knitr,
     rsvg,
     rmarkdown,
-    knitr
+    rstudioapi
 Encoding: UTF-8
 LazyData: true
 License: MIT + file LICENSE
