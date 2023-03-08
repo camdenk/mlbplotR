@@ -10,6 +10,8 @@ geom_mlb_headshots(
   stat = "identity",
   position = "identity",
   ...,
+  nudge_x = 0,
+  nudge_y = 0,
   na.rm = FALSE,
   show.legend = FALSE,
   inherit.aes = TRUE
@@ -50,6 +52,10 @@ settings of the adjustment.}
 often aesthetics, used to set an aesthetic to a fixed value. See the below
 section "Aesthetics" for a full list of possible arguments.}
 
+\item{nudge_x, nudge_y}{Horizontal and vertical adjustment to nudge labels by.
+Useful for offsetting text from points, particularly on discrete scales.
+Cannot be jointly specified with \code{position}.}
+
 \item{na.rm}{If \code{FALSE}, the default, missing values are removed with
 a warning. If \code{TRUE}, missing values are silently removed.}
 
@@ -70,8 +76,8 @@ created with \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}.
 }
 \description{
 This geom is used to plot MLB player headshots instead
-of points in a ggplot. It requires x, y aesthetics as well as a valid MLB
-id (The same ID associated with their baseball savant page).
+of points in a ggplot. It requires x, y aesthetics as well as a valid MLBAM
+id (The same ID associated with their Baseball Savant page).
 }
 \section{Aesthetics}{
 

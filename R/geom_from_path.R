@@ -27,13 +27,16 @@
 #' @param ... Other arguments passed on to [ggplot2::layer()]. These are
 #'   often aesthetics, used to set an aesthetic to a fixed value. See the below
 #'   section "Aesthetics" for a full list of possible arguments.
+#' @param nudge_x,nudge_y Horizontal and vertical adjustment to nudge labels by.
+#'   Useful for offsetting text from points, particularly on discrete scales.
+#'   Cannot be jointly specified with `position`.
 #' @return A ggplot2 layer ([ggplot2::layer()]) that can be added to a plot
 #'   created with [ggplot2::ggplot()].
 #' @export
 #' @examples
 #' \donttest{
-#' library(ggplot2)
 #' library(mlbplotR)
+#' library(ggplot2)
 #'
 #' # create x-y-coordinates of a triangle and add league logo urls
 #' df <- data.frame(
@@ -76,9 +79,22 @@
 geom_from_path <- function(mapping = NULL, data = NULL,
                            stat = "identity", position = "identity",
                            ...,
+                           nudge_x = 0,
+                           nudge_y = 0,
                            na.rm = FALSE,
                            show.legend = FALSE,
                            inherit.aes = TRUE) {
+
+  if (!missing(nudge_x) || !missing(nudge_y)) {
+    if (!missing(position)) {
+      cli::cli_abort(c(
+        "both {.arg position} and {.arg nudge_x}/{.arg nudge_y} are supplied",
+        "i" = "Only use one approach to alter the position"
+      ))
+    }
+
+    position <- ggplot2::position_nudge(nudge_x, nudge_y)
+  }
 
   ggplot2::layer(
     data = data,

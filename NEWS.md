@@ -19,3 +19,4 @@
 * Added `mlb_team_tiers()` and `mlb_player_tiers()` (v0.0.0.9017)
 * Added `mlb_team_factor()` (v0.0.0.9018)
 * Added `geom_mean_lines()` and `geom_median_lines()` (v0.0.0.9019)
+* Added ability to use `nudge_x` and `nudge_y` to the geom family of functions and cleaned up documentation (v0.0.0.9020)
