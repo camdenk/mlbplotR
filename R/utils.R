@@ -8,7 +8,7 @@ logo_html <- function(team_abbr, type = c("height", "width"), size = 15){
 headshot_html <- function(player_id, type = c("height", "width"), size = 25){
   type <- rlang::arg_match(type)
   headshot_map <- load_headshots()
-  player_id <- ifelse(player_id %in% headshot_map$savent_id, player_id, "NA_ID")
+  player_id <- ifelse(player_id %in% headshot_map$savant_id, player_id, "NA_ID")
   headshot_map <- rbind(
     headshot_map,
     list(savant_id = "NA_ID", espn_headshot = na_headshot())
