@@ -1,7 +1,7 @@
 Package: mlbplotR
 Type: Package
 Title: Create 'ggplot2' and 'gt' Visuals with MLB Logos
-Version: 0.0.0.9020
+Version: 1.0.0
 Authors@R: 
     c(
     person(given = "Sebastian",

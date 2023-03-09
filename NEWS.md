@@ -1,4 +1,4 @@
-# mlbplotR (development version)
+# mlbplotR 1.0.0
 
 * Added the `geom_mlb_logos()` geom.
 * Added the color and fill scales `scale_color_mlb()` and `scale_fill_mlb()` along with the axis scales `scale_x_mlb()` and `scale_y_mlb()` in combination with the theme update functions `theme_x_mlb()` and `theme_y_mlb()`. Also added the ggplot2 theme-element `element_mlb_logo()` which translates MLB team abbreviations into team logos (v0.0.0.9002)
@@ -19,4 +19,4 @@
 * Added `mlb_team_tiers()` and `mlb_player_tiers()` (v0.0.0.9017)
 * Added `mlb_team_factor()` (v0.0.0.9018)
 * Added `geom_mean_lines()` and `geom_median_lines()` (v0.0.0.9019)
-* Added ability to use `nudge_x` and `nudge_y` to the geom family of functions and cleaned up documentation (v0.0.0.9020)
+* Added ability to use `nudge_x` and `nudge_y` to the geom family of functions and cleaned up documentation to prepare for CRAN release (v0.0.0.9020)
