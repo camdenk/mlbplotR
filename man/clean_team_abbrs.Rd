@@ -21,7 +21,9 @@ This function standardizes MLB team abbreviations to Baseball Savant defaults.
 This helps for joins and plotting
 }
 \examples{
+\donttest{
 x <- c("PIE", "STL", "WSN", "CWS", "CHW")
 # use current location and keep non matches
 clean_team_abbrs(x)
+}
 }

@@ -28,6 +28,7 @@
 #'   created with [ggplot2::ggplot()].
 #' @aliases NULL
 #' @examples
+#' \donttest{
 #' library(mlbplotR)
 #' library(ggplot2)
 #'
@@ -58,6 +59,7 @@
 #'   geom_median_lines(v_var = 400, h_var = 15) +
 #'   geom_mean_lines(v_var = 150, h_var = 30, color = "blue") +
 #'   theme_minimal()
+#' }
 NULL
 
 #' @rdname geom_lines

@@ -14,7 +14,7 @@ Loads team colors, and logos - useful for plots!
 }
 \examples{
 \donttest{
-  load_mlb_teams()
+load_mlb_teams()
 }
 
 }

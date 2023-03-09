@@ -84,6 +84,7 @@ aesthetics (at least one of the bold aesthetics is required):
 }
 
 \examples{
+\donttest{
 library(mlbplotR)
 library(ggplot2)
 
@@ -114,6 +115,7 @@ ggplot(mtcars, aes(x = disp, y = mpg)) +
   geom_median_lines(v_var = 400, h_var = 15) +
   geom_mean_lines(v_var = 150, h_var = 30, color = "blue") +
   theme_minimal()
+}
 }
 \seealso{
 The underlying ggplot2 geoms \code{\link[=geom_hline]{geom_hline()}} and \code{\link[=geom_vline]{geom_vline()}}

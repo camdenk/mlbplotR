@@ -56,6 +56,7 @@ it will look when saved. It is also significantly faster than the default
 preview in RStudio for ggplots created using mlbplotR.
 }
 \examples{
+\donttest{
 library(mlbplotR)
 library(ggplot2)
 
@@ -80,5 +81,6 @@ p <- ggplot(df, aes(x = teams, y = random_value)) +
 # preview p with defined width and aspect ratio (only available in RStudio)
 if (rstudioapi::isAvailable()){
   ggpreview(p, width = 5, asp = 16/9)
+}
 }
 }

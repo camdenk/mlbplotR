@@ -11,6 +11,7 @@
 #' @return No return value, called for side effects.
 #' @export
 #' @examples
+#' \donttest{
 #' library(mlbplotR)
 #' library(ggplot2)
 #'
@@ -35,6 +36,7 @@
 #' # preview p with defined width and aspect ratio (only available in RStudio)
 #' if (rstudioapi::isAvailable()){
 #'   ggpreview(p, width = 5, asp = 16/9)
+#' }
 #' }
 ggpreview <- function(plot = ggplot2::last_plot(),
                       width = NA,

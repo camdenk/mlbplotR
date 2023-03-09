@@ -40,7 +40,6 @@
 #'   Cannot be jointly specified with `position`.
 #' @return A ggplot2 layer ([ggplot2::layer()]) that can be added to a plot
 #'   created with [ggplot2::ggplot()].
-#' @export
 #' @examples
 #' \donttest{
 #' library(mlbplotR)
@@ -101,7 +100,10 @@
 #'   coord_cartesian(xlim = c(0.5,3.5), ylim = c(-0.75,.75)) +
 #'   theme_void()
 #' }
+NULL
 
+#' @rdname geom_cap_logos
+#' @export
 geom_mlb_dark_cap_logos <- function(mapping = NULL, data = NULL,
                            stat = "identity", position = "identity",
                            ...,

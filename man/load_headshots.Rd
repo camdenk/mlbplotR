@@ -14,7 +14,7 @@ Output MLB Team Abbreviations
 }
 \examples{
 \donttest{
-  load_headshots()
+load_headshots()
 }
 
 }

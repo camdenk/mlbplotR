@@ -4,7 +4,7 @@
 #'
 #' @examples
 #' \donttest{
-#'   load_mlb_teams()
+#' load_mlb_teams()
 #' }
 #'
 #' @return A tibble of team-level abbreviations, image URLs, and hex color codes.
@@ -23,8 +23,10 @@ load_mlb_teams <- function(){
 #'
 #' @return A vector of type `"character"`.
 #' @examples
+#' \donttest{
 #' # List valid team abbreviations excluding duplicates
 #' valid_team_names()
+#' }
 #'
 #' @export
 valid_team_names <- function(){
@@ -44,9 +46,11 @@ valid_team_names <- function(){
 #'   if they are included in `team_data`. Non matches may be replaced
 #'   with `NA` (depending on the value of `keep_non_matches`).
 #' @examples
+#' \donttest{
 #' x <- c("PIE", "STL", "WSN", "CWS", "CHW")
 #' # use current location and keep non matches
 #' clean_team_abbrs(x)
+#' }
 #' @export
 clean_team_abbrs <- function(abbr, keep_non_matches = TRUE) {
   stopifnot(is.character(abbr))
@@ -66,7 +70,7 @@ clean_team_abbrs <- function(abbr, keep_non_matches = TRUE) {
 #' @return A tibble of player names and ids from various sources.
 #' @examples
 #' \donttest{
-#'   load_headshots()
+#' load_headshots()
 #' }
 #'
 load_headshots <- function() rds_from_url("https://github.com/camdenk/mlbplotR-data/raw/main/Player-IDs.rds")

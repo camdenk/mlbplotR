@@ -13,7 +13,9 @@ A vector of type \code{"character"}.
 Output Valid MLB Team Abbreviations
 }
 \examples{
+\donttest{
 # List valid team abbreviations excluding duplicates
 valid_team_names()
+}
 
 }
