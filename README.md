@@ -7,11 +7,12 @@
 
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg?style=flat-square)](https://lifecycle.r-lib.org/articles/stages.html)
+[![R-CMD-check](https://github.com/camdenk/mlbplotR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/camdenk/mlbplotR/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The code for this package was copied heavily from
-[nflplotR](https://nflverse.github.io/nflplotR/index.html) with minor
-changes to support Major League Baseball logos.
+[nflplotR](https://nflplotr.nflverse.com/index.html) with minor changes
+to support Major League Baseball logos.
 
 The goal of mlbplotR is to provide functions and geoms that help with
 visualizations of MLB related analysis. It provides ggplot2 geoms that
@@ -20,8 +21,15 @@ aspect ratio, and possible transparency.
 
 ## Installation
 
-mlbplotR is currently not on [CRAN](https://CRAN.R-project.org) but you
-can get the development version from [GitHub](https://github.com/) with:
+The easiest way to get mlbplotR is to install it from
+[CRAN](https://CRAN.R-project.org) with:
+
+``` r
+install.packages("mlbplotR")
+```
+
+To get a bug fix or use a feature from the development version, you can
+install the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")

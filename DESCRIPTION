@@ -1,6 +1,6 @@
 Package: mlbplotR
 Type: Package
-Title: Create ggplot2 Visuals with MLB Logos
+Title: Create 'ggplot2' and 'gt' Visuals with MLB Logos
 Version: 0.0.0.9020
 Authors@R: 
     c(
@@ -10,10 +10,9 @@ Authors@R:
            email = "mrcaseb@gmail.com"),
     person(given = "Camden",
            family = "Kay",
-           role = c("aut", "cre"),
+           role = c("aut", "cre", "cph"),
            email = "camden.kay23@gmail.com")
      )
-Maintainer: The package maintainer <camden.kay23@gmail.com>
 Description: A set of functions to help visualize MLB analysis in 'ggplot2' and 'gt'.
 URL: https://github.com/camdenk/mlbplotR,
     https://camdenk.github.io/mlbplotR/

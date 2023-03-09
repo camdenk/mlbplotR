@@ -13,7 +13,7 @@
 \alias{GeomMLBscoreboardlogo}
 \alias{mlbplotR}
 \alias{mlbplotR-package}
-\title{mlbplotR: Create ggplot2 Visuals with MLB Logos}
+\title{mlbplotR: Create 'ggplot2' and 'gt' Visuals with MLB Logos}
 \format{
 An object of class \code{GeomMLBdarkcaplogo} (inherits from \code{Geom}, \code{ggproto}, \code{gg}) of length 5.
 
@@ -59,7 +59,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Camden Kay \email{camden.kay23@gmail.com}
+\strong{Maintainer}: Camden Kay \email{camden.kay23@gmail.com} [copyright holder]
 
 Authors:
 \itemize{
