@@ -1,4 +1,4 @@
-# mlbplotR 1.0.0
+# mlbplotR 1.0.1
 
 * Added the `geom_mlb_logos()` geom.
 * Added the color and fill scales `scale_color_mlb()` and `scale_fill_mlb()` along with the axis scales `scale_x_mlb()` and `scale_y_mlb()` in combination with the theme update functions `theme_x_mlb()` and `theme_y_mlb()`. Also added the ggplot2 theme-element `element_mlb_logo()` which translates MLB team abbreviations into team logos (v0.0.0.9002)
