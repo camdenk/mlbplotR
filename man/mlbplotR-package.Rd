@@ -13,7 +13,7 @@
 \alias{GeomMLBscoreboardlogo}
 \alias{mlbplotR}
 \alias{mlbplotR-package}
-\title{mlbplotR: Create 'ggplot2' and 'gt' Visuals with MLB Logos}
+\title{mlbplotR: Create 'ggplot2' and 'gt' Visuals with Major League Baseball Logos}
 \format{
 An object of class \code{GeomMLBdarkcaplogo} (inherits from \code{Geom}, \code{ggproto}, \code{gg}) of length 5.
 
@@ -47,7 +47,7 @@ GeomMLBscoreboardlogo
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-A set of functions to help visualize MLB analysis in 'ggplot2' and 'gt'.
+Tools to help visualize Major League Baseball analysis in 'ggplot2' and 'gt'. You provide team/player information and 'mlbplotR' will transform that information into team colors, logos, or player headshots for graphics.
 }
 \seealso{
 Useful links:

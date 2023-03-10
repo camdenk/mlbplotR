@@ -18,6 +18,8 @@
 #'   If `NA` (the default) no transparency will be applied. Can also be a vector of
 #'   alphas. All alpha levels must be in range `[0,1]`.
 #' @name scale_mlb
+#' @return A discrete ggplot2 scale created with [ggplot2::scale_color_manual()] or
+#'   [ggplot2::scale_fill_manual()].
 #' @aliases NULL
 #' @examples
 #' \donttest{

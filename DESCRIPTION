@@ -1,7 +1,7 @@
 Package: mlbplotR
 Type: Package
-Title: Create 'ggplot2' and 'gt' Visuals with MLB Logos
-Version: 1.0.0
+Title: Create 'ggplot2' and 'gt' Visuals with Major League Baseball Logos
+Version: 1.0.1
 Authors@R: 
     c(
     person(given = "Sebastian",
@@ -13,7 +13,9 @@ Authors@R:
            role = c("aut", "cre", "cph"),
            email = "camden.kay23@gmail.com")
      )
-Description: A set of functions to help visualize MLB analysis in 'ggplot2' and 'gt'.
+Description: Tools to help visualize Major League Baseball analysis in 'ggplot2' 
+  and 'gt'. You provide team/player information and 'mlbplotR' will transform 
+  that information into team colors, logos, or player headshots for graphics.
 URL: https://github.com/camdenk/mlbplotR,
     https://camdenk.github.io/mlbplotR/
 BugReports: https://github.com/camdenk/mlbplotR/issues

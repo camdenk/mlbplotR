@@ -115,6 +115,10 @@ no guide will be plotted for this scale. See \code{\link[ggplot2:guides]{ggplot2
 If \code{NA} (the default) no transparency will be applied. Can also be a vector of
 alphas. All alpha levels must be in range \verb{[0,1]}.}
 }
+\value{
+A discrete ggplot2 scale created with \code{\link[ggplot2:scale_manual]{ggplot2::scale_color_manual()}} or
+\code{\link[ggplot2:scale_manual]{ggplot2::scale_fill_manual()}}.
+}
 \description{
 These functions map MLB team names to their team colors in
 color and fill aesthetics
