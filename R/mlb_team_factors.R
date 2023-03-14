@@ -60,8 +60,6 @@ mlb_team_factor <- function(teams){
   # clean the abbrs a bit to make them match the mlbplotR team abbrs
   teams <- mlbplotR::clean_team_abbrs(teams)
 
-  # load teams
-  mlb_teams <- load_mlb_teams()
 
   # character vector of team abbrs in desired order
   levels <- c("BAL", "BOS", "NYY", "TB", "TOR",
@@ -69,7 +67,7 @@ mlb_team_factor <- function(teams){
               "CWS", "CLE", "DET", "KC", "MIN",
               "CHC", "CIN", "MIL", "PIT", "STL",
               "HOU", "LAA", "OAK", "SEA", "TEX",
-              "ARI", "COL", "LAD", "SD", "SF")
+              "AZ", "COL", "LAD", "SD", "SF")
 
   factor(
     x = teams,

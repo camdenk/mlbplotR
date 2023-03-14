@@ -1,5 +1,8 @@
 # mlbplotR (development version)
 
+* Corrected Arizona's team abbreviation in `mlb_team_factor()` v(1.0.1.9001)
+
+
 # mlbplotR 1.0.1
 
 * Added the `geom_mlb_logos()` geom.
