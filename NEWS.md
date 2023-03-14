@@ -1,3 +1,5 @@
+# mlbplotR (development version)
+
 # mlbplotR 1.0.1
 
 * Added the `geom_mlb_logos()` geom.
