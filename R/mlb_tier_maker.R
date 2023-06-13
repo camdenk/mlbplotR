@@ -34,6 +34,7 @@
 #' @param subtitle_color Text color the the subtitle. Defaults to "#8e8e93"
 #' @param caption_color Text color the the caption. Defaults to be equal to the subtitle
 #' @param tier_label_color Text color for the tier labels. Defaults to be equal to the title
+#' @param logo_type What logo should be used for each team ("main", "scoreboard", or "dot")? Defaults to "main"
 #' @return A plot object created with [ggplot2::ggplot()].
 #' @examples
 #' \donttest{
@@ -104,7 +105,8 @@ mlb_team_tiers <- function(data,
                            title_color = "white",
                            subtitle_color = "#8e8e93",
                            caption_color = subtitle_color,
-                           tier_label_color = title_color){
+                           tier_label_color = title_color,
+                           logo_type = "main"){
 
   rlang::check_installed("sjmisc", "to build the mlbplotR team tiers.")
 
@@ -112,6 +114,10 @@ mlb_team_tiers <- function(data,
 
   if (!all(required_vars %in% names(data))){
     cli::cli_abort("The data frame {.var data} has to include the variables {.var {required_vars}}!")
+  }
+
+  if (!logo_type %in% c("main", "scoreboard", "dot")){
+    cli::cli_abort("The parameter {.var logo_type} has to be either \"main\", \"scoreboard\", or \"dot\"")
   }
 
   bg <- background_color
@@ -141,8 +147,15 @@ mlb_team_tiers <- function(data,
   p <- ggplot2::ggplot(data, ggplot2::aes(y = .data$tier_no, x = .data$tier_rank)) +
     ggplot2::geom_hline(yintercept = tierlines, color = lines)
 
-  if(isFALSE(devel)) p <- p + mlbplotR::geom_mlb_logos(ggplot2::aes(team_abbr = .data$team_abbr), width = width, alpha = alpha)
-  if(isTRUE(devel)) p <- p + ggplot2::geom_text(ggplot2::aes(label = .data$team_abbr), color = tier_label_color)
+  if (isFALSE(devel) & logo_type == "main") {
+    p <- p + mlbplotR::geom_mlb_logos(ggplot2::aes(team_abbr = .data$team_abbr), width = width, alpha = alpha)
+  } else if (isFALSE(devel) & logo_type == "scoreboard") {
+    p <- p + mlbplotR::geom_mlb_scoreboard_logos(ggplot2::aes(team_abbr = .data$team_abbr), width = width, alpha = alpha)
+  } else if (isFALSE(devel) & logo_type == "dot") {
+    p <- p + mlbplotR::geom_mlb_dot_logos(ggplot2::aes(team_abbr = .data$team_abbr), width = width, alpha = alpha)
+  } else if (isTRUE(devel)) {
+    p <- p + ggplot2::geom_text(ggplot2::aes(label = .data$team_abbr), color = tier_label_color)
+  }
 
   p <- p +
     ggplot2::scale_y_continuous(
