@@ -4,7 +4,7 @@
 #' In conjunction with the [ggplot2::theme] system, the following `element_`
 #' functions enable images in non-data components of the plot, e.g. axis text.
 #'
-#'   - `element_mlb_logo()` and `element_mlb_scoreboard_logo()`: draws MLB team logos instead of their abbreviations.
+#'   - `element_mlb_logo()`, `element_mlb_scoreboard_logo()`, `element_mlb_dot_logo()`: draws MLB team logos instead of their abbreviations.
 #'   - `element_mlb_dark_cap_logo()` and `element_mlb_light_cap_logo()`: draws MLB team cap logos instead of their abbreviations.
 #'   - `element_mlb_headshot()`: draws MLB player headshots instead of their MLB IDs
 #'   - `element_path()`: draws images from valid image URLs instead of the URL.
@@ -109,6 +109,17 @@ element_mlb_scoreboard_logo <- function(alpha = NULL, colour = NA, hjust = NULL,
   structure(
     list(alpha = alpha, colour = colour, hjust = hjust, vjust = vjust, size = size),
     class = c("element_mlb_scoreboard_logo", "element_text", "element")
+  )
+}
+
+#' @export
+#' @rdname element
+element_mlb_dot_logo <- function(alpha = NULL, colour = NA, hjust = NULL, vjust = NULL,
+                                 color = NULL, size = 0.5) {
+  if (!is.null(color))  colour <- color
+  structure(
+    list(alpha = alpha, colour = colour, hjust = hjust, vjust = vjust, size = size),
+    class = c("element_mlb_dot_logo", "element_text", "element")
   )
 }
 
@@ -224,6 +235,46 @@ element_grob.element_mlb_scoreboard_logo <- function(element, label = "", x = NU
     hjust = hj,
     vjust = vj,
     type = "scoreboard"
+  )
+
+  class(grobs) <- "gList"
+
+  grid::gTree(
+    gp = grid::gpar(),
+    children = grobs,
+    size = size,
+    cl = "axisImageGrob"
+  )
+}
+
+#' @export
+element_grob.element_mlb_dot_logo <- function(element, label = "", x = NULL, y = NULL,
+                                              alpha = NULL, colour = NULL,
+                                              hjust = NULL, vjust = NULL,
+                                              size = NULL, ...) {
+
+  if (is.null(label)) return(ggplot2::zeroGrob())
+
+  n <- max(length(x), length(y), 1)
+  vj <- element$vjust %||% vjust
+  hj <- element$hjust %||% hjust
+  x <- x %||% unit(rep(hj, n), "npc")
+  y <- y %||% unit(rep(vj, n), "npc")
+  alpha <- alpha %||% element$alpha
+  colour <- colour %||% rep(element$colour, n)
+  size <- size %||% element$size
+
+  grobs <- lapply(
+    seq_along(label),
+    axisImageGrob,
+    alpha = alpha,
+    colour = colour,
+    label = label,
+    x = x,
+    y = y,
+    hjust = hj,
+    vjust = vj,
+    type = "dot"
   )
 
   class(grobs) <- "gList"
@@ -400,7 +451,7 @@ element_grob.element_path <- function(element, label = "", x = NULL, y = NULL,
 
 axisImageGrob <- function(i, label, alpha, colour, data, x, y, hjust, vjust,
                           width = 1, height = 1,
-                          type = c("teams", "light_cap", "dark_cap", "scoreboard", "headshots", "path")) {
+                          type = c("teams", "light_cap", "dark_cap", "scoreboard", "dot", "headshots", "path")) {
   make_null <- FALSE
   type <- rlang::arg_match(type)
   if(type == "teams") {
@@ -418,6 +469,10 @@ axisImageGrob <- function(i, label, alpha, colour, data, x, y, hjust, vjust,
   } else if(type == "scoreboard"){
     team_abbr <- label[i]
     image_to_read <- scoreboard_logo_list[[team_abbr]]
+    if (is.na(team_abbr)) make_null <- TRUE
+  } else if(type == "dot"){
+    team_abbr <- label[i]
+    image_to_read <- dot_logo_list[[team_abbr]]
     if (is.na(team_abbr)) make_null <- TRUE
   } else if (type == "path"){
     image_to_read <- label[i]

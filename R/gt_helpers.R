@@ -2,7 +2,7 @@
 #' @title
 #' Add MLB team logos into rows of a `gt` table
 #' @description
-#' The `gt_fmt_mlb_logo` and `gt_fmt_mlb_scoreboard_logo` functions take an existing
+#' The `gt_fmt_mlb_logo`, `gt_fmt_mlb_scoreboard_logo`, and `gt_fmt_mlb_dot_logo` functions take an existing
 #' `gt_tbl` object and converts MLB team names from `valid_team_names()` into team logos.
 #' This is a wrapper around
 #' [`gtExtras::gt_image_rows()`](https://jthomasmock.github.io/gtExtras/reference/gt_img_rows.html)
@@ -20,12 +20,14 @@
 #'
 #' df <- data.frame(team = valid_team_names()[1:5],
 #'                  logo = valid_team_names()[1:5],
-#'                  scoreboard_logo = valid_team_names()[1:5])
+#'                  scoreboard_logo = valid_team_names()[1:5],
+#'                  dot_logo = valid_team_names()[1:5])
 #'
 #' gt_logo_example <- df %>%
 #'  gt::gt() %>%
 #'  gt_fmt_mlb_logo(columns = "logo") %>%
-#'  gt_fmt_mlb_scoreboard_logo(columns = "scoreboard_logo")
+#'  gt_fmt_mlb_scoreboard_logo(columns = "scoreboard_logo") %>%
+#'  gt_fmt_mlb_dot_logo(columns = "dot_logo")
 
 gt_fmt_mlb_logo <- function(gt_object, columns, height = 30){
 
@@ -56,11 +58,27 @@ gt_fmt_mlb_scoreboard_logo <- function(gt_object, columns, height = 30){
 }
 
 
+#' @rdname gt_mlb
+#' @export
+
+gt_fmt_mlb_dot_logo <- function(gt_object, columns, height = 30){
+
+  stopifnot("'gt_object' must be a 'gt_tbl', have you accidentally passed raw data?" = "gt_tbl" %in% class(gt_object))
+
+  gt_mlbplotR_image(
+    gt_object = gt_object,
+    columns = columns,
+    height = height,
+    type = "dot_logo"
+  )
+}
+
+
 # Taken from nflplotR package and adapted for MLB purposes
 gt_mlbplotR_image <- function(gt_object,
                               columns,
                               height = 30,
-                              type = c("mlb_logo", "scoreboard_logo")){
+                              type = c("mlb_logo", "scoreboard_logo", "dot_logo")){
 
   rlang::check_installed("gt (>= 0.8.0)", "to render images in gt tables.")
 
@@ -90,11 +108,12 @@ gt_mlbplotR_image <- function(gt_object,
 
 # Taken from gt and nflplotR package
 # Get image URIs from image lists as a vector Base64-encoded image strings
-get_image_uri <- function(team_abbr, type = c("mlb_logo", "scoreboard_logo")) {
+get_image_uri <- function(team_abbr, type = c("mlb_logo", "scoreboard_logo", "dot_logo")) {
 
   lookup_list <- switch (type,
                          "mlb_logo" = logo_list,
-                         "scoreboard_logo" = scoreboard_logo_list
+                         "scoreboard_logo" = scoreboard_logo_list,
+                         "dot_logo" = dot_logo_list
   )
 
   vapply(

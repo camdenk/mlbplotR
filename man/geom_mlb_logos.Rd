@@ -3,6 +3,7 @@
 \name{geom_mlb_logos}
 \alias{geom_mlb_logos}
 \alias{geom_mlb_scoreboard_logos}
+\alias{geom_mlb_dot_logos}
 \title{ggplot2 Layer for Visualizing MLB Team Logos}
 \usage{
 geom_mlb_logos(
@@ -19,6 +20,19 @@ geom_mlb_logos(
 )
 
 geom_mlb_scoreboard_logos(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  ...,
+  nudge_x = 0,
+  nudge_y = 0,
+  na.rm = FALSE,
+  show.legend = FALSE,
+  inherit.aes = TRUE
+)
+
+geom_mlb_dot_logos(
   mapping = NULL,
   data = NULL,
   stat = "identity",
@@ -89,14 +103,14 @@ A ggplot2 layer (\code{\link[ggplot2:layer]{ggplot2::layer()}}) that can be adde
 created with \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}.
 }
 \description{
-\code{geom_mlb_logos()} and \code{geom_mlb_scoreboard_logos()} are used to
+\code{geom_mlb_logos()}, \code{geom_mlb_scoreboard_logos()}, and \code{geom_mlb_dot_logos()} are used to
 plot MLB team and league logos instead of points in a ggplot. It requires
 x, y aesthetics as well as a valid MLB team abbreviation. The latter can be
 checked with \code{\link[=valid_team_names]{valid_team_names()}} but is also cleaned before being plotted.
 }
 \section{Aesthetics}{
 
-\code{geom_mlb_logos()} and \code{geom_mlb_scoreboard_logos()} understand the following aesthetics (required aesthetics are in bold):
+\code{geom_mlb_logos()}, \code{geom_mlb_scoreboard_logos()}, and \code{geom_mlb_dot_logos()} understand the following aesthetics (required aesthetics are in bold):
 \itemize{
 \item{\strong{x}}{ - The x-coordinate.}
 \item{\strong{y}}{ - The y-coordinate.}
@@ -165,7 +179,7 @@ ggplot(df, aes(x = a, y = b)) +
 
 # apply alpha as constant for all logos
 ggplot(df, aes(x = a, y = b)) +
-  geom_mlb_scoreboard_logos(aes(team_abbr = teams), width = 0.075, alpha = 0.6) +
+  geom_mlb_dot_logos(aes(team_abbr = teams), width = 0.075, alpha = 0.6) +
   geom_label(aes(label = teams), nudge_y = -0.35, alpha = 0.5) +
   theme_void()
 

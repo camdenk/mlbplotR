@@ -11,6 +11,7 @@
 \alias{GeomMLBheads}
 \alias{GeomMLBlogo}
 \alias{GeomMLBscoreboardlogo}
+\alias{GeomMLBdotlogo}
 \alias{mlbplotR}
 \alias{mlbplotR-package}
 \title{mlbplotR: Create 'ggplot2' and 'gt' Visuals with Major League Baseball Logos}
@@ -28,6 +29,8 @@ An object of class \code{GeomMLBheads} (inherits from \code{Geom}, \code{ggproto
 An object of class \code{GeomMLBlogo} (inherits from \code{Geom}, \code{ggproto}, \code{gg}) of length 5.
 
 An object of class \code{GeomMLBscoreboardlogo} (inherits from \code{Geom}, \code{ggproto}, \code{gg}) of length 5.
+
+An object of class \code{GeomMLBdotlogo} (inherits from \code{Geom}, \code{ggproto}, \code{gg}) of length 5.
 }
 \usage{
 GeomMLBdarkcaplogo
@@ -43,6 +46,8 @@ GeomMLBheads
 GeomMLBlogo
 
 GeomMLBscoreboardlogo
+
+GeomMLBdotlogo
 }
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}

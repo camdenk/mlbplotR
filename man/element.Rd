@@ -3,6 +3,7 @@
 \name{element}
 \alias{element_mlb_logo}
 \alias{element_mlb_scoreboard_logo}
+\alias{element_mlb_dot_logo}
 \alias{element_mlb_dark_cap_logo}
 \alias{element_mlb_light_cap_logo}
 \alias{element_mlb_headshot}
@@ -19,6 +20,15 @@ element_mlb_logo(
 )
 
 element_mlb_scoreboard_logo(
+  alpha = NULL,
+  colour = NA,
+  hjust = NULL,
+  vjust = NULL,
+  color = NULL,
+  size = 0.5
+)
+
+element_mlb_dot_logo(
   alpha = NULL,
   colour = NA,
   hjust = NULL,
@@ -84,7 +94,7 @@ An S3 object of class \code{element}.
 In conjunction with the \link[ggplot2:theme]{ggplot2::theme} system, the following \code{element_}
 functions enable images in non-data components of the plot, e.g. axis text.
 \itemize{
-\item \code{element_mlb_logo()} and \code{element_mlb_scoreboard_logo()}: draws MLB team logos instead of their abbreviations.
+\item \code{element_mlb_logo()}, \code{element_mlb_scoreboard_logo()}, \code{element_mlb_dot_logo()}: draws MLB team logos instead of their abbreviations.
 \item \code{element_mlb_dark_cap_logo()} and \code{element_mlb_light_cap_logo()}: draws MLB team cap logos instead of their abbreviations.
 \item \code{element_mlb_headshot()}: draws MLB player headshots instead of their MLB IDs
 \item \code{element_path()}: draws images from valid image URLs instead of the URL.

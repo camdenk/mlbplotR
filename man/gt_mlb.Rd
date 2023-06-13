@@ -4,11 +4,14 @@
 \alias{gt_mlb}
 \alias{gt_fmt_mlb_logo}
 \alias{gt_fmt_mlb_scoreboard_logo}
+\alias{gt_fmt_mlb_dot_logo}
 \title{Add MLB team logos into rows of a \code{gt} table}
 \usage{
 gt_fmt_mlb_logo(gt_object, columns, height = 30)
 
 gt_fmt_mlb_scoreboard_logo(gt_object, columns, height = 30)
+
+gt_fmt_mlb_dot_logo(gt_object, columns, height = 30)
 }
 \arguments{
 \item{gt_object}{An existing gt table object of class \code{gt_tbl}}
@@ -21,7 +24,7 @@ gt_fmt_mlb_scoreboard_logo(gt_object, columns, height = 30)
 An object of class \code{gt_tbl}.
 }
 \description{
-The \code{gt_fmt_mlb_logo} and \code{gt_fmt_mlb_scoreboard_logo} functions take an existing
+The \code{gt_fmt_mlb_logo}, \code{gt_fmt_mlb_scoreboard_logo}, and \code{gt_fmt_mlb_dot_logo} functions take an existing
 \code{gt_tbl} object and converts MLB team names from \code{valid_team_names()} into team logos.
 This is a wrapper around
 \href{https://jthomasmock.github.io/gtExtras/reference/gt_img_rows.html}{\code{gtExtras::gt_image_rows()}}
@@ -34,10 +37,12 @@ library(mlbplotR)
 
 df <- data.frame(team = valid_team_names()[1:5],
                  logo = valid_team_names()[1:5],
-                 scoreboard_logo = valid_team_names()[1:5])
+                 scoreboard_logo = valid_team_names()[1:5],
+                 dot_logo = valid_team_names()[1:5])
 
 gt_logo_example <- df \%>\%
  gt::gt() \%>\%
  gt_fmt_mlb_logo(columns = "logo") \%>\%
- gt_fmt_mlb_scoreboard_logo(columns = "scoreboard_logo")
+ gt_fmt_mlb_scoreboard_logo(columns = "scoreboard_logo") \%>\%
+ gt_fmt_mlb_dot_logo(columns = "dot_logo")
 }

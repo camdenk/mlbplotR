@@ -21,7 +21,8 @@ mlb_team_tiers(
   title_color = "white",
   subtitle_color = "#8e8e93",
   caption_color = subtitle_color,
-  tier_label_color = title_color
+  tier_label_color = title_color,
+  logo_type = "main"
 )
 }
 \arguments{
@@ -71,6 +72,8 @@ development.}
 \item{caption_color}{Text color the the caption. Defaults to be equal to the subtitle}
 
 \item{tier_label_color}{Text color for the tier labels. Defaults to be equal to the title}
+
+\item{logo_type}{What logo should be used for each team ("main", "scoreboard", or "dot")? Defaults to "main"}
 }
 \value{
 A plot object created with \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}.

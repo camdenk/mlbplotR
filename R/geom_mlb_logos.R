@@ -3,14 +3,14 @@
 #' @title
 #' ggplot2 Layer for Visualizing MLB Team Logos
 #'
-#' @description `geom_mlb_logos()` and `geom_mlb_scoreboard_logos()` are used to
+#' @description `geom_mlb_logos()`, `geom_mlb_scoreboard_logos()`, and `geom_mlb_dot_logos()` are used to
 #'   plot MLB team and league logos instead of points in a ggplot. It requires
 #'   x, y aesthetics as well as a valid MLB team abbreviation. The latter can be
 #'   checked with [`valid_team_names()`] but is also cleaned before being plotted.
 #'
 #' @inheritParams ggplot2::geom_point
 #' @section Aesthetics:
-#' `geom_mlb_logos()` and `geom_mlb_scoreboard_logos()` understand the following aesthetics (required aesthetics are in bold):
+#' `geom_mlb_logos()`, `geom_mlb_scoreboard_logos()`, and `geom_mlb_dot_logos()` understand the following aesthetics (required aesthetics are in bold):
 #' \itemize{
 #'   \item{**x**}{ - The x-coordinate.}
 #'   \item{**y**}{ - The y-coordinate.}
@@ -85,7 +85,7 @@
 #'
 #' # apply alpha as constant for all logos
 #' ggplot(df, aes(x = a, y = b)) +
-#'   geom_mlb_scoreboard_logos(aes(team_abbr = teams), width = 0.075, alpha = 0.6) +
+#'   geom_mlb_dot_logos(aes(team_abbr = teams), width = 0.075, alpha = 0.6) +
 #'   geom_label(aes(label = teams), nudge_y = -0.35, alpha = 0.5) +
 #'   theme_void()
 #'
@@ -215,6 +215,70 @@ GeomMLBscoreboardlogo <- ggplot2::ggproto(
     data$team_abbr <- clean_team_abbrs(as.character(data$team_abbr), keep_non_matches = FALSE)
 
     grobs <- lapply(seq_along(data$team_abbr), build_grobs, alpha = data$alpha, colour = data$colour, data = data, type = "scoreboard")
+
+    class(grobs) <- "gList"
+
+    grid::gTree(children = grobs)
+  },
+  draw_key = function(...) grid::nullGrob()
+)
+
+
+
+
+#' @rdname geom_mlb_logos
+#' @export
+geom_mlb_dot_logos <- function(mapping = NULL, data = NULL,
+                               stat = "identity", position = "identity",
+                               ...,
+                               nudge_x = 0,
+                               nudge_y = 0,
+                               na.rm = FALSE,
+                               show.legend = FALSE,
+                               inherit.aes = TRUE) {
+
+  if (!missing(nudge_x) || !missing(nudge_y)) {
+    if (!missing(position)) {
+      cli::cli_abort(c(
+        "both {.arg position} and {.arg nudge_x}/{.arg nudge_y} are supplied",
+        "i" = "Only use one approach to alter the position"
+      ))
+    }
+
+    position <- ggplot2::position_nudge(nudge_x, nudge_y)
+  }
+
+  ggplot2::layer(
+    data = data,
+    mapping = mapping,
+    stat = stat,
+    geom = GeomMLBdotlogo,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      na.rm = na.rm,
+      ...
+    )
+  )
+}
+
+#' @rdname mlbplotR-package
+#' @export
+GeomMLBdotlogo <- ggplot2::ggproto(
+  "GeomMLBdotlogo", ggplot2::Geom,
+  required_aes = c("x", "y", "team_abbr"),
+  # non_missing_aes = c(""),
+  default_aes = ggplot2::aes(
+    alpha = NULL, colour = NULL, angle = 0, hjust = 0.5,
+    vjust = 0.5, width = 1.0, height = 1.0
+  ),
+  draw_panel = function(data, panel_params, coord, na.rm = FALSE) {
+    data <- coord$transform(data, panel_params)
+
+    data$team_abbr <- clean_team_abbrs(as.character(data$team_abbr), keep_non_matches = FALSE)
+
+    grobs <- lapply(seq_along(data$team_abbr), build_grobs, alpha = data$alpha, colour = data$colour, data = data, type = "dot")
 
     class(grobs) <- "gList"
 

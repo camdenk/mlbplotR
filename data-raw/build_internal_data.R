@@ -51,6 +51,15 @@ dark_cap_logo_list <- lapply(teams_colors_logos$team_abbr, function(x){
 dark_logo_list <- rlang::set_names(dark_cap_logo_list, teams_colors_logos$team_abbr)
 
 
+
+dot_logo_list <- lapply(teams_colors_logos$team_abbr, function(x){
+  url <- teams_colors_logos$team_dot_logo[teams_colors_logos$team_abbr == x]
+  curl::curl_fetch_memory(url)$content
+})
+
+dot_logo_list <- rlang::set_names(dot_logo_list, teams_colors_logos$team_abbr)
+
+
 # Build team name df that'll be used to clean abbreviations before plotting
 
 team_data <- tibble::tribble(~team, ~alternate,
@@ -70,7 +79,9 @@ team_data <- tibble::tribble(~team, ~alternate,
                            "KC" , "KC",
                            "KC" , "KCR",
                            "LAA", "LAA",
+                           "LAA", "ANA",
                            "LAD", "LAD",
+                           "LAD", "LA",
                            "MIA", "MIA",
                            "MIL", "MIL",
                            "MIN", "MIN",
@@ -110,5 +121,6 @@ usethis::use_data(teams_colors_logos, logo_list,
                   scoreboard_logo_list,
 
                   light_logo_list, dark_logo_list,
+                  dot_logo_list,
                   team_data,
                   internal = TRUE, overwrite = TRUE)
