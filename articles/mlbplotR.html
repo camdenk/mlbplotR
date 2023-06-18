@@ -108,10 +108,12 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>mlbplotR is currently not on <a href="https://CRAN.R-project.org" class="external-link">CRAN</a> but you can get the
-development version from <a href="https://github.com/" class="external-link">GitHub</a>
-with:</p>
+<p>The easiest way to get mlbplotR is to install it from <a href="https://CRAN.R-project.org" class="external-link">CRAN</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"mlbplotR"</span><span class="op">)</span></span></code></pre></div>
+<p>To get a bug fix or use a feature from the development version, you
+can install the development version from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"camdenk/mlbplotR"</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -119,7 +121,7 @@ with:</p>
 <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h2>
 <p>Let’s plot every team on a grid with some extra customization:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/camdenk/mlbplotR" class="external-link">mlbplotR</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
@@ -148,7 +150,7 @@ with:</p>
 <p>This is a basic example with <a href="https://fangraphs.com" class="external-link">FanGraphs</a> data (pulled using baseballr)
 which compares ERA to FIP for each team’s top starting pitcher by
 ERA:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Uncomment this to pull data, currently commented out to save </span></span>
 <span><span class="co"># a dependency on baseballr</span></span>
 <span><span class="co"># </span></span>
@@ -188,7 +190,7 @@ ERA:</p>
 <span>                           expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.1</span>, <span class="fl">.1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="mlbplotR_files/figure-html/scatter-example-1.png" width="100%"></p>
 <p>Here’s another that looks at Home Runs Allowed by top pitchers:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">filtered_df</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="co"># The scale_*_mlb() functions don't auto-clean abbreviations</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>Team <span class="op">=</span> <span class="fu"><a href="../reference/clean_team_abbrs.html">clean_team_abbrs</a></span><span class="op">(</span><span class="va">Team</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -209,7 +211,7 @@ ERA:</p>
 <p><img src="mlbplotR_files/figure-html/bar-example-1.png" width="100%"></p>
 <p>Instead of putting the logos in the plot, we can have them be the
 axis labels:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">filtered_df</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="co"># The scale_*_mlb() functions don't auto-clean abbreviations</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>Team <span class="op">=</span> <span class="fu"><a href="../reference/clean_team_abbrs.html">clean_team_abbrs</a></span><span class="op">(</span><span class="va">Team</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -234,7 +236,7 @@ axis labels:</p>
 extra customization with axes labels and can even be used for
 <code>facet_wrap()/facet_grid()</code> strip headers.</p>
 <p>Lastly, here’s an example using headshots:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># top_12 &lt;- df |&gt;</span></span>
 <span><span class="co">#   dplyr::mutate(playerid = as.double(playerid)) |&gt; </span></span>
 <span><span class="co">#   dplyr::slice_min(ERA, n = 12)</span></span>
