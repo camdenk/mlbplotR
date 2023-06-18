@@ -75,8 +75,13 @@ top_12 <- tibble::tribble(
 
 ## Installation
 
-mlbplotR is currently not on [CRAN](https://CRAN.R-project.org)
-but you can get the development version from [GitHub](https://github.com/) with:
+The easiest way to get mlbplotR is to install it from  [CRAN](https://CRAN.R-project.org) with:
+
+``` r
+install.packages("mlbplotR")
+```
+
+To get a bug fix or use a feature from the development version, you can install the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")

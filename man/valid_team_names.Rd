@@ -19,6 +19,7 @@ Output Valid MLB Team Abbreviations
 \donttest{
 # List valid team abbreviations excluding duplicates
 valid_team_names()
+valid_team_names(TRUE)
 }
 
 }
