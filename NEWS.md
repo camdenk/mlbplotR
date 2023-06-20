@@ -1,4 +1,4 @@
-# mlbplotR (development version)
+# mlbplotR 1.1.0
 
 * Corrected Arizona's team abbreviation in `mlb_team_factor()` (v1.0.1.9001)
 * Updated Twins logo, updated Brewers Scoreboard Logo, added more names to be cleaned (ANA to LAA and LA to LAD), added new dot logos and corresponding functions (`geom_mlb_dot_logos()`, `gt_fmt_mlb_dot_logo()`, and `element_mlb_dot_logo()`) (v1.0.1.9002)
