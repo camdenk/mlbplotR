@@ -1,3 +1,5 @@
+# mlbplotR (development version)
+
 # mlbplotR 1.1.0
 
 * Corrected Arizona's team abbreviation in `mlb_team_factor()` (v1.0.1.9001)
