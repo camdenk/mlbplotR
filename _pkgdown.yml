@@ -51,6 +51,7 @@ reference:
   - title: Utilities
     contents:
       - '`load_mlb_teams`'
+      - '`load_milb_teams`'
       - '`load_headshots`'
       - '`clean_team_abbrs`'
       - '`valid_team_names`'
