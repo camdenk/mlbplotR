@@ -80,3 +80,29 @@ clean_team_abbrs <- function(abbr, keep_non_matches = TRUE) {
 #' }
 #'
 load_headshots <- function() rds_from_url("https://github.com/camdenk/mlbplotR-data/raw/main/Player-IDs.rds")
+
+
+
+#' Load MiLB Team Colors, and Logos
+#'
+#' @description Loads team information and logos - useful for plots!
+#'
+#' @examples
+#' \donttest{
+#' load_milb_teams()
+#' }
+#'
+#' @importFrom data.table fread
+#'
+#' @return A tibble of team-level abbreviations, image URLs, and league info for Minor League Baseball Teams.
+#'
+#' @seealso Issues with this data should be filed here: <https://github.com/camdenk/mlbplotR>
+#'
+#' @export
+load_milb_teams <- function(){
+  out <- data.table::fread("https://raw.githubusercontent.com/camdenk/mlbplotR-data/main/milb_map.csv")
+  class(out) <- c("tbl_df","tbl","data.table","data.frame")
+  out
+}
+
+
