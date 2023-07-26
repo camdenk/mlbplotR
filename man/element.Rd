@@ -7,6 +7,7 @@
 \alias{element_mlb_dark_cap_logo}
 \alias{element_mlb_light_cap_logo}
 \alias{element_mlb_headshot}
+\alias{element_mlb_dot_headshot}
 \alias{element_path}
 \title{Theme Elements for Image Grobs}
 \usage{
@@ -56,6 +57,15 @@ element_mlb_light_cap_logo(
 )
 
 element_mlb_headshot(
+  alpha = NULL,
+  colour = NA,
+  hjust = NULL,
+  vjust = NULL,
+  color = NULL,
+  size = 0.5
+)
+
+element_mlb_dot_headshot(
   alpha = NULL,
   colour = NA,
   hjust = NULL,

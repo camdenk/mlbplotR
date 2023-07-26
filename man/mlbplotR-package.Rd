@@ -9,6 +9,7 @@
 \alias{GeomFromPath}
 \alias{GeomRefLines}
 \alias{GeomMLBheads}
+\alias{GeomMLBdotheads}
 \alias{GeomMLBlogo}
 \alias{GeomMLBscoreboardlogo}
 \alias{GeomMLBdotlogo}
@@ -26,6 +27,8 @@ An object of class \code{GeomRefLines} (inherits from \code{Geom}, \code{ggproto
 
 An object of class \code{GeomMLBheads} (inherits from \code{Geom}, \code{ggproto}, \code{gg}) of length 5.
 
+An object of class \code{GeomMLBdotheads} (inherits from \code{Geom}, \code{ggproto}, \code{gg}) of length 5.
+
 An object of class \code{GeomMLBlogo} (inherits from \code{Geom}, \code{ggproto}, \code{gg}) of length 5.
 
 An object of class \code{GeomMLBscoreboardlogo} (inherits from \code{Geom}, \code{ggproto}, \code{gg}) of length 5.
@@ -42,6 +45,8 @@ GeomFromPath
 GeomRefLines
 
 GeomMLBheads
+
+GeomMLBdotheads
 
 GeomMLBlogo
 

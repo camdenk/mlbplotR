@@ -43,6 +43,7 @@ and colored by the team name in another column.
 This is a slightly modified version of \href{https://jthomasmock.github.io/gtExtras/reference/gt_merge_stack.html}{\code{gtExtras::gt_merge_stack()}} written by Tom Mock.
 }
 \examples{
+\donttest{
 library(gt)
 library(mlbplotR)
 
@@ -53,4 +54,5 @@ gt_merge_example <- mlbplotR::load_mlb_teams() \%>\%
   gt_merge_stack_team_color(col1 = "team_location",
                             col2 = "team_mascot",
                             team_col = "team_abbr")
+}
 }

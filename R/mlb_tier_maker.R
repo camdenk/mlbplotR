@@ -227,6 +227,7 @@ mlb_team_tiers <- function(data,
 #' @param subtitle_color Text color the the subtitle. Defaults to "#8e8e93"
 #' @param caption_color Text color the the caption. Defaults to be equal to the subtitle
 #' @param tier_label_color Text color for the tier labels. Defaults to be equal to the title
+#' @param headshot_type "main" or "dot" headshots? Defaults to "main"
 #' @param na_headshot_to_logo Should NA/non-matches return the MLB logo instead of a grayed out blank headshot? Defaults to `TRUE`
 #' @return A plot object created with [ggplot2::ggplot()].
 #' @examples
@@ -299,6 +300,7 @@ mlb_player_tiers <- function(data,
                              subtitle_color = "#8e8e93",
                              caption_color = subtitle_color,
                              tier_label_color = title_color,
+                             headshot_type = "main",
                              na_headshot_to_logo = TRUE){
 
   rlang::check_installed("sjmisc", "to build the mlbplotR player tiers.")
@@ -334,7 +336,11 @@ mlb_player_tiers <- function(data,
   p <- ggplot2::ggplot(data, ggplot2::aes(y = .data$tier_no, x = .data$tier_rank)) +
     ggplot2::geom_hline(yintercept = tierlines, color = lines)
 
-  if(isFALSE(devel)) p <- p + mlbplotR::geom_mlb_headshots(ggplot2::aes(player_id = .data$player_id), width = width, alpha = alpha)
+  if(isFALSE(devel) & headshot_type == "main"){
+    p <- p + geom_mlb_headshots(ggplot2::aes(player_id = .data$player_id), width = width, alpha = alpha)
+  } else if (isFALSE(devel) & headshot_type == "dot") {
+    p <- p + geom_mlb_dot_headshots(ggplot2::aes(player_id = .data$player_id), width = width, alpha = alpha)
+  }
   if(isTRUE(devel)) p <- p + ggplot2::geom_text(ggplot2::aes(label = .data$player_id), color = tier_label_color)
 
   p <- p +
