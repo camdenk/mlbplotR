@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">mlbplotR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0.9002</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -88,42 +88,42 @@
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="fu">load_headshots</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          player_name      last_first   chadwick_name       espn_name savant_id</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    1: Alex Rodriguez Rodriguez, Alex  Alex Rodriguez  Alex Rodriguez    121347</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    2: LaTroy Hawkins Hawkins, LaTroy  LaTroy Hawkins  LaTroy Hawkins    115629</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    3:     Joe Hudson     Hudson, Joe      Joe Hudson      Joe Hudson    621529</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    4:  Bartolo Colon  Colon, Bartolo   Bartolo Colon   Bartolo Colon    112526</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    5:   Torii Hunter   Hunter, Torii    Torii Hunter    Torii Hunter    116338</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ---                                                                         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3368:           &lt;NA&gt;            &lt;NA&gt;    Chris Murphy            &lt;NA&gt;    669684</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3369:           &lt;NA&gt;            &lt;NA&gt;     Coco Montes            &lt;NA&gt;    663796</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3370:           &lt;NA&gt;            &lt;NA&gt; Elly De La Cruz Elly De La Cruz    682829</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3371:           &lt;NA&gt;            &lt;NA&gt;   Ricky Karcher            &lt;NA&gt;    676689</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3372:           &lt;NA&gt;            &lt;NA&gt;      José Lopez            &lt;NA&gt;    673111</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        bbref_id retro_id fangraphs_id espn_id</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    1: rodrial01 rodra001         1274    3115</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    2: hawkila01 hawkl001          729    3176</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    3: hudsojo03 hudsj002        14412    3258</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    4: colonba01 colob001          375    3602</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    5: hunteto01 huntt001          731    3723</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ---                                        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3368: murphch01 murpc001           NA      NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3369:      &lt;NA&gt;     &lt;NA&gt;           NA      NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3370: delacel01 delae003           NA 4917694</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3371:      &lt;NA&gt;     &lt;NA&gt;           NA      NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3372:      &lt;NA&gt;     &lt;NA&gt;           NA      NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                        espn_headshot</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    1:    https://a.espncdn.com/combiner/i?img=/i/headshots/mlb/players/full/3115.png</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    2:    https://a.espncdn.com/combiner/i?img=/i/headshots/mlb/players/full/3176.png</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    3:    https://a.espncdn.com/combiner/i?img=/i/headshots/mlb/players/full/3258.png</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    4:    https://a.espncdn.com/combiner/i?img=/i/headshots/mlb/players/full/3602.png</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    5:    https://a.espncdn.com/combiner/i?img=/i/headshots/mlb/players/full/3723.png</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ---                                                                               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3368:                                                                           &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3369:                                                                           &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3370: https://a.espncdn.com/combiner/i?img=/i/headshots/mlb/players/full/4917694.png</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3371:                                                                           &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3372:                                                                           &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          player_name      last_first                chadwick_name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    1: Alex Rodriguez Rodriguez, Alex               Alex Rodriguez</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    2: LaTroy Hawkins Hawkins, LaTroy               LaTroy Hawkins</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    3:     Joe Hudson     Hudson, Joe                   Joe Hudson</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    4:  Bartolo Colon  Colon, Bartolo                Bartolo Colon</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    5:   Torii Hunter   Hunter, Torii                 Torii Hunter</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ---                                                            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3427:           &lt;NA&gt;            &lt;NA&gt; Christian Encarnacion-Strand</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3428:           &lt;NA&gt;            &lt;NA&gt;                  Johan Rojas</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3429:           &lt;NA&gt;            &lt;NA&gt;               Endy Rodríguez</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3430:           &lt;NA&gt;            &lt;NA&gt;                Grant Hartwig</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3431:           &lt;NA&gt;            &lt;NA&gt;                Connor Kaiser</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            espn_name savant_id  bbref_id retro_id fangraphs_id espn_id</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    1: Alex Rodriguez    121347 rodrial01 rodra001         1274    3115</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    2: LaTroy Hawkins    115629 hawkila01 hawkl001          729    3176</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    3:     Joe Hudson    621529 hudsojo03 hudsj002        14412    3258</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    4:  Bartolo Colon    112526 colonba01 colob001          375    3602</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    5:   Torii Hunter    116338 hunteto01 huntt001          731    3723</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ---                                                                 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3427:           &lt;NA&gt;    687952      &lt;NA&gt;     &lt;NA&gt;           NA      NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3428:           &lt;NA&gt;    679032      &lt;NA&gt;     &lt;NA&gt;           NA      NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3429:           &lt;NA&gt;    682848      &lt;NA&gt;     &lt;NA&gt;           NA      NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3430:           &lt;NA&gt;    701643 hartwgr01 hartg002        29946      NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3431:           &lt;NA&gt;    663731 kaiseco01 kaisc001        21535      NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                     espn_headshot</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    1: https://a.espncdn.com/combiner/i?img=/i/headshots/mlb/players/full/3115.png</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    2: https://a.espncdn.com/combiner/i?img=/i/headshots/mlb/players/full/3176.png</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    3: https://a.espncdn.com/combiner/i?img=/i/headshots/mlb/players/full/3258.png</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    4: https://a.espncdn.com/combiner/i?img=/i/headshots/mlb/players/full/3602.png</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    5: https://a.espncdn.com/combiner/i?img=/i/headshots/mlb/players/full/3723.png</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ---                                                                            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3427:                                                                        &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3428:                                                                        &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3429:                                                                        &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3430:                                                                        &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3431:                                                                        &lt;NA&gt;</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

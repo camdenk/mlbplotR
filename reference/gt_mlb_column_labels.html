@@ -12,7 +12,7 @@ converts the designated column to the corresponding image."><meta property="og:i
     
     <a class="navbar-brand me-2" href="../index.html">mlbplotR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0.9002</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -79,7 +79,7 @@ converts the designated column to the corresponding image.</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">gt_mlb_column_labels</span><span class="op">(</span></span>
 <span>  <span class="va">value</span>,</span>
-<span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mlb_logo"</span>, <span class="st">"scoreboard_logo"</span>, <span class="st">"headshot"</span><span class="op">)</span>,</span>
+<span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mlb_logo"</span>, <span class="st">"scoreboard_logo"</span>, <span class="st">"dot_logo"</span>, <span class="st">"headshot"</span>, <span class="st">"dot_headshot"</span><span class="op">)</span>,</span>
 <span>  height <span class="op">=</span> <span class="fl">30</span>,</span>
 <span>  na_headshot_to_logo <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -101,7 +101,7 @@ converts the designated column to the corresponding image.</p>
 
 <dt>na_headshot_to_logo</dt>
 <dd><p>should NA/non player id matches return the MLB logo instead
-of a grayed out blank headshot? Defaults to <code>TRUE</code></p></dd>
+of a grayed out blank headshot? Ignored unless <code>value</code> is equal to <code>"headshot"</code>. Defaults to <code>TRUE</code></p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -113,11 +113,13 @@ of a grayed out blank headshot? Defaults to <code>TRUE</code></p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://gt.rstudio.com/" class="external-link">gt</a></span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://gt.rstudio.com/" class="external-link">gt</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/camdenk/mlbplotR" class="external-link">mlbplotR</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>BAL <span class="op">=</span> <span class="fl">1</span>,</span></span>
 <span class="r-in"><span>                 TEX <span class="op">=</span> <span class="fl">1</span>,</span></span>
+<span class="r-in"><span>                 LAD <span class="op">=</span> <span class="fl">1</span>,</span></span>
 <span class="r-in"><span>                 <span class="st">"Mike_Trout"</span> <span class="op">=</span> <span class="fl">1</span>,</span></span>
 <span class="r-in"><span>                 <span class="st">"Shohei_Ohtani"</span> <span class="op">=</span> <span class="fl">1</span></span></span>
 <span class="r-in"><span>                 <span class="op">)</span></span></span>
@@ -126,8 +128,10 @@ of a grayed out blank headshot? Defaults to <code>TRUE</code></p></dd>
 <span class="r-in"><span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html" class="external-link">cols_label</a></span><span class="op">(</span>BAL <span class="op">=</span> <span class="fu">gt_mlb_column_labels</span><span class="op">(</span><span class="st">"BAL"</span>, <span class="st">"mlb_logo"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                 TEX <span class="op">=</span> <span class="fu">gt_mlb_column_labels</span><span class="op">(</span><span class="st">"TEX"</span>, <span class="st">"scoreboard_logo"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>                 <span class="st">"Mike_Trout"</span> <span class="op">=</span> <span class="fu">gt_mlb_column_labels</span><span class="op">(</span><span class="fl">545361</span>, <span class="st">"headshot"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                 LAD <span class="op">=</span> <span class="fu">gt_mlb_column_labels</span><span class="op">(</span><span class="st">"LAD"</span>, <span class="st">"dot_logo"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                 <span class="st">"Mike_Trout"</span> <span class="op">=</span> <span class="fu">gt_mlb_column_labels</span><span class="op">(</span><span class="fl">545361</span>, <span class="st">"dot_headshot"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                 <span class="st">"Shohei_Ohtani"</span> <span class="op">=</span> <span class="fu">gt_mlb_column_labels</span><span class="op">(</span><span class="fl">660271</span>, <span class="st">"headshot"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
