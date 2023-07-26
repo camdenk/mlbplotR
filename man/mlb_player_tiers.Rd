@@ -22,6 +22,7 @@ mlb_player_tiers(
   subtitle_color = "#8e8e93",
   caption_color = subtitle_color,
   tier_label_color = title_color,
+  headshot_type = "main",
   na_headshot_to_logo = TRUE
 )
 }
@@ -70,6 +71,8 @@ development.}
 \item{caption_color}{Text color the the caption. Defaults to be equal to the subtitle}
 
 \item{tier_label_color}{Text color for the tier labels. Defaults to be equal to the title}
+
+\item{headshot_type}{"main" or "dot" headshots? Defaults to "main"}
 
 \item{na_headshot_to_logo}{Should NA/non-matches return the MLB logo instead of a grayed out blank headshot? Defaults to \code{TRUE}}
 }

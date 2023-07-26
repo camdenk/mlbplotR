@@ -2,9 +2,23 @@
 % Please edit documentation in R/geom_mlb_headshots.R
 \name{geom_mlb_headshots}
 \alias{geom_mlb_headshots}
+\alias{geom_mlb_dot_headshots}
 \title{ggplot2 Layer for Visualizing MLB Player Headshots}
 \usage{
 geom_mlb_headshots(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  ...,
+  nudge_x = 0,
+  nudge_y = 0,
+  na.rm = FALSE,
+  show.legend = FALSE,
+  inherit.aes = TRUE
+)
+
+geom_mlb_dot_headshots(
   mapping = NULL,
   data = NULL,
   stat = "identity",
@@ -81,13 +95,13 @@ id (The same ID associated with their Baseball Savant page).
 }
 \section{Aesthetics}{
 
-\code{geom_mlb_headshots()} understands the following aesthetics (required aesthetics are in bold):
+\code{geom_mlb_headshots()} and \code{geom_mlb_dot_headshots()} understand the following aesthetics (required aesthetics are in bold):
 \itemize{
 \item{\strong{x}}{ - The x-coordinate.}
 \item{\strong{y}}{ - The y-coordinate.}
 \item{\strong{player_id}}{ - The players' MLB (Baseball Savant) id.}
 \item{\code{na_headshot_to_logo = TRUE}}{ - Should NA/non-matches return the MLB logo
-instead of a grayed out blank headshot? Defaults to \code{TRUE}}
+instead of a grayed out blank headshot? Only used with \code{geom_mlb_headshots()} Defaults to \code{TRUE}}
 \item{\code{alpha = NULL}}{ - The alpha channel, i.e. transparency level, as a numerical value between 0 and 1.}
 \item{\code{colour = NULL}}{ - The image will be colorized with this colour. Use the special character \code{"b/w"} to set it to black and white. For more information on valid colour names in ggplot2 see \url{https://ggplot2.tidyverse.org/articles/ggplot2-specs.html?q=colour#colour-and-fill}}
 \item{\code{angle = 0}}{ - The angle of the image as a numerical value between 0° and 360°.}
@@ -154,9 +168,9 @@ ggplot(df, aes(x = a, y = b)) +
   coord_cartesian(xlim = c(0.75, 3.25), ylim = c(0.7, 3.25)) +
   theme_void()
 
-# apply colour as an aesthetic
+# apply colour as an aesthetic and use the dot version
 ggplot(df, aes(x = a, y = b)) +
-  geom_mlb_headshots(aes(player_id = player_id, colour = colour), height = 0.2) +
+  geom_mlb_dot_headshots(aes(player_id = player_id, colour = colour), height = 0.2) +
   geom_label(aes(label = player_name), nudge_y = -0.35, alpha = 0.5) +
   coord_cartesian(xlim = c(0.75, 3.25), ylim = c(0.7, 3.25)) +
   scale_colour_identity() +

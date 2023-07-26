@@ -1,6 +1,6 @@
 # INTERNAL HELPER THAT BUILDS THE GROBS FOR
 # GEOM LOGOS AND HEADSHOTS
-build_grobs <- function(i, alpha, colour, data, type = c("teams", "light_cap", "dark_cap", "scoreboard", "dot", "logo_headshots", "gray_headshots", "path")) {
+build_grobs <- function(i, alpha, colour, data, type = c("teams", "light_cap", "dark_cap", "scoreboard", "dot", "logo_headshots", "gray_headshots", "dot_headshots", "path")) {
   make_null <- FALSE
   type <- rlang::arg_match(type)
   if(type == "teams") {
@@ -38,6 +38,12 @@ build_grobs <- function(i, alpha, colour, data, type = c("teams", "light_cap", "
     if(length(image_to_read) == 0 || is.na(image_to_read)){
       image_to_read <- na_headshot(FALSE)
     }
+  } else if (type == "dot_headshots") {
+    id <- data$player_id[i]
+    image_to_read <- paste0("https://midfield.mlbstatic.com/v1/people/", id, "/spots/436")
+    # if(length(image_to_read) == 0 || is.na(image_to_read)){
+    #   image_to_read <- na_headshot(FALSE)
+    # }
   }
 
   if (is.na(make_null)){

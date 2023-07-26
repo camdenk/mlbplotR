@@ -132,11 +132,11 @@ get_image_uri <- function(team_abbr, type = c("mlb_logo", "scoreboard_logo", "do
 
 
 
-
-#' Render Player Headshots in 'gt' Tables
+#' @name gt_mlb_headshots
+#' @title Render Player Headshots in 'gt' Tables
 #'
 #' @description
-#' `gt_fmt_mlb_headshot` takes an existing `gt_tbl` object and converts player ids into headshots.
+#' `gt_fmt_mlb_headshot` and `gt_fmt_mlb_dot_headshot` take an existing `gt_tbl` object and converts player ids into headshots.
 #' This is a wrapper around
 #' [`gtExtras::gt_image_rows()`](https://jthomasmock.github.io/gtExtras/reference/gt_img_rows.html)
 #' written by Tom Mock, which is a wrapper around `gt::text_transform()` + `gt::web_image()`/
@@ -147,18 +147,23 @@ get_image_uri <- function(team_abbr, type = c("mlb_logo", "scoreboard_logo", "do
 #'   Has no effect if `locations` is not `NULL`
 #' @param height The absolute height (px) of the image in the table cell
 #' @param na_headshot_to_logo should NA/non matches return the MLB logo instead
-#'   of a grayed out blank headshot? Defaults to `TRUE`
+#'   of a grayed out blank headshot? Only has an effect with `gt_fmt_mlb_headshot`. Defaults to `TRUE`
 #'
 #' @return An object of class `gt_tbl`.
-#' @export
 #' @examples
+#' \donttest{
 #' library(gt)
 #' library(mlbplotR)
 #' gt_headshot_example <- mlbplotR::load_headshots() %>%
 #'   head(5) %>%
-#'   dplyr::select(player_name, savant_id) %>%
+#'   dplyr::select(player_name, savant_id1 = savant_id, savant_id2 = savant_id) %>%
 #'   gt::gt() %>%
-#'   gt_fmt_mlb_headshot(columns = "savant_id")
+#'   gt_fmt_mlb_headshot(columns = "savant_id1") %>%
+#'   gt_fmt_mlb_dot_headshot(columns = "savant_id2")
+#' }
+NULL
+
+#' @rdname gt_mlb_headshots
 #' @export
 gt_fmt_mlb_headshot <- function(gt_object,
                                 columns,
@@ -194,6 +199,39 @@ gt_fmt_mlb_headshot <- function(gt_object,
 }
 
 
+#' @rdname gt_mlb_headshots
+#' @export
+gt_fmt_mlb_dot_headshot <- function(gt_object,
+                                columns,
+                                height = 30,
+                                na_headshot_to_logo = TRUE) {
+
+  stopifnot("'gt_object' must be a 'gt_tbl', have you accidentally passed raw data?" = "gt_tbl" %in% class(gt_object))
+
+
+  rlang::check_installed("gt (>= 0.8.0)", "to render images in gt tables.")
+
+  locations <- gt::cells_body({{ columns }})
+
+  gt::text_transform(
+    data = gt_object,
+    locations = locations,
+    fn = function(mlb_id){
+      image_urls <- vapply(
+        mlb_id,
+        FUN.VALUE = character(1),
+        USE.NAMES = FALSE,
+        FUN = function(id) {
+          paste0("https://midfield.mlbstatic.com/v1/people/", id, "/spots/436")
+        }
+      )
+      gt::web_image(image_urls, height = height)
+    }
+  )
+
+}
+
+
 
 #' Replace Team Abbreviations/Player IDs With Images In Column Labels
 #'
@@ -205,16 +243,18 @@ gt_fmt_mlb_headshot <- function(gt_object,
 #' @param type What type of image is replacing the value?
 #' @param height The absolute height (px) of the image
 #' @param na_headshot_to_logo should NA/non player id matches return the MLB logo instead
-#'   of a grayed out blank headshot? Defaults to `TRUE`
+#'   of a grayed out blank headshot? Ignored unless `value` is equal to `"headshot"`. Defaults to `TRUE`
 #'
 #' @return HTML tag for image
 #' @export
 #' @examples
+#' \donttest{
 #' library(gt)
 #' library(mlbplotR)
 #'
 #' df <- data.frame(BAL = 1,
 #'                  TEX = 1,
+#'                  LAD = 1,
 #'                  "Mike_Trout" = 1,
 #'                  "Shohei_Ohtani" = 1
 #'                  )
@@ -223,12 +263,14 @@ gt_fmt_mlb_headshot <- function(gt_object,
 #'   gt::gt() %>%
 #'   gt::cols_label(BAL = gt_mlb_column_labels("BAL", "mlb_logo"),
 #'                  TEX = gt_mlb_column_labels("TEX", "scoreboard_logo"),
-#'                  "Mike_Trout" = gt_mlb_column_labels(545361, "headshot"),
+#'                  LAD = gt_mlb_column_labels("LAD", "dot_logo"),
+#'                  "Mike_Trout" = gt_mlb_column_labels(545361, "dot_headshot"),
 #'                  "Shohei_Ohtani" = gt_mlb_column_labels(660271, "headshot"))
+#' }
 #' @export
 gt_mlb_column_labels <- function(value,
                                  type = c("mlb_logo", "scoreboard_logo",
-                                          "headshot"),
+                                          "dot_logo",  "headshot", "dot_headshot"),
                                  height = 30,
                                  na_headshot_to_logo = TRUE) {
 
@@ -245,6 +287,15 @@ gt_mlb_column_labels <- function(value,
     html_content <- gt::html(html_content)
     html_content
 
+  } else if (type == "dot_headshot") {
+
+    hs_url <- paste0("https://midfield.mlbstatic.com/v1/people/", value, "/spots/436")
+
+
+    html_content <- paste0("<img src=\"", hs_url, "\" style=\"height:", height, "px;\">")
+
+    html_content <- gt::html(html_content)
+    html_content
   } else {
 
     team_abbr <- clean_team_abbrs(as.character(value), keep_non_matches = FALSE)
@@ -283,6 +334,7 @@ gt_mlb_column_labels <- function(value,
 #' @param color The color for the top text.
 #' @return An object of class `gt_tbl`.
 #' @examples
+#' \donttest{
 #' library(gt)
 #' library(mlbplotR)
 #'
@@ -293,6 +345,7 @@ gt_mlb_column_labels <- function(value,
 #'   gt_merge_stack_team_color(col1 = "team_location",
 #'                             col2 = "team_mascot",
 #'                             team_col = "team_abbr")
+#' }
 #' @export
 gt_merge_stack_team_color <- function (gt_object,
                                        col1,

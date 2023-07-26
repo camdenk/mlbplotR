@@ -6,7 +6,7 @@
 \usage{
 gt_mlb_column_labels(
   value,
-  type = c("mlb_logo", "scoreboard_logo", "headshot"),
+  type = c("mlb_logo", "scoreboard_logo", "dot_logo", "headshot", "dot_headshot"),
   height = 30,
   na_headshot_to_logo = TRUE
 )
@@ -19,7 +19,7 @@ gt_mlb_column_labels(
 \item{height}{The absolute height (px) of the image}
 
 \item{na_headshot_to_logo}{should NA/non player id matches return the MLB logo instead
-of a grayed out blank headshot? Defaults to \code{TRUE}}
+of a grayed out blank headshot? Ignored unless \code{value} is equal to \code{"headshot"}. Defaults to \code{TRUE}}
 }
 \value{
 HTML tag for image
@@ -29,11 +29,13 @@ HTML tag for image
 converts the designated column to the corresponding image.
 }
 \examples{
+\donttest{
 library(gt)
 library(mlbplotR)
 
 df <- data.frame(BAL = 1,
                  TEX = 1,
+                 LAD = 1,
                  "Mike_Trout" = 1,
                  "Shohei_Ohtani" = 1
                  )
@@ -42,6 +44,8 @@ gt_column_example <- df \%>\%
   gt::gt() \%>\%
   gt::cols_label(BAL = gt_mlb_column_labels("BAL", "mlb_logo"),
                  TEX = gt_mlb_column_labels("TEX", "scoreboard_logo"),
-                 "Mike_Trout" = gt_mlb_column_labels(545361, "headshot"),
+                 LAD = gt_mlb_column_labels("LAD", "dot_logo"),
+                 "Mike_Trout" = gt_mlb_column_labels(545361, "dot_headshot"),
                  "Shohei_Ohtani" = gt_mlb_column_labels(660271, "headshot"))
+}
 }
