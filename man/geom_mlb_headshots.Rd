@@ -101,7 +101,7 @@ id (The same ID associated with their Baseball Savant page).
 \item{\strong{y}}{ - The y-coordinate.}
 \item{\strong{player_id}}{ - The players' MLB (Baseball Savant) id.}
 \item{\code{na_headshot_to_logo = TRUE}}{ - Should NA/non-matches return the MLB logo
-instead of a grayed out blank headshot? Only used with \code{geom_mlb_headshots()} Defaults to \code{TRUE}}
+instead of a grayed out blank headshot? Only used with \code{geom_mlb_headshots()}. Defaults to \code{TRUE}}
 \item{\code{alpha = NULL}}{ - The alpha channel, i.e. transparency level, as a numerical value between 0 and 1.}
 \item{\code{colour = NULL}}{ - The image will be colorized with this colour. Use the special character \code{"b/w"} to set it to black and white. For more information on valid colour names in ggplot2 see \url{https://ggplot2.tidyverse.org/articles/ggplot2-specs.html?q=colour#colour-and-fill}}
 \item{\code{angle = 0}}{ - The angle of the image as a numerical value between 0° and 360°.}
