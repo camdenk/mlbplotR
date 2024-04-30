@@ -1,12 +1,23 @@
 # Save raw logos in internal data for more speed
 teams_colors_logos <- readr::read_csv("./data-raw/MLB_Colors_Logos.csv")
 
-logo_list <- lapply(teams_colors_logos$team_abbr, function(x){
-  url <- teams_colors_logos$team_logo_espn[teams_colors_logos$team_abbr == x]
-  curl::curl_fetch_memory(url)$content
-})
 
-logo_list <- rlang::set_names(logo_list, teams_colors_logos$team_abbr)
+# Load in old versions and only overwrite what we want
+
+old_logo_lists <- readRDS("./data-raw/old_data/old_logo_lists.rds")
+logo_list <- old_logo_lists[[1]]
+scoreboard_logo_list <- old_logo_lists[[2]]
+
+# logo_list <- lapply(teams_colors_logos$team_abbr, function(x){
+#   url <- teams_colors_logos$team_logo_espn[teams_colors_logos$team_abbr == x]
+#   curl::curl_fetch_memory(url)$content
+# })
+#
+# logo_list <- rlang::set_names(logo_list, teams_colors_logos$team_abbr)
+
+az_url <- teams_colors_logos$team_logo_espn[teams_colors_logos$team_abbr == "AZ"]
+logo_list$AZ <- curl::curl_fetch_memory(az_url)$content
+
 
 
 primary_colors <- teams_colors_logos$team_color
@@ -22,14 +33,16 @@ scoreboard_logo_urls <- teams_colors_logos$team_scoreboard_logo_espn
 names(scoreboard_logo_urls) <- teams_colors_logos$team_abbr
 
 
-scoreboard_logo_list <- lapply(teams_colors_logos$team_abbr, function(x){
-  url <- teams_colors_logos$team_scoreboard_logo_espn[teams_colors_logos$team_abbr == x]
-  curl::curl_fetch_memory(url)$content
-})
+# scoreboard_logo_list <- lapply(teams_colors_logos$team_abbr, function(x){
+#   url <- teams_colors_logos$team_scoreboard_logo_espn[teams_colors_logos$team_abbr == x]
+#   curl::curl_fetch_memory(url)$content
+# })
+#
+#
+# scoreboard_logo_list <- rlang::set_names(scoreboard_logo_list, teams_colors_logos$team_abbr)
 
-
-scoreboard_logo_list <- rlang::set_names(scoreboard_logo_list, teams_colors_logos$team_abbr)
-
+az_scoreboard_url <- teams_colors_logos$team_scoreboard_logo_espn[teams_colors_logos$team_abbr == "AZ"]
+scoreboard_logo_list$AZ <- curl::curl_fetch_memory(az_scoreboard_url)$content
 
 
 light_cap_logo_list <- lapply(teams_colors_logos$team_abbr, function(x){
@@ -65,6 +78,7 @@ dot_logo_list <- rlang::set_names(dot_logo_list, teams_colors_logos$team_abbr)
 team_data <- tibble::tribble(~team, ~alternate,
                            "AZ", "AZ",
                            "AZ", "ARI",
+                           "AZ", "ARZ",
                            "ATL", "ATL",
                            "BAL", "BAL",
                            "BOS", "BOS",
