@@ -100,7 +100,8 @@ load_headshots <- function() rds_from_url("https://github.com/camdenk/mlbplotR-d
 #'
 #' @export
 load_milb_teams <- function(){
-  out <- data.table::fread("https://raw.githubusercontent.com/camdenk/mlbplotR-data/main/milb_map.csv")
+  out <- data.table::fread("https://raw.githubusercontent.com/camdenk/mlbplotR-data/main/milb_map.csv",
+                           verbose = FALSE, showProgress = FALSE)
   class(out) <- c("tbl_df","tbl","data.table","data.frame")
   out
 }

@@ -1,6 +1,6 @@
 # INTERNAL HELPER THAT BUILDS THE GROBS FOR
 # GEOM LOGOS AND HEADSHOTS
-build_grobs <- function(i, alpha, colour, data, type = c("teams", "light_cap", "dark_cap", "scoreboard", "dot", "logo_headshots", "gray_headshots", "dot_headshots", "path")) {
+build_grobs <- function(i, alpha, colour, data, type = c("teams", "light_cap", "dark_cap", "scoreboard", "dot", "milb_logo", "milb_light_cap", "logo_headshots", "gray_headshots", "dot_headshots", "path")) {
   make_null <- FALSE
   type <- rlang::arg_match(type)
   if(type == "teams") {
@@ -22,6 +22,14 @@ build_grobs <- function(i, alpha, colour, data, type = c("teams", "light_cap", "
   } else if(type == "dot") {
     team_abbr <- data$team_abbr[i]
     image_to_read <- dot_logo_list[[team_abbr]]
+  } else if (type == "milb_logo") {
+    team_name <- data$team_name[i]
+    milb_map <- load_milb_teams()
+    image_to_read <- milb_map$team_logo[milb_map$team_name == team_name]
+  } else if (type == "milb_light_cap") {
+    team_name <- data$team_name[i]
+    milb_map <- load_milb_teams()
+    image_to_read <- milb_map$team_cap_logo_on_light[milb_map$team_name == team_name]
   } else if (type == "path"){
     image_to_read <- data$path[i]
   } else if (type == "logo_headshots") {
