@@ -13,7 +13,6 @@
 \alias{GeomMLBlogo}
 \alias{GeomMLBscoreboardlogo}
 \alias{GeomMLBdotlogo}
-\alias{mlbplotR}
 \alias{mlbplotR-package}
 \title{mlbplotR: Create 'ggplot2' and 'gt' Visuals with Major League Baseball Logos}
 \format{

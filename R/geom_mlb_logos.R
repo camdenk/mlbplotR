@@ -11,7 +11,7 @@
 #' @inheritParams ggplot2::geom_point
 #' @section Aesthetics:
 #' `geom_mlb_logos()`, `geom_mlb_scoreboard_logos()`, and `geom_mlb_dot_logos()` understand the following aesthetics (required aesthetics are in bold):
-#' \itemize{
+#' \describe{
 #'   \item{**x**}{ - The x-coordinate.}
 #'   \item{**y**}{ - The y-coordinate.}
 #'   \item{**team_abbr**}{ - The team abbreviation. Need to use Savant's abbreviation.}

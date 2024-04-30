@@ -6,7 +6,7 @@
 #' @inheritParams ggplot2::geom_point
 #' @section Aesthetics:
 #' `geom_mlb_logos()` understands the following aesthetics (required aesthetics are in bold):
-#' \itemize{
+#' \describe{
 #'   \item{**x**}{ - The x-coordinate.}
 #'   \item{**y**}{ - The y-coordinate.}
 #'   \item{**path**}{ - a file path, url, raster object or bitmap array. See [`magick::image_read()`] for further information.}

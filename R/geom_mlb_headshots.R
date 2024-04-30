@@ -9,7 +9,7 @@
 #' @inheritParams ggplot2::geom_point
 #' @section Aesthetics:
 #' `geom_mlb_headshots()` and `geom_mlb_dot_headshots()` understand the following aesthetics (required aesthetics are in bold):
-#' \itemize{
+#' \describe{
 #'   \item{**x**}{ - The x-coordinate.}
 #'   \item{**y**}{ - The y-coordinate.}
 #'   \item{**player_id**}{ - The players' MLB (Baseball Savant) id.}
