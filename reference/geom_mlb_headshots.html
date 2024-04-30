@@ -131,17 +131,29 @@ from a <code>formula</code> (e.g. <code>~ head(.x, 10)</code>).</p></dd>
 
 
 <dt>stat</dt>
-<dd><p>The statistical transformation to use on the data for this
-layer, either as a <code>ggproto</code> <code>Geom</code> subclass or as a string naming the
-stat stripped of the <code>stat_</code> prefix (e.g. <code>"count"</code> rather than
-<code>"stat_count"</code>)</p></dd>
+<dd><p>The statistical transformation to use on the data for this layer.
+When using a <code>geom_*()</code> function to construct a layer, the <code>stat</code>
+argument can be used the override the default coupling between geoms and
+stats. The <code>stat</code> argument accepts the following:</p><ul><li><p>A <code>Stat</code> ggproto subclass, for example <code>StatCount</code>.</p></li>
+<li><p>A string naming the stat. To give the stat as a string, strip the
+function name of the <code>stat_</code> prefix. For example, to use <code><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">stat_count()</a></code>,
+give the stat as <code>"count"</code>.</p></li>
+<li><p>For more information and other ways to specify the stat, see the
+<a href="https://ggplot2.tidyverse.org/reference/layer_stats.html" class="external-link">layer stat</a> documentation.</p></li>
+</ul></dd>
 
 
 <dt>position</dt>
-<dd><p>Position adjustment, either as a string naming the adjustment
-(e.g. <code>"jitter"</code> to use <code>position_jitter</code>), or the result of a call to a
-position adjustment function. Use the latter if you need to change the
-settings of the adjustment.</p></dd>
+<dd><p>A position adjustment to use on the data for this layer. This
+can be used in various ways, including to prevent overplotting and
+improving the display. The <code>position</code> argument accepts the following:</p><ul><li><p>The result of calling a position function, such as <code><a href="https://ggplot2.tidyverse.org/reference/position_jitter.html" class="external-link">position_jitter()</a></code>.
+This method allows for passing extra arguments to the position.</p></li>
+<li><p>A string naming the position adjustment. To give the position as a
+string, strip the function name of the <code>position_</code> prefix. For example,
+to use <code><a href="https://ggplot2.tidyverse.org/reference/position_jitter.html" class="external-link">position_jitter()</a></code>, give the position as <code>"jitter"</code>.</p></li>
+<li><p>For more information and other ways to specify the position, see the
+<a href="https://ggplot2.tidyverse.org/reference/layer_positions.html" class="external-link">layer position</a> documentation.</p></li>
+</ul></dd>
 
 
 <dt>...</dt>
@@ -187,25 +199,48 @@ created with <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html"
     <h2 id="aesthetics">Aesthetics<a class="anchor" aria-label="anchor" href="#aesthetics"></a></h2>
     
 
-<p><code>geom_mlb_headshots()</code> and <code>geom_mlb_dot_headshots()</code> understand the following aesthetics (required aesthetics are in bold):</p><ul><li><p><strong>x</strong> - The x-coordinate.</p></li>
-<li><p><strong>y</strong> - The y-coordinate.</p></li>
-<li><p><strong>player_id</strong> - The players' MLB (Baseball Savant) id.</p></li>
-<li><p><code>na_headshot_to_logo = TRUE</code> - Should NA/non-matches return the MLB logo
-instead of a grayed out blank headshot? Only used with <code>geom_mlb_headshots()</code>. Defaults to <code>TRUE</code></p></li>
-<li><p><code>alpha = NULL</code> - The alpha channel, i.e. transparency level, as a numerical value between 0 and 1.</p></li>
-<li><p><code>colour = NULL</code> - The image will be colorized with this colour. Use the special character <code>"b/w"</code> to set it to black and white. For more information on valid colour names in ggplot2 see <a href="https://ggplot2.tidyverse.org/articles/ggplot2-specs.html?q=colour#colour-and-fill" class="external-link">https://ggplot2.tidyverse.org/articles/ggplot2-specs.html?q=colour#colour-and-fill</a></p></li>
-<li><p><code>angle = 0</code> - The angle of the image as a numerical value between 0° and 360°.</p></li>
-<li><p><code>hjust = 0.5</code> - The horizontal adjustment relative to the given x coordinate. Must be a numerical value between 0 and 1.</p></li>
-<li><p><code>vjust = 0.5</code> - The vertical adjustment relative to the given y coordinate. Must be a numerical value between 0 and 1.</p></li>
-<li><p><code>width = 1.0</code> - The desired width of the image in <code>npc</code> (Normalised Parent Coordinates).
+<p><code>geom_mlb_headshots()</code> and <code>geom_mlb_dot_headshots()</code> understand the following aesthetics (required aesthetics are in bold):</p><dl><dt><strong>x</strong></dt>
+<dd><p>- The x-coordinate.</p></dd>
+
+<dt><strong>y</strong></dt>
+<dd><p>- The y-coordinate.</p></dd>
+
+<dt><strong>player_id</strong></dt>
+<dd><p>- The players' MLB (Baseball Savant) id.</p></dd>
+
+<dt><code>na_headshot_to_logo = TRUE</code></dt>
+<dd><p>- Should NA/non-matches return the MLB logo
+instead of a grayed out blank headshot? Only used with <code>geom_mlb_headshots()</code>. Defaults to <code>TRUE</code></p></dd>
+
+<dt><code>alpha = NULL</code></dt>
+<dd><p>- The alpha channel, i.e. transparency level, as a numerical value between 0 and 1.</p></dd>
+
+<dt><code>colour = NULL</code></dt>
+<dd><p>- The image will be colorized with this colour. Use the special character <code>"b/w"</code> to set it to black and white. For more information on valid colour names in ggplot2 see <a href="https://ggplot2.tidyverse.org/articles/ggplot2-specs.html?q=colour#colour-and-fill" class="external-link">https://ggplot2.tidyverse.org/articles/ggplot2-specs.html?q=colour#colour-and-fill</a></p></dd>
+
+<dt><code>angle = 0</code></dt>
+<dd><p>- The angle of the image as a numerical value between 0° and 360°.</p></dd>
+
+<dt><code>hjust = 0.5</code></dt>
+<dd><p>- The horizontal adjustment relative to the given x coordinate. Must be a numerical value between 0 and 1.</p></dd>
+
+<dt><code>vjust = 0.5</code></dt>
+<dd><p>- The vertical adjustment relative to the given y coordinate. Must be a numerical value between 0 and 1.</p></dd>
+
+<dt><code>width = 1.0</code></dt>
+<dd><p>- The desired width of the image in <code>npc</code> (Normalised Parent Coordinates).
 The default value is set to 1.0 which is <em>big</em> but it is necessary
 because all used values are computed relative to the default.
-A typical size is <code>width = 0.075</code> (see below examples).</p></li>
-<li><p><code>height = 1.0</code> - The desired height of the image in <code>npc</code> (Normalised Parent Coordinates).
+A typical size is <code>width = 0.075</code> (see below examples).</p></dd>
+
+<dt><code>height = 1.0</code></dt>
+<dd><p>- The desired height of the image in <code>npc</code> (Normalised Parent Coordinates).
 The default value is set to 1.0 which is <em>big</em> but it is necessary
 because all used values are computed relative to the default.
-A typical size is <code>height = 0.1</code> (see below examples).</p></li>
-</ul></div>
+A typical size is <code>height = 0.1</code> (see below examples).</p></dd>
+
+
+</dl></div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>

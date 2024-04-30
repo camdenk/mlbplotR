@@ -101,9 +101,9 @@ preview in RStudio for ggplots created using mlbplotR.</p>
 <dd><p>Plot to save, defaults to last plot displayed.</p></dd>
 
 
-<dt>width, height, units</dt>
-<dd><p>Plot size in <code>units</code> ("in", "cm", "mm", or "px").
-If not supplied, uses the size of current graphics device.</p></dd>
+<dt>width, height</dt>
+<dd><p>Plot size in units expressed by the <code>units</code> argument.
+If not supplied, uses the size of the current graphics device.</p></dd>
 
 
 <dt>asp</dt>
@@ -120,7 +120,13 @@ recalculated to <code>height = width / asp</code>.</p></dd>
 <dt>device</dt>
 <dd><p>Device to use. Can either be a device function
 (e.g. <a href="https://rdrr.io/r/grDevices/png.html" class="external-link">png</a>), or one of "eps", "ps", "tex" (pictex),
-"pdf", "jpeg", "tiff", "png", "bmp", "svg" or "wmf" (windows only).</p></dd>
+"pdf", "jpeg", "tiff", "png", "bmp", "svg" or "wmf" (windows only). If
+<code>NULL</code> (default), the device is guessed based on the <code>filename</code> extension.</p></dd>
+
+
+<dt>units</dt>
+<dd><p>One of the following units in which the <code>width</code> and <code>height</code>
+arguments are expressed: <code>"in"</code>, <code>"cm"</code>, <code>"mm"</code> or <code>"px"</code>.</p></dd>
 
 
 <dt>scale</dt>

@@ -106,7 +106,7 @@ them available as axis labels</p>
 <dd><p>Arguments passed on to <code><a href="https://ggplot2.tidyverse.org/reference/discrete_scale.html" class="external-link">discrete_scale</a></code></p><dl><dt><code>palette</code></dt>
 <dd><p>A palette function that when called with a single integer
 argument (the number of levels in the scale) returns the values that
-they should take (e.g., <code><a href="https://scales.r-lib.org/reference/pal_hue.html" class="external-link">scales::hue_pal()</a></code>).</p></dd>
+they should take (e.g., <code><a href="https://scales.r-lib.org/reference/pal_hue.html" class="external-link">scales::pal_hue()</a></code>).</p></dd>
 
     <dt><code>breaks</code></dt>
 <dd><p>One of:</p><ul><li><p><code>NULL</code> for no breaks</p></li>
@@ -129,7 +129,8 @@ notation.</p></li>
     <dt><code>drop</code></dt>
 <dd><p>Should unused factor levels be omitted from the scale?
 The default, <code>TRUE</code>, uses the levels that appear in the data;
-<code>FALSE</code> uses all the levels in the factor.</p></dd>
+<code>FALSE</code> includes the levels in the factor. Please note that to display
+every level in a legend, the layer should use <code>show.legend = TRUE</code>.</p></dd>
 
     <dt><code>na.translate</code></dt>
 <dd><p>Unlike continuous scales, discrete scales can easily show
@@ -144,16 +145,6 @@ where <code>NA</code> is always placed at the far right.</p></dd>
     <dt><code>aesthetics</code></dt>
 <dd><p>The names of the aesthetics that this scale works with.</p></dd>
 
-    <dt><code>scale_name</code></dt>
-<dd><p>The name of the scale that should be used for error messages
-associated with this scale.</p></dd>
-
-    <dt><code>name</code></dt>
-<dd><p>The name of the scale. Used as the axis or legend title. If
-<code><a href="https://ggplot2.tidyverse.org/reference/waiver.html" class="external-link">waiver()</a></code>, the default, the name of the scale is taken from the first
-mapping used for that aesthetic. If <code>NULL</code>, the legend title will be
-omitted.</p></dd>
-
     <dt><code>labels</code></dt>
 <dd><p>One of:</p><ul><li><p><code>NULL</code> for no labels</p></li>
 <li><p><code><a href="https://ggplot2.tidyverse.org/reference/waiver.html" class="external-link">waiver()</a></code> for the default labels computed by the
@@ -164,6 +155,9 @@ transformation object</p></li>
 as output. Also accepts rlang <a href="https://rlang.r-lib.org/reference/as_function.html" class="external-link">lambda</a> function
 notation.</p></li>
 </ul></dd>
+
+    <dt><code>call</code></dt>
+<dd><p>The <code>call</code> used to construct the scale for reporting messages.</p></dd>
 
     <dt><code>super</code></dt>
 <dd><p>The super class to use for the constructed scale</p></dd>
