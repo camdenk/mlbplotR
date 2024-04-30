@@ -11,7 +11,15 @@
 #'
 #' @param gt_object An existing gt table object of class `gt_tbl`
 #' @param columns The columns wherein changes to cell data colors should occur.
+#'   Argument has no effect if `locations` is not `NULL`.
 #' @param height The absolute height (px) of the image in the table cell
+#' @param locations If `NULL` (the default), the function will render
+#'   logos in argument `columns`.
+#'   Otherwise, the cell or set of cells to be associated with the team name
+#'   transformation. Only the [gt::cells_body()], [gt::cells_stub()],
+#'   [gt::cells_column_labels()], and [gt::cells_row_groups()] helper functions
+#'   can be used here. We can enclose several of these calls within a `list()`
+#'   if we wish to make the transformation happen at different locations.
 #' @return An object of class `gt_tbl`.
 #' @export
 #' @examples
@@ -29,14 +37,15 @@
 #'  gt_fmt_mlb_scoreboard_logo(columns = "scoreboard_logo") %>%
 #'  gt_fmt_mlb_dot_logo(columns = "dot_logo")
 
-gt_fmt_mlb_logo <- function(gt_object, columns, height = 30){
+gt_fmt_mlb_logo <- function(gt_object, columns, height = 30, locations = NULL){
 
   stopifnot("'gt_object' must be a 'gt_tbl', have you accidentally passed raw data?" = "gt_tbl" %in% class(gt_object))
 
   gt_mlbplotR_image(
     gt_object = gt_object,
-    columns = columns,
+    columns = {{ columns }},
     height = height,
+    locations = locations,
     type = "mlb_logo"
   )
 
@@ -45,14 +54,15 @@ gt_fmt_mlb_logo <- function(gt_object, columns, height = 30){
 #' @rdname gt_mlb
 #' @export
 
-gt_fmt_mlb_scoreboard_logo <- function(gt_object, columns, height = 30){
+gt_fmt_mlb_scoreboard_logo <- function(gt_object, columns, height = 30, locations = NULL){
 
   stopifnot("'gt_object' must be a 'gt_tbl', have you accidentally passed raw data?" = "gt_tbl" %in% class(gt_object))
 
   gt_mlbplotR_image(
     gt_object = gt_object,
-    columns = columns,
+    columns = {{ columns }},
     height = height,
+    locations = locations,
     type = "scoreboard_logo"
   )
 }
@@ -61,13 +71,13 @@ gt_fmt_mlb_scoreboard_logo <- function(gt_object, columns, height = 30){
 #' @rdname gt_mlb
 #' @export
 
-gt_fmt_mlb_dot_logo <- function(gt_object, columns, height = 30){
+gt_fmt_mlb_dot_logo <- function(gt_object, columns, height = 30, locations = NULL){
 
   stopifnot("'gt_object' must be a 'gt_tbl', have you accidentally passed raw data?" = "gt_tbl" %in% class(gt_object))
 
   gt_mlbplotR_image(
     gt_object = gt_object,
-    columns = columns,
+    columns = {{ columns }},
     height = height,
     type = "dot_logo"
   )
@@ -78,13 +88,16 @@ gt_fmt_mlb_dot_logo <- function(gt_object, columns, height = 30){
 gt_mlbplotR_image <- function(gt_object,
                               columns,
                               height = 30,
+                              locations = NULL,
                               type = c("mlb_logo", "scoreboard_logo", "dot_logo")){
 
   rlang::check_installed("gt (>= 0.8.0)", "to render images in gt tables.")
 
   type <- match.arg(type)
 
-  locations <- gt::cells_body({{ columns }})
+  if(is.null(locations)){
+    locations <- gt::cells_body({{ columns }})
+  }
 
   if (is.numeric(height)) {
     height <- paste0(height, "px")
@@ -98,7 +111,12 @@ gt_mlbplotR_image <- function(gt_object,
       # Create the image URI
       uri <- get_image_uri(team_abbr = team_abbr, type = type)
       # Generate the Base64-encoded image and place it within <img> tags
-      paste0("<img src=\"", uri, "\" style=\"height:", height, ";\">")
+      out <- paste0("<img src=\"", uri, "\" style=\"height:", height, ";\">")
+      out <- lapply(out, gt::html)
+      # If the image uri returns NA we didn't find a match. We will return the
+      # actual value then to allow the user to call gt::sub_missing()
+      out[is.na(uri)] <- x[is.na(uri)]
+      out
     }
   )
 
@@ -121,6 +139,8 @@ get_image_uri <- function(team_abbr, type = c("mlb_logo", "scoreboard_logo", "do
     FUN.VALUE = character(1),
     USE.NAMES = FALSE,
     FUN = function(team) {
+      # every non match will return NULL which is when we want NA
+      if (is.null(lookup_list[[team]])) return(NA_character_)
       paste0(
         "data:", "image/png",
         ";base64,", base64enc::base64encode(lookup_list[[team]])
@@ -129,6 +149,75 @@ get_image_uri <- function(team_abbr, type = c("mlb_logo", "scoreboard_logo", "do
   )
 }
 
+
+#' @name gt_fmt_milb_logo
+#' @title
+#' Add MiLB team logos into rows of a `gt` table
+#' @description
+#' The `gt_fmt_milb_logo` function takes an existing
+#' `gt_tbl` object and converts MiLB team names into team logos.
+#' This is a wrapper around
+#' [`gtExtras::gt_image_rows()`](https://jthomasmock.github.io/gtExtras/reference/gt_img_rows.html)
+#' written by Tom Mock, which is a wrapper around `gt::text_transform()` + `gt::web_image()`/
+#' `gt::local_image()` with the necessary boilerplate already applied.
+#'
+#' @param gt_object An existing gt table object of class `gt_tbl`
+#' @param columns The columns wherein changes to cell data colors should occur.
+#'   Argument has no effect if `locations` is not `NULL`.
+#' @param height The absolute height (px) of the image in the table cell
+#' @param locations If `NULL` (the default), the function will render
+#'   logos in argument `columns`.
+#'   Otherwise, the cell or set of cells to be associated with the team name
+#'   transformation. Only the [gt::cells_body()], [gt::cells_stub()],
+#'   [gt::cells_column_labels()], and [gt::cells_row_groups()] helper functions
+#'   can be used here. We can enclose several of these calls within a `list()`
+#'   if we wish to make the transformation happen at different locations.
+#' @return An object of class `gt_tbl`.
+#' @examples
+#' \donttest{
+#' library(gt)
+#' library(mlbplotR)
+#' gt_milb_example <- mlbplotR::load_milb_teams() %>%
+#'   dplyr::filter(parent_org_name == "Texas Rangers") %>%
+#'   dplyr::select(team_name, team_location, team_mascot) %>%
+#'   gt::gt() %>%
+#'   gt_fmt_milb_logo(columns = "team_name")
+#' }
+#' @export
+gt_fmt_milb_logo <- function(gt_object,
+                             columns,
+                             height = 30,
+                             locations = NULL) {
+
+  stopifnot("'gt_object' must be a 'gt_tbl', have you accidentally passed raw data?" = "gt_tbl" %in% class(gt_object))
+
+
+  rlang::check_installed("gt (>= 0.8.0)", "to render images in gt tables.")
+
+  if(is.null(locations)){
+    locations <- gt::cells_body({{ columns }})
+  }
+
+  gt::text_transform(
+    data = gt_object,
+    locations = locations,
+    fn = function(mlb_id){
+      milb_logo_map <- load_milb_teams()
+      image_urls <- vapply(
+        mlb_id,
+        FUN.VALUE = character(1),
+        USE.NAMES = FALSE,
+        FUN = function(team_name_full) {
+          ret <- milb_logo_map$team_logo[milb_logo_map$team_name == team_name_full]
+          if(length(ret) == 0 || is.na(ret)) ret <- NA_character_
+          ret
+        }
+      )
+      gt::web_image(image_urls, height = height)
+    }
+  )
+
+}
 
 
 

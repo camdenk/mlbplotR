@@ -3,6 +3,7 @@
 * Add `load_milb_teams()` with Minor League data (v1.1.0.9001)
 * Added ability to use dot headshots with `geom_mlb_dot_headshots()`, `gt_fmt_mlb_dot_headshot()`, and extra functionality within preexisting functions (v1.1.0.9002)
 * Update AZ logos and team colors (v1.1.0.9003)
+* Update `gt_*` functions to be used in gt row group labels and accept unquoted column names, add `gt_fmt_milb_logo()` (v1.1.0.9004)
 
 # mlbplotR 1.1.0
 
