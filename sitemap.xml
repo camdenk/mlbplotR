@@ -40,6 +40,9 @@
     <loc>https://camdenk.github.io/mlbplotR/reference/geom_lines.html</loc>
   </url>
   <url>
+    <loc>https://camdenk.github.io/mlbplotR/reference/geom_milb_logos.html</loc>
+  </url>
+  <url>
     <loc>https://camdenk.github.io/mlbplotR/reference/geom_mlb_headshots.html</loc>
   </url>
   <url>
@@ -47,6 +50,9 @@
   </url>
   <url>
     <loc>https://camdenk.github.io/mlbplotR/reference/ggpreview.html</loc>
+  </url>
+  <url>
+    <loc>https://camdenk.github.io/mlbplotR/reference/gt_fmt_milb_logo.html</loc>
   </url>
   <url>
     <loc>https://camdenk.github.io/mlbplotR/reference/gt_merge_stack_team_color.html</loc>
