@@ -3,7 +3,7 @@
 #' @title
 #' ggplot2 Layer for Visualizing MLB Team Cap Logos
 #'
-#' @description `geom_mlb_dark_cap_logos()` and `geom_mlb_dark_cap_logos()`
+#' @description `geom_mlb_dark_cap_logos()` and `geom_mlb_light_cap_logos()`
 #'   are used to plot MLB team cap and league logos instead of points in a
 #'   ggplot. It requires x, y aesthetics as well as a valid MLB team
 #'   abbreviation. The latter can be checked with [`valid_team_names()`] but is
@@ -11,7 +11,7 @@
 #'
 #' @inheritParams ggplot2::geom_point
 #' @section Aesthetics:
-#' `geom_mlb_dark_cap_logos()` and `geom_mlb_dark_cap_logos()` understand the following aesthetics (required aesthetics are in bold):
+#' `geom_mlb_dark_cap_logos()` and `geom_mlb_light_cap_logos()` understand the following aesthetics (required aesthetics are in bold):
 #' \describe{
 #'   \item{**x**}{ - The x-coordinate.}
 #'   \item{**y**}{ - The y-coordinate.}

@@ -106,7 +106,7 @@ A ggplot2 layer (\code{\link[ggplot2:layer]{ggplot2::layer()}}) that can be adde
 created with \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}.
 }
 \description{
-\code{geom_mlb_dark_cap_logos()} and \code{geom_mlb_dark_cap_logos()}
+\code{geom_mlb_dark_cap_logos()} and \code{geom_mlb_light_cap_logos()}
 are used to plot MLB team cap and league logos instead of points in a
 ggplot. It requires x, y aesthetics as well as a valid MLB team
 abbreviation. The latter can be checked with \code{\link[=valid_team_names]{valid_team_names()}} but is
@@ -114,7 +114,7 @@ also cleaned before being plotted.
 }
 \section{Aesthetics}{
 
-\code{geom_mlb_dark_cap_logos()} and \code{geom_mlb_dark_cap_logos()} understand the following aesthetics (required aesthetics are in bold):
+\code{geom_mlb_dark_cap_logos()} and \code{geom_mlb_light_cap_logos()} understand the following aesthetics (required aesthetics are in bold):
 \describe{
 \item{\strong{x}}{ - The x-coordinate.}
 \item{\strong{y}}{ - The y-coordinate.}
