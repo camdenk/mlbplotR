@@ -79,6 +79,7 @@ gt_fmt_mlb_dot_logo <- function(gt_object, columns, height = 30, locations = NUL
     gt_object = gt_object,
     columns = {{ columns }},
     height = height,
+    locations = locations,
     type = "dot_logo"
   )
 }
