@@ -88,32 +88,32 @@
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="fu">load_headshots</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          player_name      last_first      chadwick_name      espn_name</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               &lt;char&gt;          &lt;char&gt;             &lt;char&gt;         &lt;char&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    1:     Luis Ortiz     Ortiz, Luis         Luis Ortiz     Luis Ortiz</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    2: Alex Rodriguez Rodriguez, Alex     Alex Rodriguez Alex Rodriguez</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    3: LaTroy Hawkins Hawkins, LaTroy     LaTroy Hawkins LaTroy Hawkins</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    4:     Joe Hudson     Hudson, Joe         Joe Hudson     Joe Hudson</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    5:  Bartolo Colon  Colon, Bartolo      Bartolo Colon  Bartolo Colon</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ---                                                                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3583:           &lt;NA&gt;            &lt;NA&gt;        Oliver Dunn           &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3584:           &lt;NA&gt;            &lt;NA&gt;   Tyler Fitzgerald           &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3585:           &lt;NA&gt;            &lt;NA&gt; Spencer Arrighetti           &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3586:           &lt;NA&gt;            &lt;NA&gt;       Noelvi Marte           &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3587:           &lt;NA&gt;            &lt;NA&gt;        Jared Jones           &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       savant_id  bbref_id retro_id fangraphs_id espn_id</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;num&gt;    &lt;char&gt;   &lt;char&gt;        &lt;num&gt;   &lt;num&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    1:    656814 ortizlu02 ortil002        16942    2966</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    2:    121347 rodrial01 rodra001         1274    3115</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    3:    115629 hawkila01 hawkl001          729    3176</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    4:    621529 hudsojo03 hudsj002        14412    3258</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    5:    112526 colonba01 colob001          375    3602</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ---                                                  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3583:    686554  dunnol01 dunno001           NA      NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3584:    666149 fitzgty01 fitzt001        26208      NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3585:    681293 arrigsp01     &lt;NA&gt;           NA      NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3586:    682622 marteno01 martn004        26517      NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3587:    683003 jonesja09 jonej008           NA      NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          player_name      last_first   chadwick_name      espn_name savant_id</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               &lt;char&gt;          &lt;char&gt;          &lt;char&gt;         &lt;char&gt;     &lt;num&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    1:     Luis Ortiz     Ortiz, Luis      Luis Ortiz     Luis Ortiz    656814</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    2: Alex Rodriguez Rodriguez, Alex  Alex Rodriguez Alex Rodriguez    121347</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    3: LaTroy Hawkins Hawkins, LaTroy  LaTroy Hawkins LaTroy Hawkins    115629</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    4:     Joe Hudson     Hudson, Joe      Joe Hudson     Joe Hudson    621529</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    5:  Bartolo Colon  Colon, Bartolo   Bartolo Colon  Bartolo Colon    112526</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ---                                                                        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3602:           &lt;NA&gt;            &lt;NA&gt;   Blake Walston           &lt;NA&gt;    686796</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3603:           &lt;NA&gt;            &lt;NA&gt;  Chris Roycroft           &lt;NA&gt;    688297</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3604:           &lt;NA&gt;            &lt;NA&gt;    Brett Harris           &lt;NA&gt;    695391</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3605:           &lt;NA&gt;            &lt;NA&gt; Randy Rodríguez           &lt;NA&gt;    678495</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3606:           &lt;NA&gt;            &lt;NA&gt;  Tyler Ferguson           &lt;NA&gt;    621053</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        bbref_id retro_id fangraphs_id espn_id</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          &lt;char&gt;   &lt;char&gt;        &lt;num&gt;   &lt;num&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    1: ortizlu02 ortil002        16942    2966</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    2: rodrial01 rodra001         1274    3115</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    3: hawkila01 hawkl001          729    3176</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    4: hudsojo03 hudsj002        14412    3258</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    5: colonba01 colob001          375    3602</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ---                                        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3602: walstbl01     &lt;NA&gt;           NA      NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3603:      &lt;NA&gt;     &lt;NA&gt;           NA      NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3604: harribr02     &lt;NA&gt;           NA      NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3605:      &lt;NA&gt;     &lt;NA&gt;           NA      NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3606:      &lt;NA&gt;     &lt;NA&gt;           NA      NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                                     espn_headshot</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                                            &lt;char&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    1: https://a.espncdn.com/combiner/i?img=/i/headshots/mlb/players/full/2966.png</span>
@@ -122,11 +122,11 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span>    4: https://a.espncdn.com/combiner/i?img=/i/headshots/mlb/players/full/3258.png</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    5: https://a.espncdn.com/combiner/i?img=/i/headshots/mlb/players/full/3602.png</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ---                                                                            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3583:                                                                        &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3584:                                                                        &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3585:                                                                        &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3586:                                                                        &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3587:                                                                        &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3602:                                                                        &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3603:                                                                        &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3604:                                                                        &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3605:                                                                        &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3606:                                                                        &lt;NA&gt;</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

@@ -92,22 +92,23 @@
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="fu">load_milb_teams</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 120 × 12</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 231 × 13</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    team_name     team_location team_mascot team_abbr team_code team_id_num level</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Reno Aces     Reno          Aces        RNO       ren              <span style="text-decoration: underline;">2</span>310 AAA  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Amarillo Sod… Amarillo      Sod Poodles AMA       ama              <span style="text-decoration: underline;">5</span>368 AA   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Hillsboro Ho… Hillsboro     Hops        HIL       hil               419 A+   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Visalia Rawh… Visalia       Rawhide     VIS       vis               516 A    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Gwinnett Str… Gwinnett      Stripers    GWN       gwi               431 AAA  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Mississippi … Mississippi   Braves      MIS       msp               430 AA   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Rome Braves   Rome          Braves      ROM       rom               432 A+   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Augusta Gree… Augusta       GreenJacke… AUG       aug               478 A    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Norfolk Tides Norfolk       Tides       NOR       nor               568 AAA  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Bowie Baysox  Bowie         Baysox      BOW       bow               418 AA   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 110 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 5 more variables: league_name &lt;chr&gt;, parent_org_name &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   parent_org_id &lt;int&gt;, team_logo &lt;chr&gt;, team_cap_logo_on_light &lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> DSL Arizona … DSL Arizona … DSL Arizon… D-ARR     dad              <span style="text-decoration: underline;">5</span>087 Rook…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> DSL Arizona … DSL Arizona … DSL Arizon… D-ARB     dak               610 Rook…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> ACL D-backs   ACL D-backs   ACL D-backs A-DBA     adb              <span style="text-decoration: underline;">1</span>991 Rook…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Arizona Diam… Arizona       Diamondbac… AZ        ari               109 MLB  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Reno Aces     Reno          Aces        RNO       ren              <span style="text-decoration: underline;">2</span>310 AAA  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Amarillo Sod… Amarillo      Sod Poodles AMA       ama              <span style="text-decoration: underline;">5</span>368 AA   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Hillsboro Ho… Hillsboro     Hops        HIL       hil               419 A+   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Visalia Rawh… Visalia       Rawhide     VIS       vis               516 A    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> DSL Braves    DSL Braves    DSL Braves  D-BRV     dbr               605 Rook…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> FCL Braves    FCL Braves    FCL Braves  F-BRV     fbr               464 Rook…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 221 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 6 more variables: league_name &lt;chr&gt;, parent_org_name &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   parent_org_id &lt;int&gt;, team_logo &lt;chr&gt;, team_cap_logo_on_light &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   team_dot_logo &lt;chr&gt;</span></span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
