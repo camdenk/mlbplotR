@@ -1,14 +1,14 @@
 #' @name geom_milb_logos
 #'
-#' @title ggplot2 Layer for Visualizing MiLB Player Headshots
+#' @title ggplot2 Layer for Visualizing MiLB Team Logos
 #'
-#' @description `geom_milb_logos()` and `geom_milb_light_cap_logos()` are used to
+#' @description `geom_milb_logos()`, `geom_milb_light_cap_logos()`, `geom_milb_dot_logos()` are used to
 #'   plot MiLB team instead of points in a ggplot. It requires
 #'   x, y aesthetics as well as a valid MiLB team name
 #'
 #' @inheritParams ggplot2::geom_point
 #' @section Aesthetics:
-#' `geom_milb_logos()` and `geom_milb_light_cap_logos()` understand the following aesthetics (required aesthetics are in bold):
+#' `geom_milb_logos()`, `geom_milb_light_cap_logos()`, `geom_milb_dot_logos()` understand the following aesthetics (required aesthetics are in bold):
 #' \describe{
 #'   \item{**x**}{ - The x-coordinate.}
 #'   \item{**y**}{ - The y-coordinate.}
@@ -78,7 +78,7 @@
 #' # please note that you have to add scale_alpha_identity() as well as
 #' # scale_colour_identity() to use the alpha and colour values in your dataset!
 #' ggplot(df, aes(x = a, y = b)) +
-#'   geom_milb_light_cap_logos(aes(team_name = teams, alpha = alpha, colour = colour), height = 0.15) +
+#'   geom_milb_dot_logos(aes(team_name = teams, alpha = alpha, colour = colour), height = 0.15) +
 #'   geom_label(aes(label = teams), nudge_y = -0.35, alpha = 0.5) +
 #'   scale_alpha_identity() +
 #'   scale_colour_identity() +
@@ -212,6 +212,70 @@ GeomMiLBlightcaplogo <- ggplot2::ggproto(
     data <- coord$transform(data, panel_params)
 
     grobs <- lapply(seq_along(data$team_name), build_grobs, alpha = data$alpha, colour = data$colour, data = data, type = "milb_light_cap")
+
+    class(grobs) <- "gList"
+
+    grid::gTree(children = grobs)
+  },
+  draw_key = function(...) grid::nullGrob()
+)
+
+
+
+
+
+
+#' @rdname geom_milb_logos
+#' @export
+geom_milb_dot_logos <- function(mapping = NULL, data = NULL,
+                                stat = "identity", position = "identity",
+                                ...,
+                                nudge_x = 0,
+                                nudge_y = 0,
+                                na.rm = FALSE,
+                                show.legend = FALSE,
+                                inherit.aes = TRUE) {
+
+  if (!missing(nudge_x) || !missing(nudge_y)) {
+    if (!missing(position)) {
+      cli::cli_abort(c(
+        "both {.arg position} and {.arg nudge_x}/{.arg nudge_y} are supplied",
+        "i" = "Only use one approach to alter the position"
+      ))
+    }
+
+    position <- ggplot2::position_nudge(nudge_x, nudge_y)
+  }
+
+  ggplot2::layer(
+    data = data,
+    mapping = mapping,
+    stat = stat,
+    geom = GeomMiLBdotlogo,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      na.rm = na.rm,
+      ...
+    )
+  )
+}
+
+#' @rdname mlbplotR-package
+#' @export
+GeomMiLBdotlogo <- ggplot2::ggproto(
+  "GeomMiLBdotlogo", ggplot2::Geom,
+  required_aes = c("x", "y", "team_name"),
+  # non_missing_aes = c(""),
+  default_aes = ggplot2::aes(
+    alpha = NULL, colour = NULL, angle = 0, hjust = 0.5,
+    vjust = 0.5, width = 1.0, height = 1.0
+  ),
+  draw_panel = function(data, panel_params, coord, na.rm = FALSE) {
+    data <- coord$transform(data, panel_params)
+
+    grobs <- lapply(seq_along(data$team_name), build_grobs, alpha = data$alpha, colour = data$colour, data = data, type = "milb_dot")
 
     class(grobs) <- "gList"
 
