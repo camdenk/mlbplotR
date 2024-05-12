@@ -61,24 +61,16 @@
 #'
 #' # scatterplot of all logos
 #' ggplot(df, aes(x = a, y = b)) +
-#'   geom_milb_logos(aes(team_name = teams), height = 0.15) +
+#'   geom_milb_logos(aes(team_name = teams), height = 0.1) +
 #'   geom_label(aes(label = teams), nudge_y = -0.35, alpha = 0.5) +
 #'   theme_void()
 #'
-#' # apply alpha via an aesthetic from inside the dataset `df`
-#' # please note that you have to add scale_alpha_identity() to use the alpha
-#' # values in your dataset!
-#' ggplot(df, aes(x = a, y = b)) +
-#'   geom_milb_light_cap_logos(aes(team_name = teams, alpha = alpha), height = 0.15) +
-#'   geom_label(aes(label = teams), nudge_y = -0.35, alpha = 0.5) +
-#'   scale_alpha_identity() +
-#'   theme_void()
 #'
 #' # apply alpha and colour via an aesthetic from inside the dataset `df`
 #' # please note that you have to add scale_alpha_identity() as well as
 #' # scale_colour_identity() to use the alpha and colour values in your dataset!
 #' ggplot(df, aes(x = a, y = b)) +
-#'   geom_milb_dot_logos(aes(team_name = teams, alpha = alpha, colour = colour), height = 0.15) +
+#'   geom_milb_light_cap_logos(aes(team_name = teams, alpha = alpha, colour = colour), height = 0.1) +
 #'   geom_label(aes(label = teams), nudge_y = -0.35, alpha = 0.5) +
 #'   scale_alpha_identity() +
 #'   scale_colour_identity() +
@@ -86,7 +78,7 @@
 #'
 #' # apply alpha as constant for all logos
 #' ggplot(df, aes(x = a, y = b)) +
-#'   geom_milb_logos(aes(team_name = teams), height = 0.15, alpha = 0.6) +
+#'   geom_milb_dot_logos(aes(team_name = teams), height = 0.15, alpha = 0.6) +
 #'   geom_label(aes(label = teams), nudge_y = -0.35, alpha = 0.5) +
 #'   theme_void()
 #'
