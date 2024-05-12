@@ -151,11 +151,11 @@ get_image_uri <- function(team_abbr, type = c("mlb_logo", "scoreboard_logo", "do
 }
 
 
-#' @name gt_fmt_milb_logo
+#' @name gt_milb
 #' @title
 #' Add MiLB team logos into rows of a `gt` table
 #' @description
-#' The `gt_fmt_milb_logo` function takes an existing
+#' The `gt_fmt_milb_logo` and `gt_fmt_milb_dot_logo` functions take an existing
 #' `gt_tbl` object and converts MiLB team names into team logos.
 #' This is a wrapper around
 #' [`gtExtras::gt_image_rows()`](https://jthomasmock.github.io/gtExtras/reference/gt_img_rows.html)
@@ -180,9 +180,11 @@ get_image_uri <- function(team_abbr, type = c("mlb_logo", "scoreboard_logo", "do
 #' library(mlbplotR)
 #' gt_milb_example <- mlbplotR::load_milb_teams() %>%
 #'   dplyr::filter(parent_org_name == "Texas Rangers") %>%
-#'   dplyr::select(team_name, team_location, team_mascot) %>%
+#'   dplyr::mutate(dot = team_name) %>%
+#'   dplyr::select(team_name, dot, team_location, team_mascot) %>%
 #'   gt::gt() %>%
-#'   gt_fmt_milb_logo(columns = "team_name")
+#'   gt_fmt_milb_logo(columns = "team_name") %>%
+#'   gt_fmt_milb_dot_logo(columns = "dot")
 #' }
 #' @export
 gt_fmt_milb_logo <- function(gt_object,
@@ -220,13 +222,50 @@ gt_fmt_milb_logo <- function(gt_object,
 
 }
 
+#' @rdname gt_milb
+#' @export
+gt_fmt_milb_dot_logo <- function(gt_object,
+                                 columns,
+                                 height = 30,
+                                 locations = NULL) {
+
+  stopifnot("'gt_object' must be a 'gt_tbl', have you accidentally passed raw data?" = "gt_tbl" %in% class(gt_object))
+
+
+  rlang::check_installed("gt (>= 0.8.0)", "to render images in gt tables.")
+
+  if(is.null(locations)){
+    locations <- gt::cells_body({{ columns }})
+  }
+
+  gt::text_transform(
+    data = gt_object,
+    locations = locations,
+    fn = function(mlb_id){
+      milb_logo_map <- load_milb_teams()
+      image_urls <- vapply(
+        mlb_id,
+        FUN.VALUE = character(1),
+        USE.NAMES = FALSE,
+        FUN = function(team_name_full) {
+          ret <- milb_logo_map$team_dot_logo[milb_logo_map$team_name == team_name_full]
+          if(length(ret) == 0 || is.na(ret)) ret <- NA_character_
+          ret
+        }
+      )
+      gt::web_image(image_urls, height = height)
+    }
+  )
+
+}
+
 
 
 #' @name gt_mlb_headshots
 #' @title Render Player Headshots in 'gt' Tables
 #'
 #' @description
-#' `gt_fmt_mlb_headshot` and `gt_fmt_mlb_dot_headshot` take an existing `gt_tbl` object and converts player ids into headshots.
+#' `gt_fmt_mlb_headshot`, `gt_fmt_mlb_dot_headshot`, and `gt_fmt_milb_dot_headshot` take an existing `gt_tbl` object and converts player ids into headshots.
 #' This is a wrapper around
 #' [`gtExtras::gt_image_rows()`](https://jthomasmock.github.io/gtExtras/reference/gt_img_rows.html)
 #' written by Tom Mock, which is a wrapper around `gt::text_transform()` + `gt::web_image()`/
@@ -238,6 +277,13 @@ gt_fmt_milb_logo <- function(gt_object,
 #' @param height The absolute height (px) of the image in the table cell
 #' @param na_headshot_to_logo should NA/non matches return the MLB logo instead
 #'   of a grayed out blank headshot? Only has an effect with `gt_fmt_mlb_headshot`. Defaults to `TRUE`
+#' @param locations If `NULL` (the default), the function will render
+#'   logos in argument `columns`.
+#'   Otherwise, the cell or set of cells to be associated with the team name
+#'   transformation. Only the [gt::cells_body()], [gt::cells_stub()],
+#'   [gt::cells_column_labels()], and [gt::cells_row_groups()] helper functions
+#'   can be used here. We can enclose several of these calls within a `list()`
+#'   if we wish to make the transformation happen at different locations.
 #'
 #' @return An object of class `gt_tbl`.
 #' @examples
@@ -258,14 +304,17 @@ NULL
 gt_fmt_mlb_headshot <- function(gt_object,
                                 columns,
                                 height = 30,
-                                na_headshot_to_logo = TRUE) {
+                                na_headshot_to_logo = TRUE,
+                                locations = NULL) {
 
   stopifnot("'gt_object' must be a 'gt_tbl', have you accidentally passed raw data?" = "gt_tbl" %in% class(gt_object))
 
 
   rlang::check_installed("gt (>= 0.8.0)", "to render images in gt tables.")
 
-  locations <- gt::cells_body({{ columns }})
+  if(is.null(locations)){
+    locations <- gt::cells_body({{ columns }})
+  }
 
   gt::text_transform(
     data = gt_object,
@@ -294,14 +343,17 @@ gt_fmt_mlb_headshot <- function(gt_object,
 gt_fmt_mlb_dot_headshot <- function(gt_object,
                                 columns,
                                 height = 30,
-                                na_headshot_to_logo = TRUE) {
+                                na_headshot_to_logo = TRUE,
+                                locations = NULL) {
 
   stopifnot("'gt_object' must be a 'gt_tbl', have you accidentally passed raw data?" = "gt_tbl" %in% class(gt_object))
 
 
   rlang::check_installed("gt (>= 0.8.0)", "to render images in gt tables.")
 
-  locations <- gt::cells_body({{ columns }})
+  if(is.null(locations)){
+    locations <- gt::cells_body({{ columns }})
+  }
 
   gt::text_transform(
     data = gt_object,
@@ -313,6 +365,44 @@ gt_fmt_mlb_dot_headshot <- function(gt_object,
         USE.NAMES = FALSE,
         FUN = function(id) {
           paste0("https://midfield.mlbstatic.com/v1/people/", id, "/spots/436")
+        }
+      )
+      gt::web_image(image_urls, height = height)
+    }
+  )
+
+}
+
+
+
+
+#' @rdname gt_mlb_headshots
+#' @export
+gt_fmt_milb_dot_headshot <- function(gt_object,
+                                     columns,
+                                     height = 30,
+                                     na_headshot_to_logo = TRUE,
+                                     locations = NULL) {
+
+  stopifnot("'gt_object' must be a 'gt_tbl', have you accidentally passed raw data?" = "gt_tbl" %in% class(gt_object))
+
+
+  rlang::check_installed("gt (>= 0.8.0)", "to render images in gt tables.")
+
+  if(is.null(locations)){
+    locations <- gt::cells_body({{ columns }})
+  }
+
+  gt::text_transform(
+    data = gt_object,
+    locations = locations,
+    fn = function(mlb_id){
+      image_urls <- vapply(
+        mlb_id,
+        FUN.VALUE = character(1),
+        USE.NAMES = FALSE,
+        FUN = function(id) {
+          paste0("https://midfield.mlbstatic.com/v1/people/", id, "/milb/436?circle=true")
         }
       )
       gt::web_image(image_urls, height = height)
