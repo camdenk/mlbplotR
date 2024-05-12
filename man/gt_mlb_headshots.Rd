@@ -4,20 +4,31 @@
 \alias{gt_mlb_headshots}
 \alias{gt_fmt_mlb_headshot}
 \alias{gt_fmt_mlb_dot_headshot}
+\alias{gt_fmt_milb_dot_headshot}
 \title{Render Player Headshots in 'gt' Tables}
 \usage{
 gt_fmt_mlb_headshot(
   gt_object,
   columns,
   height = 30,
-  na_headshot_to_logo = TRUE
+  na_headshot_to_logo = TRUE,
+  locations = NULL
 )
 
 gt_fmt_mlb_dot_headshot(
   gt_object,
   columns,
   height = 30,
-  na_headshot_to_logo = TRUE
+  na_headshot_to_logo = TRUE,
+  locations = NULL
+)
+
+gt_fmt_milb_dot_headshot(
+  gt_object,
+  columns,
+  height = 30,
+  na_headshot_to_logo = TRUE,
+  locations = NULL
 )
 }
 \arguments{
@@ -30,12 +41,20 @@ Has no effect if \code{locations} is not \code{NULL}}
 
 \item{na_headshot_to_logo}{should NA/non matches return the MLB logo instead
 of a grayed out blank headshot? Only has an effect with \code{gt_fmt_mlb_headshot}. Defaults to \code{TRUE}}
+
+\item{locations}{If \code{NULL} (the default), the function will render
+logos in argument \code{columns}.
+Otherwise, the cell or set of cells to be associated with the team name
+transformation. Only the \code{\link[gt:cells_body]{gt::cells_body()}}, \code{\link[gt:cells_stub]{gt::cells_stub()}},
+\code{\link[gt:cells_column_labels]{gt::cells_column_labels()}}, and \code{\link[gt:cells_row_groups]{gt::cells_row_groups()}} helper functions
+can be used here. We can enclose several of these calls within a \code{list()}
+if we wish to make the transformation happen at different locations.}
 }
 \value{
 An object of class \code{gt_tbl}.
 }
 \description{
-\code{gt_fmt_mlb_headshot} and \code{gt_fmt_mlb_dot_headshot} take an existing \code{gt_tbl} object and converts player ids into headshots.
+\code{gt_fmt_mlb_headshot}, \code{gt_fmt_mlb_dot_headshot}, and \code{gt_fmt_milb_dot_headshot} take an existing \code{gt_tbl} object and converts player ids into headshots.
 This is a wrapper around
 \href{https://jthomasmock.github.io/gtExtras/reference/gt_img_rows.html}{\code{gtExtras::gt_image_rows()}}
 written by Tom Mock, which is a wrapper around \code{gt::text_transform()} + \code{gt::web_image()}/

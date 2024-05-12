@@ -3,7 +3,8 @@
 \name{geom_milb_logos}
 \alias{geom_milb_logos}
 \alias{geom_milb_light_cap_logos}
-\title{ggplot2 Layer for Visualizing MiLB Player Headshots}
+\alias{geom_milb_dot_logos}
+\title{ggplot2 Layer for Visualizing MiLB Team Logos}
 \usage{
 geom_milb_logos(
   mapping = NULL,
@@ -19,6 +20,19 @@ geom_milb_logos(
 )
 
 geom_milb_light_cap_logos(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  ...,
+  nudge_x = 0,
+  nudge_y = 0,
+  na.rm = FALSE,
+  show.legend = FALSE,
+  inherit.aes = TRUE
+)
+
+geom_milb_dot_logos(
   mapping = NULL,
   data = NULL,
   stat = "identity",
@@ -105,13 +119,13 @@ A ggplot2 layer (\code{\link[ggplot2:layer]{ggplot2::layer()}}) that can be adde
 created with \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}.
 }
 \description{
-\code{geom_milb_logos()} and \code{geom_milb_light_cap_logos()} are used to
+\code{geom_milb_logos()}, \code{geom_milb_light_cap_logos()}, \code{geom_milb_dot_logos()} are used to
 plot MiLB team instead of points in a ggplot. It requires
 x, y aesthetics as well as a valid MiLB team name
 }
 \section{Aesthetics}{
 
-\code{geom_milb_logos()} and \code{geom_milb_light_cap_logos()} understand the following aesthetics (required aesthetics are in bold):
+\code{geom_milb_logos()}, \code{geom_milb_light_cap_logos()}, \code{geom_milb_dot_logos()} understand the following aesthetics (required aesthetics are in bold):
 \describe{
 \item{\strong{x}}{ - The x-coordinate.}
 \item{\strong{y}}{ - The y-coordinate.}
@@ -175,7 +189,7 @@ ggplot(df, aes(x = a, y = b)) +
 # please note that you have to add scale_alpha_identity() as well as
 # scale_colour_identity() to use the alpha and colour values in your dataset!
 ggplot(df, aes(x = a, y = b)) +
-  geom_milb_light_cap_logos(aes(team_name = teams, alpha = alpha, colour = colour), height = 0.15) +
+  geom_milb_dot_logos(aes(team_name = teams, alpha = alpha, colour = colour), height = 0.15) +
   geom_label(aes(label = teams), nudge_y = -0.35, alpha = 0.5) +
   scale_alpha_identity() +
   scale_colour_identity() +

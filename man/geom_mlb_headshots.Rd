@@ -3,7 +3,8 @@
 \name{geom_mlb_headshots}
 \alias{geom_mlb_headshots}
 \alias{geom_mlb_dot_headshots}
-\title{ggplot2 Layer for Visualizing MLB Player Headshots}
+\alias{geom_milb_dot_headshots}
+\title{ggplot2 Layer for Visualizing MLB/MiLB Player Headshots}
 \usage{
 geom_mlb_headshots(
   mapping = NULL,
@@ -19,6 +20,19 @@ geom_mlb_headshots(
 )
 
 geom_mlb_dot_headshots(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  ...,
+  nudge_x = 0,
+  nudge_y = 0,
+  na.rm = FALSE,
+  show.legend = FALSE,
+  inherit.aes = TRUE
+)
+
+geom_milb_dot_headshots(
   mapping = NULL,
   data = NULL,
   stat = "identity",
@@ -105,13 +119,13 @@ A ggplot2 layer (\code{\link[ggplot2:layer]{ggplot2::layer()}}) that can be adde
 created with \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}.
 }
 \description{
-This geom is used to plot MLB player headshots instead
+This geom is used to plot MLB/MiLB player headshots instead
 of points in a ggplot. It requires x, y aesthetics as well as a valid MLBAM
 id (The same ID associated with their Baseball Savant page).
 }
 \section{Aesthetics}{
 
-\code{geom_mlb_headshots()} and \code{geom_mlb_dot_headshots()} understand the following aesthetics (required aesthetics are in bold):
+\code{geom_mlb_headshots()}, \code{geom_mlb_dot_headshots()}, \code{geom_milb_dot_headshots()}, understand the following aesthetics (required aesthetics are in bold):
 \describe{
 \item{\strong{x}}{ - The x-coordinate.}
 \item{\strong{y}}{ - The y-coordinate.}

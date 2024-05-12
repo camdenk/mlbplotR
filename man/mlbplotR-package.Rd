@@ -10,8 +10,10 @@
 \alias{GeomRefLines}
 \alias{GeomMiLBlogo}
 \alias{GeomMiLBlightcaplogo}
+\alias{GeomMiLBdotlogo}
 \alias{GeomMLBheads}
 \alias{GeomMLBdotheads}
+\alias{GeomMiLBdotheads}
 \alias{GeomMLBlogo}
 \alias{GeomMLBscoreboardlogo}
 \alias{GeomMLBdotlogo}
@@ -30,9 +32,13 @@ An object of class \code{GeomMiLBlogo} (inherits from \code{Geom}, \code{ggproto
 
 An object of class \code{GeomMiLBlightcaplogo} (inherits from \code{Geom}, \code{ggproto}, \code{gg}) of length 5.
 
+An object of class \code{GeomMiLBdotlogo} (inherits from \code{Geom}, \code{ggproto}, \code{gg}) of length 5.
+
 An object of class \code{GeomMLBheads} (inherits from \code{Geom}, \code{ggproto}, \code{gg}) of length 5.
 
 An object of class \code{GeomMLBdotheads} (inherits from \code{Geom}, \code{ggproto}, \code{gg}) of length 5.
+
+An object of class \code{GeomMiLBdotheads} (inherits from \code{Geom}, \code{ggproto}, \code{gg}) of length 5.
 
 An object of class \code{GeomMLBlogo} (inherits from \code{Geom}, \code{ggproto}, \code{gg}) of length 5.
 
@@ -53,9 +59,13 @@ GeomMiLBlogo
 
 GeomMiLBlightcaplogo
 
+GeomMiLBdotlogo
+
 GeomMLBheads
 
 GeomMLBdotheads
+
+GeomMiLBdotheads
 
 GeomMLBlogo
 
