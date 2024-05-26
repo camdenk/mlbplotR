@@ -1,5 +1,7 @@
 logo_html <- function(team_abbr, type = c("height", "width"), size = 15){
   type <- rlang::arg_match(type)
+  logo_urls <- teams_colors_logos$team_logo_espn
+  names(logo_urls) <- teams_colors_logos$team_abbr
   url <- logo_urls[team_abbr]
   sprintf("<img src='%s' %s = '%s'>", url, type, size)
 }

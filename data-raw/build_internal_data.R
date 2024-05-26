@@ -133,7 +133,7 @@ team_data <- tibble::tribble(~team, ~alternate,
 
 usethis::use_data(teams_colors_logos, logo_list,
                   primary_colors, secondary_colors,
-                  logo_urls, scoreboard_logo_urls,
+                  #logo_urls, scoreboard_logo_urls, These are unnecessary to store
                   scoreboard_logo_list,
 
                   light_logo_list, dark_logo_list,
