@@ -67,7 +67,7 @@ dark_logo_list <- rlang::set_names(dark_cap_logo_list, teams_colors_logos$team_a
 
 dot_logo_list <- lapply(teams_colors_logos$team_abbr, function(x){
   url <- teams_colors_logos$team_dot_logo[teams_colors_logos$team_abbr == x]
-  curl::curl_fetch_memory(url)$content
+  # curl::curl_fetch_memory(url)$content
 })
 
 dot_logo_list <- rlang::set_names(dot_logo_list, teams_colors_logos$team_abbr)

@@ -104,22 +104,42 @@ gt_mlbplotR_image <- function(gt_object,
     height <- paste0(height, "px")
   }
 
-  gt::text_transform(
-    data = gt_object,
-    locations = locations,
-    fn = function(x){
-      team_abbr <- clean_team_abbrs(as.character(x), keep_non_matches = FALSE)
-      # Create the image URI
-      uri <- get_image_uri(team_abbr = team_abbr, type = type)
-      # Generate the Base64-encoded image and place it within <img> tags
-      out <- paste0("<img src=\"", uri, "\" style=\"height:", height, ";\">")
-      out <- lapply(out, gt::html)
-      # If the image uri returns NA we didn't find a match. We will return the
-      # actual value then to allow the user to call gt::sub_missing()
-      out[is.na(uri)] <- x[is.na(uri)]
-      out
-    }
-  )
+  if (type %in% c("mlb_logo", "scoreboard_logo")) {
+    gt::text_transform(
+      data = gt_object,
+      locations = locations,
+      fn = function(x){
+        team_abbr <- clean_team_abbrs(as.character(x), keep_non_matches = FALSE)
+        # Create the image URI
+        uri <- get_image_uri(team_abbr = team_abbr, type = type)
+        # Generate the Base64-encoded image and place it within <img> tags
+        out <- paste0("<img src=\"", uri, "\" style=\"height:", height, ";\">")
+        out <- lapply(out, gt::html)
+        # If the image uri returns NA we didn't find a match. We will return the
+        # actual value then to allow the user to call gt::sub_missing()
+        out[is.na(uri)] <- x[is.na(uri)]
+        out
+      }
+    )
+  } else if (type == "dot_logo") {
+
+    gt::text_transform(
+      data = gt_object,
+      locations = locations,
+      fn = function(x){
+        image_urls <- vapply(
+          x,
+          FUN.VALUE = character(1),
+          USE.NAMES = FALSE,
+          FUN = function(team_abbr) {
+            paste0("https://", dot_logo_list[[team_abbr]])
+          }
+        )
+        gt::web_image(image_urls, height = height)
+      }
+    )
+
+  }
 
 }
 
