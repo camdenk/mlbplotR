@@ -323,6 +323,7 @@ NULL
 #' @export
 gt_fmt_mlb_headshot <- function(gt_object,
                                 columns,
+                                rows = TRUE,
                                 height = 30,
                                 na_headshot_to_logo = TRUE,
                                 locations = NULL) {
@@ -333,7 +334,7 @@ gt_fmt_mlb_headshot <- function(gt_object,
   rlang::check_installed("gt (>= 0.8.0)", "to render images in gt tables.")
 
   if(is.null(locations)){
-    locations <- gt::cells_body({{ columns }})
+    locations <- gt::cells_body(columns = {{ columns }}, rows = {{ rows }})
   }
 
   gt::text_transform(
@@ -361,20 +362,21 @@ gt_fmt_mlb_headshot <- function(gt_object,
 #' @rdname gt_mlb_headshots
 #' @export
 gt_fmt_mlb_dot_headshot <- function(gt_object,
-                                columns,
-                                height = 30,
-                                na_headshot_to_logo = TRUE,
-                                locations = NULL) {
-
+                                    columns,
+                                    rows = TRUE,
+                                    height = 30,
+                                    na_headshot_to_logo = TRUE,
+                                    locations = NULL) {
+  
   stopifnot("'gt_object' must be a 'gt_tbl', have you accidentally passed raw data?" = "gt_tbl" %in% class(gt_object))
-
-
+  
+  
   rlang::check_installed("gt (>= 0.8.0)", "to render images in gt tables.")
-
+  
   if(is.null(locations)){
-    locations <- gt::cells_body({{ columns }})
+    locations <- gt::cells_body(columns = {{ columns }}, rows = {{ rows }})
   }
-
+  
   gt::text_transform(
     data = gt_object,
     locations = locations,
@@ -390,7 +392,7 @@ gt_fmt_mlb_dot_headshot <- function(gt_object,
       gt::web_image(image_urls, height = height)
     }
   )
-
+  
 }
 
 
