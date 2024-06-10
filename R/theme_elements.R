@@ -4,9 +4,11 @@
 #' In conjunction with the [ggplot2::theme] system, the following `element_`
 #' functions enable images in non-data components of the plot, e.g. axis text.
 #'
-#'   - `element_mlb_logo()`, `element_mlb_scoreboard_logo()`, `element_mlb_dot_logo()`: draws MLB team logos instead of their abbreviations.
-#'   - `element_mlb_dark_cap_logo()` and `element_mlb_light_cap_logo()`: draws MLB team cap logos instead of their abbreviations.
-#'   - `element_mlb_headshot()`: draws MLB player headshots instead of their MLB IDs
+#'   - `element_mlb_logo()`, `element_mlb_scoreboard_logo()`, `element_mlb_dot_logo()`: draws MLB team logos instead of their abbreviations
+#'   - `element_milb_logo`, `element_milb_light_cap_logo()`, and `element_milb_dot_logo`: draws MiLB team logos instead of their team names
+#'   - `element_mlb_dark_cap_logo()` and `element_mlb_light_cap_logo()`: draws MLB team cap logos instead of their abbreviations
+#'   - `element_mlb_headshot()` and `element_milb_dot_headshot()`: draws MLB player headshots instead of their MLB IDs
+#'   - `element_milb_dot_headshot()`: draws MiLB player headshots instead of their MLB IDs
 #'   - `element_path()`: draws images from valid image URLs instead of the URL.
 #'
 #' @details The elements translate MLB team abbreviations or MLB player IDs
@@ -177,6 +179,55 @@ element_path <- function(alpha = NULL, colour = NA, hjust = NULL, vjust = NULL,
     class = c("element_path", "element_text", "element")
   )
 }
+
+#' @export
+#' @rdname element
+element_milb_logo <- function(alpha = NULL, colour = NA, hjust = NULL, vjust = NULL,
+                         color = NULL, size = 0.5) {
+  if (!is.null(color))  colour <- color
+  structure(
+    list(alpha = alpha, colour = colour, hjust = hjust, vjust = vjust, size = size),
+    class = c("element_milb_logo", "element_text", "element")
+  )
+}
+
+#' @export
+#' @rdname element
+element_milb_light_cap_logo <- function(alpha = NULL, colour = NA, hjust = NULL, vjust = NULL,
+                              color = NULL, size = 0.5) {
+  if (!is.null(color))  colour <- color
+  structure(
+    list(alpha = alpha, colour = colour, hjust = hjust, vjust = vjust, size = size),
+    class = c("element_milb_light_cap_logo", "element_text", "element")
+  )
+}
+
+
+#' @export
+#' @rdname element
+element_milb_dot_logo <- function(alpha = NULL, colour = NA, hjust = NULL, vjust = NULL,
+                                  color = NULL, size = 0.5) {
+  if (!is.null(color))  colour <- color
+  structure(
+    list(alpha = alpha, colour = colour, hjust = hjust, vjust = vjust, size = size),
+    class = c("element_milb_dot_logo", "element_text", "element")
+  )
+}
+
+
+
+#' @export
+#' @rdname element
+element_milb_dot_headshot <- function(alpha = NULL, colour = NA, hjust = NULL, vjust = NULL,
+                                        color = NULL, size = 0.5) {
+  if (!is.null(color))  colour <- color
+  structure(
+    list(alpha = alpha, colour = colour, hjust = hjust, vjust = vjust, size = size),
+    class = c("element_milb_dot_headshot", "element_text", "element")
+  )
+}
+
+
 
 #' @export
 element_grob.element_mlb_logo <- function(element, label = "", x = NULL, y = NULL,
@@ -500,9 +551,184 @@ element_grob.element_path <- function(element, label = "", x = NULL, y = NULL,
 }
 
 
+#' @export
+element_grob.element_milb_logo <- function(element, label = "", x = NULL, y = NULL,
+                                                  alpha = NULL, colour = NULL,
+                                                  hjust = NULL, vjust = NULL,
+                                                  size = NULL, ...) {
+
+  if (is.null(label)) return(ggplot2::zeroGrob())
+
+  n <- max(length(x), length(y), 1)
+  vj <- element$vjust %||% vjust
+  hj <- element$hjust %||% hjust
+  x <- x %||% unit(rep(hj, n), "npc")
+  y <- y %||% unit(rep(vj, n), "npc")
+  alpha <- alpha %||% element$alpha
+  colour <- colour %||% rep(element$colour, n)
+  size <- size %||% element$size
+
+  grobs <- lapply(
+    seq_along(label),
+    axisImageGrob,
+    alpha = alpha,
+    colour = colour,
+    label = label,
+    x = x,
+    y = y,
+    hjust = hj,
+    vjust = vj,
+    type = "milb_logo"
+  )
+
+  class(grobs) <- "gList"
+
+  grid::gTree(
+    gp = grid::gpar(),
+    children = grobs,
+    size = size,
+    cl = "axisImageGrob"
+  )
+}
+
+
+#' @export
+element_grob.element_milb_light_cap_logo <- function(element, label = "", x = NULL, y = NULL,
+                                           alpha = NULL, colour = NULL,
+                                           hjust = NULL, vjust = NULL,
+                                           size = NULL, ...) {
+
+  if (is.null(label)) return(ggplot2::zeroGrob())
+
+  n <- max(length(x), length(y), 1)
+  vj <- element$vjust %||% vjust
+  hj <- element$hjust %||% hjust
+  x <- x %||% unit(rep(hj, n), "npc")
+  y <- y %||% unit(rep(vj, n), "npc")
+  alpha <- alpha %||% element$alpha
+  colour <- colour %||% rep(element$colour, n)
+  size <- size %||% element$size
+
+  grobs <- lapply(
+    seq_along(label),
+    axisImageGrob,
+    alpha = alpha,
+    colour = colour,
+    label = label,
+    x = x,
+    y = y,
+    hjust = hj,
+    vjust = vj,
+    type = "milb_light_cap"
+  )
+
+  class(grobs) <- "gList"
+
+  grid::gTree(
+    gp = grid::gpar(),
+    children = grobs,
+    size = size,
+    cl = "axisImageGrob"
+  )
+}
+
+
+
+#' @export
+element_grob.element_milb_dot_logo <- function(element, label = "", x = NULL, y = NULL,
+                                           alpha = NULL, colour = NULL,
+                                           hjust = NULL, vjust = NULL,
+                                           size = NULL, ...) {
+
+  if (is.null(label)) return(ggplot2::zeroGrob())
+
+  n <- max(length(x), length(y), 1)
+  vj <- element$vjust %||% vjust
+  hj <- element$hjust %||% hjust
+  x <- x %||% unit(rep(hj, n), "npc")
+  y <- y %||% unit(rep(vj, n), "npc")
+  alpha <- alpha %||% element$alpha
+  colour <- colour %||% rep(element$colour, n)
+  size <- size %||% element$size
+
+  grobs <- lapply(
+    seq_along(label),
+    axisImageGrob,
+    alpha = alpha,
+    colour = colour,
+    label = label,
+    x = x,
+    y = y,
+    hjust = hj,
+    vjust = vj,
+    type = "milb_dot"
+  )
+
+  class(grobs) <- "gList"
+
+  grid::gTree(
+    gp = grid::gpar(),
+    children = grobs,
+    size = size,
+    cl = "axisImageGrob"
+  )
+}
+
+
+
+
+#' @export
+element_grob.element_milb_dot_headshot <- function(element, label = "", x = NULL, y = NULL,
+                                           alpha = NULL, colour = NULL,
+                                           hjust = NULL, vjust = NULL,
+                                           size = NULL, ...) {
+
+  if (is.null(label)) return(ggplot2::zeroGrob())
+
+  n <- max(length(x), length(y), 1)
+  vj <- element$vjust %||% vjust
+  hj <- element$hjust %||% hjust
+  x <- x %||% unit(rep(hj, n), "npc")
+  y <- y %||% unit(rep(vj, n), "npc")
+  alpha <- alpha %||% element$alpha
+  colour <- colour %||% rep(element$colour, n)
+  size <- size %||% element$size
+
+  grobs <- lapply(
+    seq_along(label),
+    axisImageGrob,
+    alpha = alpha,
+    colour = colour,
+    label = label,
+    x = x,
+    y = y,
+    hjust = hj,
+    vjust = vj,
+    type = "milb_dot_headshots"
+  )
+
+  class(grobs) <- "gList"
+
+  grid::gTree(
+    gp = grid::gpar(),
+    children = grobs,
+    size = size,
+    cl = "axisImageGrob"
+  )
+}
+
+
+
+
+
+
+
+
+
+
 axisImageGrob <- function(i, label, alpha, colour, data, x, y, hjust, vjust,
                           width = 1, height = 1,
-                          type = c("teams", "light_cap", "dark_cap", "scoreboard", "dot", "headshots", "dot_headshots", "path")) {
+                          type = c("teams", "light_cap", "dark_cap", "scoreboard", "dot", "headshots", "dot_headshots", "milb_logo", "milb_light_cap", "milb_dot", "milb_dot_headshots", "path")) {
   make_null <- FALSE
   type <- rlang::arg_match(type)
   if(type == "teams") {
@@ -530,6 +756,21 @@ axisImageGrob <- function(i, label, alpha, colour, data, x, y, hjust, vjust,
   } else if (type == "dot_headshots") {
     id <- label[i]
     image_to_read <- paste0("https://midfield.mlbstatic.com/v1/people/", id, "/spots/436")
+  } else if (type == "milb_logo") {
+    team_name <- label[i]
+    milb_map <- load_milb_teams()
+    image_to_read <- milb_map$team_logo[milb_map$team_name == team_name]
+  } else if (type == "milb_light_cap") {
+    team_name <- label[i]
+    milb_map <- load_milb_teams()
+    image_to_read <- milb_map$team_cap_logo_on_light[milb_map$team_name == team_name]
+  } else if (type == "milb_dot") {
+    team_name <- label[i]
+    milb_map <- load_milb_teams()
+    image_to_read <- milb_map$team_dot_logo[milb_map$team_name == team_name]
+  } else if (type == "milb_dot_headshots") {
+    id <- data$player_id[i]
+    image_to_read <- paste0("https://midfield.mlbstatic.com/v1/people/", id, "/milb/436?circle=true")
   } else {
     id <- label[i]
     headshot_map <- load_headshots()

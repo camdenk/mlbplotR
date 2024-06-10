@@ -9,6 +9,10 @@
 \alias{element_mlb_headshot}
 \alias{element_mlb_dot_headshot}
 \alias{element_path}
+\alias{element_milb_logo}
+\alias{element_milb_light_cap_logo}
+\alias{element_milb_dot_logo}
+\alias{element_milb_dot_headshot}
 \title{Theme Elements for Image Grobs}
 \usage{
 element_mlb_logo(
@@ -82,6 +86,42 @@ element_path(
   color = NULL,
   size = 0.5
 )
+
+element_milb_logo(
+  alpha = NULL,
+  colour = NA,
+  hjust = NULL,
+  vjust = NULL,
+  color = NULL,
+  size = 0.5
+)
+
+element_milb_light_cap_logo(
+  alpha = NULL,
+  colour = NA,
+  hjust = NULL,
+  vjust = NULL,
+  color = NULL,
+  size = 0.5
+)
+
+element_milb_dot_logo(
+  alpha = NULL,
+  colour = NA,
+  hjust = NULL,
+  vjust = NULL,
+  color = NULL,
+  size = 0.5
+)
+
+element_milb_dot_headshot(
+  alpha = NULL,
+  colour = NA,
+  hjust = NULL,
+  vjust = NULL,
+  color = NULL,
+  size = 0.5
+)
 }
 \arguments{
 \item{alpha}{The alpha channel, i.e. transparency level, as a numerical value
@@ -104,9 +144,11 @@ An S3 object of class \code{element}.
 In conjunction with the \link[ggplot2:theme]{ggplot2::theme} system, the following \code{element_}
 functions enable images in non-data components of the plot, e.g. axis text.
 \itemize{
-\item \code{element_mlb_logo()}, \code{element_mlb_scoreboard_logo()}, \code{element_mlb_dot_logo()}: draws MLB team logos instead of their abbreviations.
-\item \code{element_mlb_dark_cap_logo()} and \code{element_mlb_light_cap_logo()}: draws MLB team cap logos instead of their abbreviations.
-\item \code{element_mlb_headshot()}: draws MLB player headshots instead of their MLB IDs
+\item \code{element_mlb_logo()}, \code{element_mlb_scoreboard_logo()}, \code{element_mlb_dot_logo()}: draws MLB team logos instead of their abbreviations
+\item \code{element_milb_logo}, \code{element_milb_light_cap_logo()}, and \code{element_milb_dot_logo}: draws MiLB team logos instead of their team names
+\item \code{element_mlb_dark_cap_logo()} and \code{element_mlb_light_cap_logo()}: draws MLB team cap logos instead of their abbreviations
+\item \code{element_mlb_headshot()} and \code{element_milb_dot_headshot()}: draws MLB player headshots instead of their MLB IDs
+\item \code{element_milb_dot_headshot()}: draws MiLB player headshots instead of their MLB IDs
 \item \code{element_path()}: draws images from valid image URLs instead of the URL.
 }
 }
