@@ -132,7 +132,7 @@ gt_mlbplotR_image <- function(gt_object,
           FUN.VALUE = character(1),
           USE.NAMES = FALSE,
           FUN = function(team_abbr) {
-            paste0("https://", dot_logo_list[[team_abbr]])
+            dot_logo_list[[team_abbr]]
           }
         )
         gt::web_image(image_urls, height = height)
