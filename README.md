@@ -49,17 +49,13 @@ teams_colors_logos <- mlbplotR::load_mlb_teams() |>
   dplyr::filter(!team_abbr %in% c("AL", "NL", "MLB")) |> 
   dplyr::mutate(
     a = rep(1:6, 5),
-    b = sort(rep(1:5, 6), decreasing = TRUE),
-    alpha = ifelse(grepl("A", team_abbr), 1, 0.75), # Keep alpha == 1 for teams that have an "A"
-    color = ifelse(grepl("E", team_abbr), "b/w", NA) # Set teams that have an "E" to black & white
+    b = sort(rep(1:5, 6), decreasing = TRUE)
   )
 
 
  ggplot2::ggplot(teams_colors_logos, aes(x = a, y = b)) +
-   mlbplotR::geom_mlb_logos(aes(team_abbr = team_abbr, color = color, alpha = alpha), width = 0.075) +
+   mlbplotR::geom_mlb_logos(aes(team_abbr = team_abbr), width = 0.075) +
    ggplot2::geom_label(aes(label = team_abbr), nudge_y = -0.35, alpha = 0.5) +
-   ggplot2::scale_color_identity() +
-   ggplot2::scale_alpha_identity() +
    ggplot2::theme_void() 
 ```
 
