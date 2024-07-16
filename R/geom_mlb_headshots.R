@@ -8,11 +8,11 @@
 #'
 #' @inheritParams ggplot2::geom_point
 #' @section Aesthetics:
-#' `geom_mlb_headshots()`, `geom_mlb_dot_headshots()`, `geom_milb_dot_headshots()`, understand the following aesthetics (required aesthetics are in bold):
+#' `geom_mlb_headshots()`, `geom_mlb_dot_headshots()`, `geom_milb_dot_headshots()`, understand the following aesthetics:
 #' \describe{
-#'   \item{**x**}{ - The x-coordinate.}
-#'   \item{**y**}{ - The y-coordinate.}
-#'   \item{**player_id**}{ - The players' MLB (Baseball Savant) id.}
+#'   \item{`x`}{ - The x-coordinate. Required.}
+#'   \item{`y`}{ - The y-coordinate. Required.}
+#'   \item{`player_id`}{ - The players' MLBAM (Baseball Savant) id. Required.}
 #'   \item{`na_headshot_to_logo = TRUE`}{ - Should NA/non-matches return the MLB logo
 #'                                          instead of a grayed out blank headshot? Only used with `geom_mlb_headshots()`. Defaults to `TRUE`}
 #'   \item{`alpha = NULL`}{ - The alpha channel, i.e. transparency level, as a numerical value between 0 and 1.}

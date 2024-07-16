@@ -125,11 +125,11 @@ id (The same ID associated with their Baseball Savant page).
 }
 \section{Aesthetics}{
 
-\code{geom_mlb_headshots()}, \code{geom_mlb_dot_headshots()}, \code{geom_milb_dot_headshots()}, understand the following aesthetics (required aesthetics are in bold):
+\code{geom_mlb_headshots()}, \code{geom_mlb_dot_headshots()}, \code{geom_milb_dot_headshots()}, understand the following aesthetics:
 \describe{
-\item{\strong{x}}{ - The x-coordinate.}
-\item{\strong{y}}{ - The y-coordinate.}
-\item{\strong{player_id}}{ - The players' MLB (Baseball Savant) id.}
+\item{\code{x}}{ - The x-coordinate. Required.}
+\item{\code{y}}{ - The y-coordinate. Required.}
+\item{\code{player_id}}{ - The players' MLBAM (Baseball Savant) id. Required.}
 \item{\code{na_headshot_to_logo = TRUE}}{ - Should NA/non-matches return the MLB logo
 instead of a grayed out blank headshot? Only used with \code{geom_mlb_headshots()}. Defaults to \code{TRUE}}
 \item{\code{alpha = NULL}}{ - The alpha channel, i.e. transparency level, as a numerical value between 0 and 1.}

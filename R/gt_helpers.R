@@ -436,7 +436,7 @@ gt_fmt_milb_dot_headshot <- function(gt_object,
 #' Replace Team Abbreviations/Player IDs With Images In Column Labels
 #'
 #' @description
-#' `gt_column_example` takes in a value of a team abbreviation or player id and
+#' `gt_mlb_column_labels` takes in a value of a team abbreviation or player id and
 #' converts the designated column to the corresponding image.
 #'
 #' @param value What team abbreviation/player id should be replaced with an image?

@@ -25,7 +25,7 @@ of a grayed out blank headshot? Ignored unless \code{value} is equal to \code{"h
 HTML tag for image
 }
 \description{
-\code{gt_column_example} takes in a value of a team abbreviation or player id and
+\code{gt_mlb_column_labels} takes in a value of a team abbreviation or player id and
 converts the designated column to the corresponding image.
 }
 \examples{

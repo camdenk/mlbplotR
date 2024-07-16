@@ -95,10 +95,10 @@ to compute their \code{median} or \code{mean} and draw the as a line.
 \section{Aesthetics}{
 
 \code{geom_median_lines()} and \code{geom_mean_lines()} understand the following
-aesthetics (at least one of the bold aesthetics is required):
+aesthetics (at least one of \code{v_var} and \code{h_var} are required):
 \describe{
-\item{\strong{v_var}}{ - The variable for which to compute the median/mean that is drawn as vertical line.}
-\item{\strong{h_var}}{ - The variable for which to compute the median/mean that is drawn as horizontal line.}
+\item{\code{v_var}}{ - The variable for which to compute the median/mean that is drawn as vertical line.}
+\item{\code{h_var}}{ - The variable for which to compute the median/mean that is drawn as horizontal line.}
 \item{\code{alpha = NA}}{ - The alpha channel, i.e. transparency level, as a numerical value between 0 and 1.}
 \item{\code{color = "black"}}{ - The color of the drawn lines.}
 \item{\code{linetype = 2}}{ - The linetype of the drawn lines.}

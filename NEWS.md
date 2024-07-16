@@ -5,6 +5,7 @@
 * Update AZ logos and team colors (v1.1.0.9003)
 * Update `gt_*` functions to be used in gt row group labels and accept unquoted column names, add `gt_fmt_milb_logo()` (v1.1.0.9004)
 * Add `gt_` and `geom_` functions for MiLB dot team logos and headshots (v1.1.0.9005)
+* Documentation updates (v1.1.0.9006)
 
 # mlbplotR 1.1.0
 
