@@ -1,105 +1,37 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://camdenk.github.io/mlbplotR/404.html</loc>
-  </url>
-  <url>
-    <loc>https://camdenk.github.io/mlbplotR/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://camdenk.github.io/mlbplotR/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://camdenk.github.io/mlbplotR/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://camdenk.github.io/mlbplotR/articles/mlbplotR.html</loc>
-  </url>
-  <url>
-    <loc>https://camdenk.github.io/mlbplotR/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://camdenk.github.io/mlbplotR/index.html</loc>
-  </url>
-  <url>
-    <loc>https://camdenk.github.io/mlbplotR/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://camdenk.github.io/mlbplotR/reference/clean_team_abbrs.html</loc>
-  </url>
-  <url>
-    <loc>https://camdenk.github.io/mlbplotR/reference/element.html</loc>
-  </url>
-  <url>
-    <loc>https://camdenk.github.io/mlbplotR/reference/geom_cap_logos.html</loc>
-  </url>
-  <url>
-    <loc>https://camdenk.github.io/mlbplotR/reference/geom_from_path.html</loc>
-  </url>
-  <url>
-    <loc>https://camdenk.github.io/mlbplotR/reference/geom_lines.html</loc>
-  </url>
-  <url>
-    <loc>https://camdenk.github.io/mlbplotR/reference/geom_milb_logos.html</loc>
-  </url>
-  <url>
-    <loc>https://camdenk.github.io/mlbplotR/reference/geom_mlb_headshots.html</loc>
-  </url>
-  <url>
-    <loc>https://camdenk.github.io/mlbplotR/reference/geom_mlb_logos.html</loc>
-  </url>
-  <url>
-    <loc>https://camdenk.github.io/mlbplotR/reference/ggpreview.html</loc>
-  </url>
-  <url>
-    <loc>https://camdenk.github.io/mlbplotR/reference/gt_merge_stack_team_color.html</loc>
-  </url>
-  <url>
-    <loc>https://camdenk.github.io/mlbplotR/reference/gt_milb.html</loc>
-  </url>
-  <url>
-    <loc>https://camdenk.github.io/mlbplotR/reference/gt_mlb.html</loc>
-  </url>
-  <url>
-    <loc>https://camdenk.github.io/mlbplotR/reference/gt_mlb_column_labels.html</loc>
-  </url>
-  <url>
-    <loc>https://camdenk.github.io/mlbplotR/reference/gt_mlb_headshots.html</loc>
-  </url>
-  <url>
-    <loc>https://camdenk.github.io/mlbplotR/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://camdenk.github.io/mlbplotR/reference/load_headshots.html</loc>
-  </url>
-  <url>
-    <loc>https://camdenk.github.io/mlbplotR/reference/load_milb_teams.html</loc>
-  </url>
-  <url>
-    <loc>https://camdenk.github.io/mlbplotR/reference/load_mlb_teams.html</loc>
-  </url>
-  <url>
-    <loc>https://camdenk.github.io/mlbplotR/reference/mlb_player_tiers.html</loc>
-  </url>
-  <url>
-    <loc>https://camdenk.github.io/mlbplotR/reference/mlb_team_factor.html</loc>
-  </url>
-  <url>
-    <loc>https://camdenk.github.io/mlbplotR/reference/mlb_team_tiers.html</loc>
-  </url>
-  <url>
-    <loc>https://camdenk.github.io/mlbplotR/reference/mlbplotR-package.html</loc>
-  </url>
-  <url>
-    <loc>https://camdenk.github.io/mlbplotR/reference/scale_axes_mlb.html</loc>
-  </url>
-  <url>
-    <loc>https://camdenk.github.io/mlbplotR/reference/scale_mlb.html</loc>
-  </url>
-  <url>
-    <loc>https://camdenk.github.io/mlbplotR/reference/theme_mlb.html</loc>
-  </url>
-  <url>
-    <loc>https://camdenk.github.io/mlbplotR/reference/valid_team_names.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://camdenk.github.io/mlbplotR/404.html</loc></url>
+<url><loc>https://camdenk.github.io/mlbplotR/LICENSE-text.html</loc></url>
+<url><loc>https://camdenk.github.io/mlbplotR/LICENSE.html</loc></url>
+<url><loc>https://camdenk.github.io/mlbplotR/articles/index.html</loc></url>
+<url><loc>https://camdenk.github.io/mlbplotR/articles/mlbplotR.html</loc></url>
+<url><loc>https://camdenk.github.io/mlbplotR/authors.html</loc></url>
+<url><loc>https://camdenk.github.io/mlbplotR/index.html</loc></url>
+<url><loc>https://camdenk.github.io/mlbplotR/news/index.html</loc></url>
+<url><loc>https://camdenk.github.io/mlbplotR/reference/clean_team_abbrs.html</loc></url>
+<url><loc>https://camdenk.github.io/mlbplotR/reference/element.html</loc></url>
+<url><loc>https://camdenk.github.io/mlbplotR/reference/geom_cap_logos.html</loc></url>
+<url><loc>https://camdenk.github.io/mlbplotR/reference/geom_from_path.html</loc></url>
+<url><loc>https://camdenk.github.io/mlbplotR/reference/geom_lines.html</loc></url>
+<url><loc>https://camdenk.github.io/mlbplotR/reference/geom_milb_logos.html</loc></url>
+<url><loc>https://camdenk.github.io/mlbplotR/reference/geom_mlb_headshots.html</loc></url>
+<url><loc>https://camdenk.github.io/mlbplotR/reference/geom_mlb_logos.html</loc></url>
+<url><loc>https://camdenk.github.io/mlbplotR/reference/ggpreview.html</loc></url>
+<url><loc>https://camdenk.github.io/mlbplotR/reference/gt_merge_stack_team_color.html</loc></url>
+<url><loc>https://camdenk.github.io/mlbplotR/reference/gt_milb.html</loc></url>
+<url><loc>https://camdenk.github.io/mlbplotR/reference/gt_mlb.html</loc></url>
+<url><loc>https://camdenk.github.io/mlbplotR/reference/gt_mlb_column_labels.html</loc></url>
+<url><loc>https://camdenk.github.io/mlbplotR/reference/gt_mlb_headshots.html</loc></url>
+<url><loc>https://camdenk.github.io/mlbplotR/reference/index.html</loc></url>
+<url><loc>https://camdenk.github.io/mlbplotR/reference/load_headshots.html</loc></url>
+<url><loc>https://camdenk.github.io/mlbplotR/reference/load_milb_teams.html</loc></url>
+<url><loc>https://camdenk.github.io/mlbplotR/reference/load_mlb_teams.html</loc></url>
+<url><loc>https://camdenk.github.io/mlbplotR/reference/mlb_player_tiers.html</loc></url>
+<url><loc>https://camdenk.github.io/mlbplotR/reference/mlb_team_factor.html</loc></url>
+<url><loc>https://camdenk.github.io/mlbplotR/reference/mlb_team_tiers.html</loc></url>
+<url><loc>https://camdenk.github.io/mlbplotR/reference/mlbplotR-package.html</loc></url>
+<url><loc>https://camdenk.github.io/mlbplotR/reference/scale_axes_mlb.html</loc></url>
+<url><loc>https://camdenk.github.io/mlbplotR/reference/scale_mlb.html</loc></url>
+<url><loc>https://camdenk.github.io/mlbplotR/reference/theme_mlb.html</loc></url>
+<url><loc>https://camdenk.github.io/mlbplotR/reference/valid_team_names.html</loc></url>
 </urlset>
+
