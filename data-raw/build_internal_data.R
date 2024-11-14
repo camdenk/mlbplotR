@@ -15,6 +15,8 @@ scoreboard_logo_list <- old_logo_lists[[2]]
 #
 # logo_list <- rlang::set_names(logo_list, teams_colors_logos$team_abbr)
 
+# Only update Arizona because of their logo change. Otherwise, keep the old
+# ESPN logos
 az_url <- teams_colors_logos$team_logo_espn[teams_colors_logos$team_abbr == "AZ"]
 logo_list$AZ <- curl::curl_fetch_memory(az_url)$content
 
@@ -104,6 +106,7 @@ team_data <- tibble::tribble(~team, ~alternate,
                            "NYM", "NY",
                            "NYY", "NYY",
                            "OAK", "OAK",
+                           "OAK", "ATH",
                            "PHI", "PHI",
                            "PIT", "PIT",
                            "SD" , "SD",
