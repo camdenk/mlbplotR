@@ -8,6 +8,12 @@ old_logo_lists <- readRDS("./data-raw/old_data/old_logo_lists.rds")
 logo_list <- old_logo_lists[[1]]
 scoreboard_logo_list <- old_logo_lists[[2]]
 
+# Correct for Oakland's shift
+names(logo_list)[20] <- "ATH"
+names(scoreboard_logo_list)[20] <- "ATH"
+
+
+
 # logo_list <- lapply(teams_colors_logos$team_abbr, function(x){
 #   url <- teams_colors_logos$team_logo_espn[teams_colors_logos$team_abbr == x]
 #   curl::curl_fetch_memory(url)$content
@@ -105,8 +111,8 @@ team_data <- tibble::tribble(~team, ~alternate,
                            "NYM", "NYM",
                            "NYM", "NY",
                            "NYY", "NYY",
-                           "OAK", "OAK",
-                           "OAK", "ATH",
+                           "ATH", "OAK",
+                           "ATH", "ATH",
                            "PHI", "PHI",
                            "PIT", "PIT",
                            "SD" , "SD",

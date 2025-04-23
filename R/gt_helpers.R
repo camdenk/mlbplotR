@@ -132,7 +132,14 @@ gt_mlbplotR_image <- function(gt_object,
           FUN.VALUE = character(1),
           USE.NAMES = FALSE,
           FUN = function(team_abbr) {
-            dot_logo_list[[team_abbr]]
+
+            if (team_abbr %in% names(dot_logo_list)) {
+              dot_logo_list[[team_abbr]]
+            } else {
+              # Return the MLB logo if there isn't a match
+              dot_logo_list[["MLB"]]
+            }
+
           }
         )
         gt::web_image(image_urls, height = height)

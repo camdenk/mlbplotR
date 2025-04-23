@@ -6,7 +6,8 @@
 * Update `gt_*` functions to be used in gt row group labels and accept unquoted column names, add `gt_fmt_milb_logo()` (v1.1.0.9004)
 * Add `gt_` and `geom_` functions for MiLB dot team logos and headshots (v1.1.0.9005)
 * Documentation updates (v1.1.0.9006)
-* Added "ATH" -> "OAK" in `clean_team_abbrs()` (v1.1.0.9006)
+* Added "ATH" -> "OAK" in `clean_team_abbrs()` (v1.1.0.9007)
+* Flipped "OAK" -> "ATH" in `clean_team_abbrs()` and had `gt_fmt_mlb_dot_logo` return the MLB dot logo if there's a mismatch (v1.1.0.9008)
 
 # mlbplotR 1.1.0
 

@@ -43,9 +43,9 @@
 #' library(ggplot2)
 #'
 #' team_names <- c("Kannapolis Cannon Ballers", "Charlotte Knights",
-#'                 "Bowie Baysox", "Durham Bulls", "Montgomery Biscuits", "Las Vegas Aviators",
+#'                 "Chesapeake Baysox", "Durham Bulls", "Montgomery Biscuits", "Las Vegas Aviators",
 #'                 "Lehigh Valley IronPigs", "Richmond Flying Squirrels", "Round Rock Express",
-#'                 "Frisco RoughRiders", "Hickory Crawdads", "Down East Wood Ducks")
+#'                 "Frisco RoughRiders", "Hub City Spartanburgers", "Hickory Crawdads")
 #'
 #' df <- data.frame(
 #'   a = rep(1:4, 3),
