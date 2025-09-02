@@ -2,7 +2,7 @@
 % Please edit documentation in R/load_data.R
 \name{load_headshots}
 \alias{load_headshots}
-\title{Output MLB Team Abbreviations}
+\title{Load Player ID Map With Headshot Info}
 \usage{
 load_headshots()
 }
@@ -10,11 +10,12 @@ load_headshots()
 A tibble of player names and ids from various sources.
 }
 \description{
-Output MLB Team Abbreviations
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+\code{load_headshots()} has been deprecated due to lack of support. Please use \code{baseballr::chadwick_player_lu()}
 }
 \examples{
 \donttest{
-load_headshots()
+# load_headshots()
 }
 
 }
