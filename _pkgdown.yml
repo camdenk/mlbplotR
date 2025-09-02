@@ -29,7 +29,7 @@ navbar:
       href: news/index.html
     twitter:
       icon: "fab fa-twitter fa-lg"
-      href: http://twitter.com/mlbplotR
+      href: http://twitter.com/k_camden
     github:
       icon: "fab fa-github fa-lg"
       href: https://github.com/camdenk/mlbplotR/
@@ -52,7 +52,6 @@ reference:
     contents:
       - '`load_mlb_teams`'
       - '`load_milb_teams`'
-      - '`load_headshots`'
       - '`clean_team_abbrs`'
       - '`valid_team_names`'
       - '`mlb_team_factor`'
@@ -61,3 +60,6 @@ reference:
     contents:
       - '`theme_mlb`'
       - '`scale_axes_mlb`'
+  - title: Deprecated
+    contents:
+      - '`load_headshots`'
