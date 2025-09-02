@@ -39,9 +39,6 @@ Has no effect if \code{locations} is not \code{NULL}}
 
 \item{height}{The absolute height (px) of the image in the table cell}
 
-\item{na_headshot_to_logo}{should NA/non matches return the MLB logo instead
-of a grayed out blank headshot? Only has an effect with \code{gt_fmt_mlb_headshot}. Defaults to \code{TRUE}}
-
 \item{locations}{If \code{NULL} (the default), the function will render
 logos in argument \code{columns}.
 Otherwise, the cell or set of cells to be associated with the team name
