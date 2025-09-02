@@ -1,7 +1,7 @@
 Package: mlbplotR
 Type: Package
 Title: Create 'ggplot2' and 'gt' Visuals with Major League Baseball Logos
-Version: 1.1.0.9008
+Version: 1.1.0.9009
 Authors@R: 
     c(
     person(given = "Sebastian",
@@ -24,6 +24,7 @@ Imports:
     data.table,
     ggplot2,
     gt,
+    httr,
     lifecycle,
     magick,
     magrittr,

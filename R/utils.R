@@ -7,26 +7,38 @@ logo_html <- function(team_abbr, type = c("height", "width"), size = 15){
 }
 
 
-headshot_html <- function(player_id, type = c("height", "width"), size = 25){
-  type <- rlang::arg_match(type)
-  headshot_map <- load_headshots()
-  player_id <- ifelse(player_id %in% headshot_map$savant_id, player_id, "NA_ID")
-  headshot_map <- rbind(
-    headshot_map,
-    list(savant_id = "NA_ID", espn_headshot = na_headshot())
-  )
-  joined <- merge(
-    data.frame(savant_id = player_id),
-    headshot_map,
-    by = "savant_id",
-    all.x = TRUE,
-    sort = FALSE
-  )
-  url <- joined$espn_headshot
-  url <- ifelse(grepl(".png", url), url, paste0(url, ".png"))
-  sprintf("<img src='%s' %s = '%s'>", url, type, size)
-}
+# headshot_html <- function(player_id, type = c("height", "width"), size = 25){
+#   type <- rlang::arg_match(type)
+#   headshot_map <- load_headshots()
+#   player_id <- ifelse(player_id %in% headshot_map$savant_id, player_id, "NA_ID")
+#   headshot_map <- rbind(
+#     headshot_map,
+#     list(savant_id = "NA_ID", espn_headshot = na_headshot())
+#   )
+#   joined <- merge(
+#     data.frame(savant_id = player_id),
+#     headshot_map,
+#     by = "savant_id",
+#     all.x = TRUE,
+#     sort = FALSE
+#   )
+#   url <- joined$espn_headshot
+#   url <- ifelse(grepl(".png", url), url, paste0(url, ".png"))
+#   sprintf("<img src='%s' %s = '%s'>", url, type, size)
+# }
 
+check_url <- function(url) {
+  res <- tryCatch(
+    httr::HEAD(url, httr::timeout(5)),   # HEAD is faster since it doesn't fetch the body
+    error = function(e) return(NULL)
+  )
+
+  if (is.null(res)) {
+    return(FALSE)
+  }
+
+  httr::status_code(res) == 200
+}
 
 rds_from_url <- function(url) {
   con <- url(url)

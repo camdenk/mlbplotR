@@ -8,6 +8,7 @@
 * Documentation updates (v1.1.0.9006)
 * Added "ATH" -> "OAK" in `clean_team_abbrs()` (v1.1.0.9007)
 * Flipped "OAK" -> "ATH" in `clean_team_abbrs()` and had `gt_fmt_mlb_dot_logo` return the MLB dot logo if there's a mismatch (v1.1.0.9008)
+* Updated documentation. Rewrite `geom_mlb_headshots()` and `gt_fmt_mlb_headshot()` to use MLB headshots, not ESPN, which makes the parameter `na_headshot_to_logo` unnecessary. Deprecate `load_headshots()` (v1.1.0.9009)
 
 # mlbplotR 1.1.0
 

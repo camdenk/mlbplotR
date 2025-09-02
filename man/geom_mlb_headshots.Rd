@@ -130,8 +130,6 @@ id (The same ID associated with their Baseball Savant page).
 \item{\code{x}}{ - The x-coordinate. Required.}
 \item{\code{y}}{ - The y-coordinate. Required.}
 \item{\code{player_id}}{ - The players' MLBAM (Baseball Savant) id. Required.}
-\item{\code{na_headshot_to_logo = TRUE}}{ - Should NA/non-matches return the MLB logo
-instead of a grayed out blank headshot? Only used with \code{geom_mlb_headshots()}. Defaults to \code{TRUE}}
 \item{\code{alpha = NULL}}{ - The alpha channel, i.e. transparency level, as a numerical value between 0 and 1.}
 \item{\code{colour = NULL}}{ - The image will be colorized with this colour. Use the special character \code{"b/w"} to set it to black and white. For more information on valid colour names in ggplot2 see \url{https://ggplot2.tidyverse.org/articles/ggplot2-specs.html?q=colour#colour-and-fill}}
 \item{\code{angle = 0}}{ - The angle of the image as a numerical value between 0° and 360°.}
@@ -156,28 +154,28 @@ library(ggplot2)
 df <- data.frame(
   a = c(rep(1:3, 3), 1.5, 2.5),
   b = c(sort(rep(1:3, 3), decreasing = TRUE), 2.5, 2.5),
-  player_id = c("660670",
-                "545361",
-                "605141",
-                "571448",
-                "594798",
+  player_id = c("665742",
+                "677594",
+                "592450",
+                "608070",
+                "694973",
                 "518692",
                 "0",
-                "521692",
+                "663728",
                 "120074",
-                "665487",
-                "518934"),
-  player_name = c("Ronald Acuña Jr.",
-                  "Mike Trout",
-                  "Mookie Betts",
-                  "Nolan Arenado",
-                  "Jacob deGrom",
+                "608369",
+                "606466"),
+  player_name = c("Juan Soto",
+                  "Julio Rodríguez",
+                  "Aaron Judge",
+                  "José Ramírez",
+                  "Paul Skenes",
                   "Freddie Freeman",
                   "Non Match",
-                  "Salvador Perez",
+                  "Cal Raleigh",
                   "David Ortiz",
-                  "Fernando Tatis Jr.",
-                  "DJ LeMahieu")
+                  "Corey Seager",
+                  "Ketel Marte")
 )
 
 # set a custom fill colour for one player
@@ -190,15 +188,14 @@ ggplot(df, aes(x = a, y = b)) +
   coord_cartesian(xlim = c(0.75, 3.25), ylim = c(0.7, 3.25)) +
   theme_void()
 
-# apply alpha as constant and use non default na replacement
+# apply alpha as constant
 ggplot(df, aes(x = a, y = b)) +
-  geom_mlb_headshots(aes(player_id = player_id), height = 0.2, alpha = 0.5,
-                     na_headshot_to_logo = FALSE) +
+  geom_mlb_headshots(aes(player_id = player_id), height = 0.2, alpha = 0.5) +
   geom_label(aes(label = player_name), nudge_y = -0.35, alpha = 0.5) +
   coord_cartesian(xlim = c(0.75, 3.25), ylim = c(0.7, 3.25)) +
   theme_void()
 
-# apply colour as an aesthetic and use the dot version
+# apply colour as an aesthetic and use the dot version with colored background
 ggplot(df, aes(x = a, y = b)) +
   geom_mlb_dot_headshots(aes(player_id = player_id, colour = colour), height = 0.2) +
   geom_label(aes(label = player_name), nudge_y = -0.35, alpha = 0.5) +

@@ -39,9 +39,6 @@ Has no effect if \code{locations} is not \code{NULL}}
 
 \item{height}{The absolute height (px) of the image in the table cell}
 
-\item{na_headshot_to_logo}{should NA/non matches return the MLB logo instead
-of a grayed out blank headshot? Only has an effect with \code{gt_fmt_mlb_headshot}. Defaults to \code{TRUE}}
-
 \item{locations}{If \code{NULL} (the default), the function will render
 logos in argument \code{columns}.
 Otherwise, the cell or set of cells to be associated with the team name
@@ -64,9 +61,13 @@ written by Tom Mock, which is a wrapper around \code{gt::text_transform()} + \co
 \donttest{
 library(gt)
 library(mlbplotR)
-gt_headshot_example <- mlbplotR::load_headshots() \%>\%
-  head(5) \%>\%
-  dplyr::select(player_name, savant_id1 = savant_id, savant_id2 = savant_id) \%>\%
+gt_headshot_example <- data.frame(
+  player_name = c(
+    "Nathan Eovaldi", "Marcus Semien", "Corey Seager", "Jacob deGrom", "Chris Martin"
+  ),
+  savant_id1 = c(543135, 543760, 608369, 594798, 455119),
+  savant_id2 = c(543135, 543760, 608369, 594798, 455119)
+  ) \%>\%
   gt::gt() \%>\%
   gt_fmt_mlb_headshot(columns = "savant_id1") \%>\%
   gt_fmt_mlb_dot_headshot(columns = "savant_id2")

@@ -302,8 +302,6 @@ gt_fmt_milb_dot_logo <- function(gt_object,
 #' @param columns The columns wherein changes to cell data colors should occur.
 #'   Has no effect if `locations` is not `NULL`
 #' @param height The absolute height (px) of the image in the table cell
-#' @param na_headshot_to_logo should NA/non matches return the MLB logo instead
-#'   of a grayed out blank headshot? Only has an effect with `gt_fmt_mlb_headshot`. Defaults to `TRUE`
 #' @param locations If `NULL` (the default), the function will render
 #'   logos in argument `columns`.
 #'   Otherwise, the cell or set of cells to be associated with the team name
@@ -317,9 +315,13 @@ gt_fmt_milb_dot_logo <- function(gt_object,
 #' \donttest{
 #' library(gt)
 #' library(mlbplotR)
-#' gt_headshot_example <- mlbplotR::load_headshots() %>%
-#'   head(5) %>%
-#'   dplyr::select(player_name, savant_id1 = savant_id, savant_id2 = savant_id) %>%
+#' gt_headshot_example <- data.frame(
+#'   player_name = c(
+#'     "Nathan Eovaldi", "Marcus Semien", "Corey Seager", "Jacob deGrom", "Chris Martin"
+#'   ),
+#'   savant_id1 = c(543135, 543760, 608369, 594798, 455119),
+#'   savant_id2 = c(543135, 543760, 608369, 594798, 455119)
+#'   ) %>%
 #'   gt::gt() %>%
 #'   gt_fmt_mlb_headshot(columns = "savant_id1") %>%
 #'   gt_fmt_mlb_dot_headshot(columns = "savant_id2")
@@ -347,15 +349,17 @@ gt_fmt_mlb_headshot <- function(gt_object,
     data = gt_object,
     locations = locations,
     fn = function(mlb_id){
-      headshot_map <- load_headshots()
       image_urls <- vapply(
         mlb_id,
         FUN.VALUE = character(1),
         USE.NAMES = FALSE,
         FUN = function(id) {
-          ret <- headshot_map$espn_headshot[headshot_map$savant_id == id]
-          if(length(ret) == 0 || is.na(ret)) ret <- na_headshot(na_headshot_to_logo)
-          ret
+          url <- paste0("https://midfield.mlbstatic.com/v1/people/", id, "/mlb/436?circle=true")
+          if (isFALSE(check_url(url))) {
+            url <- paste0("https://midfield.mlbstatic.com/v1/people/", id, "/spots/436")
+          }
+
+          return(url)
         }
       )
       gt::web_image(image_urls, height = height)
@@ -483,11 +487,11 @@ gt_mlb_column_labels <- function(value,
 
   if (type == "headshot") {
 
-    headshot_map <- load_headshots()
+    hs_url <- paste0("https://midfield.mlbstatic.com/v1/people/", value, "/mlb/436?circle=true")
 
-    hs_url <- headshot_map$espn_headshot[headshot_map$savant_id == as.numeric(value)]
-    if(length(hs_url) == 0 || is.na(hs_url)) hs_url <- na_headshot(na_headshot_to_logo)
-
+    if (isFALSE(check_url(hs_url))) {
+      hs_url <- paste0("https://midfield.mlbstatic.com/v1/people/", value, "/spots/436")
+    }
 
     html_content <- paste0("<img src=\"", hs_url, "\" style=\"height:", height, "px;\">")
 

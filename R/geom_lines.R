@@ -22,7 +22,7 @@
 #'   \item{`linetype = 2`}{ - The linetype of the drawn lines.}
 #'   \item{`linewidth = 0.5`}{ - The size of the drawn lines.}
 #' }
-#' @seealso The underlying ggplot2 geoms [`geom_hline()`] and [`geom_vline()`]
+#' @seealso The underlying ggplot2 geoms [`ggplot2::geom_hline()`] and [`ggplot2::geom_vline()`]
 #' @name geom_lines
 #' @return A ggplot2 layer ([ggplot2::layer()]) that can be added to a plot
 #'   created with [ggplot2::ggplot()].

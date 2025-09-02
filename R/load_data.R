@@ -70,13 +70,18 @@ clean_team_abbrs <- function(abbr, keep_non_matches = TRUE) {
 
 
 
-#' Output MLB Team Abbreviations
+#' Load Player ID Map With Headshot Info
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#' `load_headshots()` has been deprecated due to lack of support. Please use `baseballr::chadwick_player_lu()`
+#'
 #'
 #' @export
 #' @return A tibble of player names and ids from various sources.
 #' @examples
 #' \donttest{
-#' load_headshots()
+#' # load_headshots()
 #' }
 #'
 load_headshots <- function() rds_from_url("https://github.com/camdenk/mlbplotR-data/raw/main/Player-IDs.rds")

@@ -124,7 +124,7 @@ scale_fill_mlb <- function(type = c("primary", "secondary"),
 #'   them available as axis labels
 #' @details The scale translates MLB team abbreviations into raw image
 #'   html and places the html as axis labels. Because of the way ggplots are
-#'   constructed, it is necessary to adjust the [`theme()`] after calling this
+#'   constructed, it is necessary to adjust the [`ggplot2::theme()`] after calling this
 #'   scale. This can be done by calling [`theme_x_mlb()`] or [`theme_y_mlb()`]
 #'   or alternatively by manually changing the relevant `axis.text` to
 #'   [`ggtext::element_markdown()`]. However, this will only work if an underlying
