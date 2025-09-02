@@ -333,7 +333,6 @@ NULL
 gt_fmt_mlb_headshot <- function(gt_object,
                                 columns,
                                 height = 30,
-                                na_headshot_to_logo = TRUE,
                                 locations = NULL) {
 
   stopifnot("'gt_object' must be a 'gt_tbl', have you accidentally passed raw data?" = "gt_tbl" %in% class(gt_object))
@@ -374,7 +373,6 @@ gt_fmt_mlb_headshot <- function(gt_object,
 gt_fmt_mlb_dot_headshot <- function(gt_object,
                                 columns,
                                 height = 30,
-                                na_headshot_to_logo = TRUE,
                                 locations = NULL) {
 
   stopifnot("'gt_object' must be a 'gt_tbl', have you accidentally passed raw data?" = "gt_tbl" %in% class(gt_object))
@@ -412,7 +410,6 @@ gt_fmt_mlb_dot_headshot <- function(gt_object,
 gt_fmt_milb_dot_headshot <- function(gt_object,
                                      columns,
                                      height = 30,
-                                     na_headshot_to_logo = TRUE,
                                      locations = NULL) {
 
   stopifnot("'gt_object' must be a 'gt_tbl', have you accidentally passed raw data?" = "gt_tbl" %in% class(gt_object))

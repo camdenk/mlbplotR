@@ -7,29 +7,11 @@
 \alias{gt_fmt_milb_dot_headshot}
 \title{Render Player Headshots in 'gt' Tables}
 \usage{
-gt_fmt_mlb_headshot(
-  gt_object,
-  columns,
-  height = 30,
-  na_headshot_to_logo = TRUE,
-  locations = NULL
-)
+gt_fmt_mlb_headshot(gt_object, columns, height = 30, locations = NULL)
 
-gt_fmt_mlb_dot_headshot(
-  gt_object,
-  columns,
-  height = 30,
-  na_headshot_to_logo = TRUE,
-  locations = NULL
-)
+gt_fmt_mlb_dot_headshot(gt_object, columns, height = 30, locations = NULL)
 
-gt_fmt_milb_dot_headshot(
-  gt_object,
-  columns,
-  height = 30,
-  na_headshot_to_logo = TRUE,
-  locations = NULL
-)
+gt_fmt_milb_dot_headshot(gt_object, columns, height = 30, locations = NULL)
 }
 \arguments{
 \item{gt_object}{An existing gt table object of class \code{gt_tbl}}

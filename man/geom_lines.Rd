@@ -141,5 +141,5 @@ ggplot(mtcars, aes(x = disp, y = mpg)) +
 }
 }
 \seealso{
-The underlying ggplot2 geoms \code{\link[=geom_hline]{geom_hline()}} and \code{\link[=geom_vline]{geom_vline()}}
+The underlying ggplot2 geoms \code{\link[ggplot2:geom_abline]{ggplot2::geom_hline()}} and \code{\link[ggplot2:geom_abline]{ggplot2::geom_vline()}}
 }

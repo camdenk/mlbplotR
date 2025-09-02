@@ -101,7 +101,7 @@ them available as axis labels
 \details{
 The scale translates MLB team abbreviations into raw image
 html and places the html as axis labels. Because of the way ggplots are
-constructed, it is necessary to adjust the \code{\link[=theme]{theme()}} after calling this
+constructed, it is necessary to adjust the \code{\link[ggplot2:theme]{ggplot2::theme()}} after calling this
 scale. This can be done by calling \code{\link[=theme_x_mlb]{theme_x_mlb()}} or \code{\link[=theme_y_mlb]{theme_y_mlb()}}
 or alternatively by manually changing the relevant \code{axis.text} to
 \code{\link[ggtext:element_markdown]{ggtext::element_markdown()}}. However, this will only work if an underlying
