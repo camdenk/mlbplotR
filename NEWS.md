@@ -1,3 +1,5 @@
+# mlbplotR (development version)
+
 # mlbplotR 1.2.0
 
 * Add `load_milb_teams()` with Minor League data (v1.1.0.9001)
